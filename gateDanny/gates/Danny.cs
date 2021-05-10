@@ -133,11 +133,11 @@ namespace gateDanny.gates
             var ipUp = ip[1].ToString().Replace("//", "");
 
 
-            var verifiProxy=check.ping(Variables.key, prox);
-            if (verifiProxy == false)
-            {
-                load();
-            }
+            //var verifiProxy = check.ping(Variables.key, prox);
+            //if (verifiProxy == false)
+            //{
+            //    load();
+            //}
 
 
             if (int.Parse(Variables.creditos) <= 0)
@@ -158,7 +158,7 @@ namespace gateDanny.gates
               
                 //chromeOptions.AddArguments(new List<string>() { "headless" });
                 //chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080");, "--headless"
-                chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--proxy-server=" + prox, "--ignore-certificate-errors" , "--headless");
+                chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--proxy-server=" + prox, "--ignore-certificate-errors");
 
                 var chromeDriverService = ChromeDriverService.CreateDefaultService();
                 chromeDriverService.HideCommandPromptWindow = true;
@@ -316,7 +316,7 @@ namespace gateDanny.gates
             try
             {
                 Thread.Sleep(1000);
-                driver.FindElement(by);
+                 driver.FindElement(by);
                 return true;
             }
             catch (NoSuchElementException)
@@ -463,7 +463,7 @@ namespace gateDanny.gates
                                 var guardar = numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)) + " " + Variables.gate; ;
                                 check.ccss(Variables.key, guardar, "deads");
                                 Thread.Sleep(300);
-                                Form1.textBox2.AppendText(cc + " $" + RandomNumber(5, 15) + ".00  - " + checkbin(cc.Substring(0, 6)));
+                                Form1.textBox2.AppendText(cc );
                                 Console.WriteLine("dead " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
                                 Form1.textBox2.AppendText(Environment.NewLine);
                                 Form1.listCC.Text = Form1.listCC.Text.Remove(0, cc.Length).Trim();

@@ -38,7 +38,7 @@ namespace gateDanny
         Woot Qspray = new Woot();
         Shopbob Shopbob = new Shopbob();
         Eatsdane zoo = new Eatsdane();
-        Intelephense danny = new Intelephense();
+        Danny danny = new Danny();
 
 
 
@@ -592,10 +592,10 @@ namespace gateDanny
                 //radioButton4.Enabled = false;
                 //radioButton5.Enabled = false;
                 //radioButton6.Enabled = false;
-                //radioButton7.Checked = false;
-                //radioButton8.Checked = false;
-                //radioButton9.Checked = false; 
-                //radioButton10.Checked = false;
+                //radioButton7.Enabled = false;
+                //radioButton8.Enabled = false;
+                //radioButton9.Enabled = false;
+                //radioButton10.Enabled = false;
 
                 MessageBox.Show("CHECKER INACTIVO");
             }
@@ -816,7 +816,7 @@ namespace gateDanny
         {
             if (radioButton10.Checked == true)
             {
-                MessageBox.Show("LIVE CCN CCS ECUADOR VISA - MC (PACIFICO - AUSTRO - GUAYAQUIL - PRODUBANCO) NO CONSUME SALDO");
+                
                 radioButton1.Checked = false;
                 radioButton2.Checked = false;
                 radioButton3.Checked = false;
