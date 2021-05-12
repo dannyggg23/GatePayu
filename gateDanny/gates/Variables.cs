@@ -17,5 +17,9 @@ namespace gateDanny.gates
         public static string gate="";
         public static bool run = true;
         public static string key_captcha = "";
+
+        public static string bin = "";
+        public static string cantidad = "";
+        public static string ccsgen = "";
     }
 }
