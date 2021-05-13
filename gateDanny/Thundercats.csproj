@@ -334,6 +334,11 @@
   <ItemGroup>
     <Content Include="gates\smb_1-up.wav" />
     <Content Include="kalangozilla-skrynium-black-thundercats.ico" />
+    <None Include="Resources\Mumm-Ra-CG-Pyro-tranparente.png" />
+    <None Include="Resources\7007836_thumb.png" />
+    <None Include="Resources\ThunderCats-logo-FE87D8397B-seeklogo.com.png" />
+    <None Include="Resources\2291252-middle.png" />
+    <None Include="Resources\f29fe9fd1365be35797f5380a05a0532.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Selenium.Chrome.WebDriver.85.0.0\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.85.0.0\build\Selenium.Chrome.WebDriver.targets')" />

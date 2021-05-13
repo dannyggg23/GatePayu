@@ -211,8 +211,7 @@ namespace gateDanny.gates
             }
 
             //var lines = Form1.listCC.Lines.Count();
-            if ( Variables.run == true)
-            {
+            
                 try
                 {
 
@@ -225,13 +224,13 @@ namespace gateDanny.gates
 
                     //chromeOptions.AddArguments(new List<string>() { "headless" });
                     //chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080");, 
-                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--ignore-certificate-errors"); // "--headless"
+                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--ignore-certificate-errors", "--headless"); // "--headless"
 
                     var chromeDriverService = ChromeDriverService.CreateDefaultService();
                     chromeDriverService.HideCommandPromptWindow = true;
                     //https://www.shopbop.com/jewelry-accessories/br/v=1/13539.htm
                     driver = new ChromeDriver(chromeDriverService, chromeOptions);
-                    driver.Url = "http://localhost/ccgen1/";
+                    driver.Url = "http://softoo.info/thunder/";
                     Thread.Sleep(1000);
 
                     string[] ccLine = Variables.bin.Trim().Split('|');
@@ -281,21 +280,11 @@ namespace gateDanny.gates
                 catch (Exception ex)
                 {
 
-                    if (Variables.run == true)
-                    {
-                        restart();
-                    }
-                    else
-                    {
-                        stop();
-                    }
+                  
                 }
 
-            }
-            else
-            {
-                stop();
-            }
+            
+           
         }
 
         private void GetEmail()

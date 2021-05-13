@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using gateBeta;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
@@ -100,6 +101,7 @@ namespace gateDanny.gates
 
                 dynamic stuff = JObject.Parse(response.Content);
                 Variables.creditos = stuff.creditos;
+                Thunder._Form1.updateCreditos(Variables.creditos);
 
                 //var id = Int16.Parse(stuff.id);
 
@@ -116,7 +118,10 @@ namespace gateDanny.gates
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.ToString());
+                Variables.creditos = "0";
+                Thunder._Form1.updateCreditos("0");
                 return false;
+                
             }
 
         }

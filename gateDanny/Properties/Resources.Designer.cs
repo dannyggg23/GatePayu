@@ -59,5 +59,55 @@ namespace Thundercats.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _2291252_middle {
+            get {
+                object obj = ResourceManager.GetObject("2291252-middle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _7007836_thumb {
+            get {
+                object obj = ResourceManager.GetObject("7007836_thumb", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap f29fe9fd1365be35797f5380a05a0532 {
+            get {
+                object obj = ResourceManager.GetObject("f29fe9fd1365be35797f5380a05a0532", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Mumm_Ra_CG_Pyro_tranparente {
+            get {
+                object obj = ResourceManager.GetObject("Mumm-Ra-CG-Pyro-tranparente", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ThunderCats_logo_FE87D8397B_seeklogo_com {
+            get {
+                object obj = ResourceManager.GetObject("ThunderCats-logo-FE87D8397B-seeklogo.com", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
