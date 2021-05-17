@@ -211,7 +211,7 @@ namespace gateDanny.gates
             }
 
          
-            if (Thunder._Form1.numcc() > 0 && Variables.run == true)
+            if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "5")
             {
                 try
                 {
@@ -437,14 +437,14 @@ namespace gateDanny.gates
                     }
                     else
                     {
-                        stop();
+                        Thunder._Form1.abort();
                     }
                 }
 
             }
             else
             {
-                stop();
+                Thunder._Form1.abort();
             }
         }
 
@@ -495,7 +495,7 @@ namespace gateDanny.gates
                 }
                 else
                 {
-                    stop();
+                    Thunder._Form1.abort();
                 }
             }
 
@@ -656,7 +656,7 @@ namespace gateDanny.gates
                 }
                 else
                 {
-                    stop();
+                    Thunder._Form1.abort();
                 }
             }
             catch (Exception ex)
@@ -667,7 +667,7 @@ namespace gateDanny.gates
                 }
                 else
                 {
-                    stop();
+                    Thunder._Form1.abort();
                     return;
                 }
                 //MessageBox.Show(ex.ToString());
@@ -686,11 +686,13 @@ namespace gateDanny.gates
                 numeroTargeta = 0;
                 driver.Close();
                 driver.Quit();
+                Thunder._Form1.abort();
             }
             catch (Exception ex)
             {
 
                 Console.WriteLine(ex.ToString());
+                Thunder._Form1.abort();
             }
 
         }

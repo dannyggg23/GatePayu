@@ -24,17 +24,14 @@ namespace gateBeta
 
 
         Shopbob poseidon = new Shopbob();
-        // Theepochtimes Dropified = new Theepochtimes();
         Eatsdane Dropified = new Eatsdane();
-        //Papirogems Dropified = new Papirogems();
-        //Frey Dropified = new Frey();
         Chicos Flletfarm = new Chicos();
         Weightwatchers Healthydirections = new Weightwatchers();
         Woot Jomashop = new Woot();
-        //Poseidon Jomashop = new Poseidon();
-        koleimports koleimports = new koleimports();
-        //Qspray Qspray = new Qspray();
-        Roomstogo Qspray = new Roomstogo();
+        Forever21 koleimports = new Forever21();
+        Rooms2 Qspray = new Rooms2();
+
+
         Shopbob Shopbob = new Shopbob();
         Eatsdane zoo = new Eatsdane();
         Danny danny = new Danny();
@@ -69,6 +66,11 @@ namespace gateBeta
             return txt_check.Lines.Count();
         }
 
+        public string ccs()
+        {
+            return txt_check.Text;
+        }
+
         public void updateCreditos(string creditos)
         {
             LBL_CREDITOS.Text = creditos;
@@ -82,12 +84,49 @@ namespace gateBeta
         public void ccsgen(string ccsgen)
         {
             txt_ccsgen.Text = ccsgen;
-            txt_check.AppendText(ccsgen.Trim());
+            if (txt_check.Text == "")
+            {
+                txt_check.AppendText(ccsgen.Trim());
+            }
+            else
+            {
+                txt_check.AppendText(Environment.NewLine);
+                txt_check.AppendText(ccsgen.Trim());
+            }
+            btn_generar.Enabled = true;
+
         }
 
         public void updateMisCcs(string ccs)
         {
             txtmisccs.Text = ccs;
+        }
+
+        public void abort()
+        {
+            try
+            {
+                t.Abort();
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+           
+            foreach (Process proc in Process.GetProcessesByName("chromedriver"))
+            {
+                proc.Kill();
+            }
+
+            foreach (Process proc in Process.GetProcessesByName("conhost"))
+            {
+                proc.Kill();
+            }
+            foreach (Process proc in Process.GetProcessesByName("chrome"))
+            {
+                proc.Kill();
+            }
         }
 
         public void update_progresbar(int val)
@@ -136,6 +175,7 @@ namespace gateBeta
 
         private void Thunder_Load(object sender, EventArgs e)
         {
+            _Form1.update_progresbar(0);
             this.bunifuElipse1.ApplyElipse(pnl1, 8);
             this.bunifuElipse1.ApplyElipse(pnl2, 8);
             this.bunifuElipse1.ApplyElipse(pnl3, 8);
@@ -149,6 +189,24 @@ namespace gateBeta
             if (checkws.estado() == true)
             {
                 checkws.key_captcha();
+
+                foreach (Process proc in Process.GetProcessesByName("chromedriver"))
+                {
+                    proc.Kill();
+                }
+
+                foreach (Process proc in Process.GetProcessesByName("conhost"))
+                {
+                    proc.Kill();
+                }
+
+                foreach (Process proc in Process.GetProcessesByName("chrome"))
+                {
+                    proc.Kill();
+                }
+
+                radioButton6.Enabled = true;
+                radioButton7.Enabled = false;
             }
             else
             {
@@ -222,14 +280,41 @@ namespace gateBeta
         {
 
            
-           if(txt_bin.Text.Trim().Length>=28 && Int16.Parse(txt_cantidad.Text) > 1)
+           if(txt_bin.Text.Trim().Length>=22 && Int16.Parse(txt_cantidad.Text) > 1)
             {
                 Variables.bin = txt_bin.Text.Trim();
+
+                string[] binarr = txt_bin.Text.Trim().Split('|');
+                try
+                {
+                    if (txt_bin.Text.Trim().Length < 15)
+                    {
+                        MessageBox.Show("ERROR: REVISE QUE SU BIEN ESTE CORRECTO");
+                        return;
+                    }
+
+                    if(binarr[0]!="" && binarr[1] != "" && binarr[2] != "")
+                    {
+                       
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: REVISE QUE SU BIEN ESTE CORRECTO");
+                        return;
+                    }
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("ERROR: REVISE QUE SU BIEN ESTE CORRECTO");
+                    return;
+                }
+
                 Variables.cantidad = txt_cantidad.Text.Trim();
                 Variables.key = txt_key.Text.Trim();
+                btn_generar.Enabled = false;
                 t = new Thread(gencheck);
                 t.Start();
-                t.Join();
             }
 
           
@@ -591,36 +676,36 @@ namespace gateBeta
 
             try
             {
-                if (radioButton1.Checked == true)
-                {
-                    poseidon.stop();
+                //if (radioButton1.Checked == true)
+                //{
+                //    poseidon.stop();
 
-                }
-                else if (radioButton2.Checked == true)
-                {
-                    Dropified.stop();
-                }
-                else if (radioButton3.Checked == true)
-                {
-                    Flletfarm.stop();
-                }
-                else if (radioButton4.Checked == true)
-                {
-                    Healthydirections.stop();
-                }
-                else if (radioButton5.Checked == true)
-                {
-                    Jomashop.stop();
-                }
-                else if (radioButton6.Checked == true)
-                {
-                    koleimports.stop();
-                }
-                else if (radioButton7.Checked == true)
-                {
-                    Qspray.stop();
+                //}
+                //else if (radioButton2.Checked == true)
+                //{
+                //    Dropified.stop();
+                //}
+                //else if (radioButton3.Checked == true)
+                //{
+                //    Flletfarm.stop();
+                //}
+                //else if (radioButton4.Checked == true)
+                //{
+                //    Healthydirections.stop();
+                //}
+                //else if (radioButton5.Checked == true)
+                //{
+                //    Jomashop.stop();
+                //}
+                //else if (radioButton6.Checked == true)
+                //{
+                //    koleimports.stop();
+                //}
+                //else if (radioButton7.Checked == true)
+                //{
+                //    Qspray.stop();
 
-                }
+                //}
                 
             }
             catch (Exception ex)
@@ -636,11 +721,20 @@ namespace gateBeta
             radioButton4.Enabled = true;
             radioButton5.Enabled = true;
             radioButton6.Enabled = true;
-            radioButton7.Enabled = true;
+            radioButton7.Enabled = false;
             btn_iniciar.Enabled = true;
             btn_detener.Enabled = false;
 
-            t.Abort();
+            try
+            {
+                t.Abort();
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+            
 
         }
 
@@ -743,6 +837,7 @@ namespace gateBeta
                 radioButton5.Checked = false;
                 radioButton6.Checked = false;
                 radioButton7.Checked = false;
+              
             }
         }
 
@@ -782,6 +877,7 @@ namespace gateBeta
                 radioButton5.Checked = false;
                 radioButton1.Checked = false;
                 radioButton7.Checked = false;
+                MessageBox.Show("USAR VPN USA");
             }
         }
 
@@ -795,6 +891,7 @@ namespace gateBeta
                 radioButton5.Checked = false;
                 radioButton6.Checked = false;
                 radioButton1.Checked = false;
+                MessageBox.Show("USAR VPN USA");
             }
         }
 
@@ -802,9 +899,21 @@ namespace gateBeta
         {
             Variables.run = false;
             update_progresbar(1);
-            Thread stopchk = new Thread(stop);
-            stopchk.Start();
-           
+            //Thread stopchk = new Thread(stop);
+            //stopchk.Start();
+
+            try
+            {
+                t.Abort();
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+
+            
+
 
             foreach (Process proc in Process.GetProcessesByName("chromedriver"))
             {
@@ -813,10 +922,32 @@ namespace gateBeta
 
             foreach (Process proc in Process.GetProcessesByName("conhost"))
             {
+                try
+                {
+                    proc.Kill();
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex);
+                }
+              
+            }
+
+            foreach (Process proc in Process.GetProcessesByName("chrome"))
+            {
                 proc.Kill();
             }
 
-
+            radioButton1.Enabled = true;
+            radioButton2.Enabled = true;
+            radioButton3.Enabled = true;
+            radioButton4.Enabled = true;
+            radioButton5.Enabled = true;
+            radioButton6.Enabled = true;
+            radioButton7.Enabled = false;
+            btn_iniciar.Enabled = true;
+            btn_detener.Enabled = false;
 
 
         }
@@ -838,11 +969,31 @@ namespace gateBeta
                 proc.Kill();
             }
 
+            foreach (Process proc in Process.GetProcessesByName("chrome"))
+            {
+                proc.Kill();
+            }
+
             foreach (Process proc in Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName))
             {
                 proc.Kill();
             }
 
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void bunifuButton1_Click_1(object sender, EventArgs e)
+        {
+            this.txt_check.Text = "";
+            this.txt_lives.Text = "";
+            this.txt_deads.Text = "";
+            this.lbl_enproceso.Text = "0";
+            this.lbl_deads.Text = "0";
+            this.lbl_lives.Text = "0";
         }
     }
 }

@@ -125,7 +125,7 @@ namespace gateDanny.gates
             }
 
            
-            if (Thunder._Form1.numcc() > 0 && Variables.run==true )
+            if (Thunder._Form1.numcc() > 0 && Variables.run==true && Variables.gate == "3")
             {
 
                 Thunder._Form1.update_progresbar(5);
@@ -134,7 +134,7 @@ namespace gateDanny.gates
                 clave = "Jo." + getNum();
 
                 //chromeOptions.AddArguments(new List<string>() { "headless" });
-                //chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080");, "--headless"
+                //chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080");, 
                 chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--ignore-certificate-errors", "--headless");
 
                 var chromeDriverService = ChromeDriverService.CreateDefaultService();
@@ -241,7 +241,7 @@ namespace gateDanny.gates
                         restart();
                     }
 
-                    Thread.Sleep(300);
+                    Thread.Sleep(1500);
 
                     if (tiempoElemento(By.XPath("//*[@id='shipping-first-name']")))
                     {
@@ -280,6 +280,7 @@ namespace gateDanny.gates
 
                     if (tiempoElemento(By.XPath("//*[@id='checkout-shipping-options']/div/div[1]/form/div[3]/div[2]/button")))
                     {
+                        Thread.Sleep(1000);
                         driver.FindElement(By.XPath("//*[@id='checkout-shipping-options']/div/div[1]/form/div[3]/div[2]/button")).Submit();
                         Thread.Sleep(1000);
                     }
@@ -306,7 +307,9 @@ namespace gateDanny.gates
                     }
                     else
                     {
-                        stop();
+                       
+                        Thunder._Form1.abort();
+                        return;
                     }
                    
                 }
@@ -314,7 +317,9 @@ namespace gateDanny.gates
             }
             else
             {
-                stop();
+              
+                Thunder._Form1.abort();
+                return;
             }
         }
 
@@ -370,16 +375,17 @@ namespace gateDanny.gates
                         string cc = Thunder._Form1.nextCc();
                         string[] ccLine = cc.Split('|');
                         var ccnum = ccLine[0];
+                        Thread.Sleep(1000);
                         
 
                         driver.SwitchTo().Frame(driver.FindElement(By.XPath("//*[@id='eProtect-iframe']")));
-                        Thread.Sleep(800);
+                        Thread.Sleep(1500);
 
                         driver.FindElement(By.XPath("//*[@id='accountNumber']")).SendKeys(ccLine[0]);
-                        Thread.Sleep(300);
+                        Thread.Sleep(500);
                         var mes = new SelectElement(driver.FindElement(By.XPath("//*[@id='expMonth']")));
                         mes.SelectByValue(ccLine[1]);
-                        Thread.Sleep(300);
+                        Thread.Sleep(1000);
                         var anio = new SelectElement(driver.FindElement(By.XPath("//*[@id='expYear']")));
                         anio.SelectByText(ccLine[2]);
 
@@ -398,11 +404,11 @@ namespace gateDanny.gates
 
                         driver.SwitchTo().ParentFrame();
 
-                        Thread.Sleep(500);
+                        Thread.Sleep(1000);
 
                         driver.FindElement(By.XPath("//*[@id='checkout-payment-options']/div/div[4]/div[3]/div/form/div[4]/div[2]/button[2]")).Click();
 
-                        Thread.Sleep(300);
+                        Thread.Sleep(2000);
 
                         if (tiempoElemento(By.XPath("//*[@id='checkout-commit-order']/div/div/form/div[2]/div[2]/button")))
                         {
@@ -450,19 +456,22 @@ namespace gateDanny.gates
                 }
                 else
                 {
-                    stop2();
+                  
+                    Thunder._Form1.abort();
+                    return;
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.ToString());
-                if (Variables.run == true && Variables.gate=="1")
+                if (Variables.run == true )
                 {
                     restart();
                 }
                 else
                 {
-                    stop2();
+                  
+                    Thunder._Form1.abort();
                 }
                
             }
@@ -477,13 +486,16 @@ namespace gateDanny.gates
                 numeroTargeta = 0;
                 driver.Close();
                 driver.Quit();
+                Thunder._Form1.abort();
+                return;
                 
             }
             catch (Exception EX)
             {
 
                 Console.WriteLine(EX.ToString());
-               
+                Thunder._Form1.abort();
+                return;
             }
            
         }

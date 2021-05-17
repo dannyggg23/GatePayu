@@ -204,11 +204,11 @@ namespace gateDanny.gates
         {
 
             check.login(Variables.key);
-            if (int.Parse(Variables.creditos) <= 0)
-            {
-                MessageBox.Show("Recargue sus creditos");
-                return;
-            }
+            //if (int.Parse(Variables.creditos) <= 0)
+            //{
+            //    MessageBox.Show("Recargue sus creditos");
+            //    return;
+            //}
 
             //var lines = Form1.listCC.Lines.Count();
             
@@ -239,12 +239,22 @@ namespace gateDanny.gates
                     {
                         driver.FindElementById("ccpN").SendKeys(ccLine[0]);
                         Thread.Sleep(500);
+
+                    if (ccLine[1].Trim() != "rnd" || ccLine[1].Trim() != "RND")
+                    {
                         var mes = new SelectElement(driver.FindElementByName("emeses"));
                         mes.SelectByValue(ccLine[1]);
                         Thread.Sleep(500);
+                    }
+                   
+
+                    if (ccLine[2].Trim() != "rnd" || ccLine[2].Trim() != "RND")
+                    {
                         var anio = new SelectElement(driver.FindElementByName("eyear"));
                         anio.SelectByValue(ccLine[2]);
                         Thread.Sleep(500);
+                    }
+                    
 
                         if(ccLine[3].Trim()!="rnd" || ccLine[3].Trim() != "RND")
                         {
@@ -280,8 +290,8 @@ namespace gateDanny.gates
                 catch (Exception ex)
                 {
 
-                  
-                }
+                restart();
+            }
 
             
            

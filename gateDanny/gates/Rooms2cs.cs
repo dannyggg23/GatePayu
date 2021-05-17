@@ -18,7 +18,7 @@ using Keys = OpenQA.Selenium.Keys;
 
 namespace gateDanny.gates
 {
-    class Roomstogo
+    class Rooms2
     {
         Socks socks = new Socks();
         ChromeDriver driver;
@@ -127,8 +127,8 @@ namespace gateDanny.gates
                 return;
             }
 
-            
-            if (Thunder._Form1.numcc() > 0 && Variables.run==true)
+
+            if (Thunder._Form1.numcc() > 0 && Variables.run == true)
             {
                 var chromeOptions = new ChromeOptions();
                 correo = "joseffernana" + getNum() + "@gmail.com";
@@ -136,8 +136,8 @@ namespace gateDanny.gates
 
 
                 //chromeOptions.AddArguments(new List<string>() { "headless" });
-                chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080", "--incognito", "--ignore-certificate-errors", "--headless"); //
-                //chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito","--proxy-server=" + socks.proxy(), "--ignore-certificate-errors");
+                chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080", "--incognito", "--ignore-certificate-errors", "--headless"); //"--headless"
+                //chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=true", "--incognito","--proxy-server=" + socks.proxy(), "--ignore-certificate-errors");
 
                 var chromeDriverService = ChromeDriverService.CreateDefaultService();
                 chromeDriverService.HideCommandPromptWindow = true;
@@ -145,7 +145,7 @@ namespace gateDanny.gates
                 driver = new ChromeDriver(chromeDriverService, chromeOptions);
                 try
                 {
-                    driver.Url = "https://www.roomstogo.com/furniture/free-shipping/kids-decor";
+                    driver.Url = "https://www.roomstogo.com/furniture/kids-and-teens/decor/pillows/";
                 }
                 catch (Exception)
                 {
@@ -156,51 +156,51 @@ namespace gateDanny.gates
                 try
                 {
 
-               
 
-                Thread.Sleep(1000);
+
+                    Thread.Sleep(1000);
                     Thunder._Form1.update_progresbar(5);
                     correo = "joseffernana" + getNum() + "@hotmail.com";
 
-                if (IsElementPresent(By.XPath("/html/body/h1")))
-                {
-                    if (driver.FindElement(By.XPath("/html/body/h1")).Text.Trim() == "403 ERROR")
+                    if (IsElementPresent(By.XPath("/html/body/h1")))
+                    {
+                        if (driver.FindElement(By.XPath("/html/body/h1")).Text.Trim() == "403 ERROR")
+                        {
+                            restart();
+                        }
+                    }
+
+                    if (tiempoElemento(By.Id("aisSort")))
+                    {
+                        var precio = new SelectElement(driver.FindElement(By.Id("aisSort")));
+                        //precio.SelectByText("Lowest Price");
+                        Thread.Sleep(500);
+
+                    }
+                    else
                     {
                         restart();
                     }
-                }
-
-                if (tiempoElemento(By.Id("aisSort")))
-                {
-                    var precio = new SelectElement(driver.FindElement(By.Id("aisSort")));
-                    //precio.SelectByText("Lowest Price");
-                    Thread.Sleep(500);
-
-                }
-                else
-                {
-                    restart();
-                }
-                var producto = RandomNumber(1, 20);
-                var href = "";
-                if (IsElementPresent(By.XPath("//*[@id='productResultsWrapper']/div/div/div[" + producto + "]/div/div/a")))
-                {
+                    var producto = RandomNumber(1, 12);
+                    var href = "";
+                    if (IsElementPresent(By.XPath("//*[@id='productResultsWrapper']/div/div/div[" + producto + "]/div/div/a")))
+                    {
                         Thunder._Form1.update_progresbar(20);
                         href = driver.FindElement(By.XPath("//*[@id='productResultsWrapper']/div/div/div[" + producto + "]/div/div/a")).GetAttribute("href");
-                    Thread.Sleep(300);
-                    driver.Navigate().GoToUrl(href);
-                    Thread.Sleep(1000);
-                }
-                else
-                {
-                    restart();
-                }
+                        Thread.Sleep(300);
+                        driver.Navigate().GoToUrl(href);
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        restart();
+                    }
 
-                if (tiempoElemento(By.XPath("//*[@id='content']/div[1]/div[2]/div/div/div[2]/div[3]/div/div[3]/div/div/div[2]/div/div[2]/div/button")))
-                {
+                    if (tiempoElemento(By.XPath("//*[@id='content']/div[1]/div[2]/div/div/div[2]/div[3]/div/div[3]/div/div/div[2]/div/div[2]/div/button")))
+                    {
                         Thunder._Form1.update_progresbar(40);
                         driver.FindElement(By.XPath("//*[@id='content']/div[1]/div[2]/div/div/div[2]/div[3]/div/div[3]/div/div/div[2]/div/div[2]/div/button")).Click();
-                    Thread.Sleep(2000);
+                        Thread.Sleep(2000);
                         //if (IsElementPresent(By.XPath("/html/body/div[3]/div/div/div/div/div/h3[2]")))
                         //{
                         //    if (driver.FindElement(By.XPath("/html/body/div[3]/div/div/div/div/div/h3[2]")).Displayed == true)
@@ -213,106 +213,112 @@ namespace gateDanny.gates
                         //}
 
                         driver.Navigate().GoToUrl("https://www.roomstogo.com/cart");
-                    //driver.FindElement(By.XPath("/html/body/div[3]/div/div/div/div/div/div[2]/div/div[2]/a")).Click();
-                    Thread.Sleep(1000);
-                }
-                else
-                {
-                    restart();
-                }
-
-                if (IsElementPresent(By.XPath("//*[@id='content']/div/div/div[1]/div[2]/div[2]/div[2]/div/span/a")))
-                {
-                        Thread.Sleep(2000);
-                    driver.FindElement(By.XPath("//*[@id='content']/div/div/div[2]/div[1]/div[4]/div/span/a")).Click();
-                    Thread.Sleep(1000);
-                }
-                else
-                {
-
-                    driver.Navigate().GoToUrl(href);
-                    Thread.Sleep(1000);
-
-                    if (tiempoElemento(By.XPath("//*[@id='content']/div[1]/div[2]/div/div/div[2]/div[3]/div/div[3]/div/div/div[2]/div/div[2]/div/button")))
+                        //driver.FindElement(By.XPath("/html/body/div[3]/div/div/div/div/div/div[2]/div/div[2]/a")).Click();
+                        Thread.Sleep(1000);
+                    }
+                    else
                     {
+                        restart();
+                    }
+
+                    if (IsElementPresent(By.XPath("//*[@id='content']/div/div/div[1]/div[2]/div[2]/div[2]/div/span/a")))
+                    {
+                        driver.FindElement(By.XPath("//*[@id='content']/div/div/div[2]/div[1]/div[4]/div/span/a")).Click();
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+
+                        driver.Navigate().GoToUrl(href);
+                        Thread.Sleep(1000);
+
+                        if (tiempoElemento(By.XPath("//*[@id='content']/div[1]/div[2]/div/div/div[2]/div[3]/div/div[3]/div/div/div[2]/div/div[2]/div/button")))
+                        {
                             Thunder._Form1.update_progresbar(40);
                             driver.FindElement(By.XPath("//*[@id='content']/div[1]/div[2]/div/div/div[2]/div[3]/div/div[3]/div/div/div[2]/div/div[2]/div/button")).Click();
-                        Thread.Sleep(3000);
+                            Thread.Sleep(3000);
                             //if (IsElementPresent(By.XPath("/html/body/div[3]/div/div/div/div/div/h3[2]")))
                             //{
                             //    if (driver.FindElement(By.XPath("/html/body/div[3]/div/div/div/div/div/h3[2]")).Displayed == true)
                             //    {
                             //        if (driver.FindElement(By.XPath("/html/body/div[3]/div/div/div/div/div/h3[2]")).Text == "Product is not available in your region.")
                             //        {
-                            //            load2();
+                            //            restart();
                             //        }
                             //    }
                             //}
 
                             driver.Navigate().GoToUrl("https://www.roomstogo.com/cart");
-                        //driver.FindElement(By.XPath("/html/body/div[3]/div/div/div/div/div/div[2]/div/div[2]/a")).Click();
-                        Thread.Sleep(1000);
-
-                        if (IsElementPresent(By.XPath("//*[@id='content']/div/div/div[1]/div[2]/div[2]/div[2]/div/span/a")))
-                        {
-                            driver.FindElement(By.XPath("//*[@id='content']/div/div/div[2]/div[1]/div[4]/div/span/a")).Click();
+                            //driver.FindElement(By.XPath("/html/body/div[3]/div/div/div/div/div/div[2]/div/div[2]/a")).Click();
                             Thread.Sleep(1000);
+
+                            if (IsElementPresent(By.XPath("//*[@id='content']/div/div/div[1]/div[2]/div[2]/div[2]/div/span/a")))
+                            {
+                                driver.FindElement(By.XPath("//*[@id='content']/div/div/div[2]/div[1]/div[4]/div/span/a")).Click();
+                                Thread.Sleep(1000);
+                            }
+                            else
+                            {
+                                restart();
+                            }
                         }
                         else
                         {
                             restart();
                         }
                     }
-                    else
-                    {
-                        restart();
-                    }
-                }
 
-                if (tiempoElemento(By.Id("firstName")))
-                {
+                    if (tiempoElemento(By.Id("firstName")))
+                    {
                         Thunder._Form1.update_progresbar(60);
                         driver.FindElement(By.Id("firstName")).SendKeys("JOSE");
-                    driver.FindElement(By.Id("lastName")).SendKeys("REYES");
-                    driver.FindElement(By.Id("phone")).SendKeys("2136548541");
-                    driver.FindElement(By.Id("altPhone")).SendKeys("2136548541");
-                    driver.FindElement(By.Id("email")).SendKeys(correo);
-                    driver.FindElement(By.Id("address")).SendKeys("street " + RandomNumber(1, 9));
-                    Thread.Sleep(1000);
-                    if (tiempoElemento(By.XPath("//*[@id='addsug0']")))
-                    {
-                        driver.FindElement(By.XPath("//*[@id='addsug0']")).Click();
+                        driver.FindElement(By.Id("lastName")).SendKeys("REYES");
+                        driver.FindElement(By.Id("phone")).SendKeys("2136548541");
+                        driver.FindElement(By.Id("altPhone")).SendKeys("2136548541");
+                        driver.FindElement(By.Id("email")).SendKeys(correo);
+                        driver.FindElement(By.Id("address")).SendKeys("street " + RandomNumber(1, 9));
                         Thread.Sleep(1000);
-
-                        if (IsElementPresent(By.XPath("//*[@id='shipping']/div/div[2]/div/button")))
+                        if (tiempoElemento(By.XPath("//*[@id='addsug0']")))
                         {
+                            driver.FindElement(By.XPath("//*[@id='addsug0']")).Click();
+                            Thread.Sleep(1000);
+
+                            if (IsElementPresent(By.XPath("//*[@id='shipping']/div/div[2]/div/button")))
+                            {
                                 Thunder._Form1.update_progresbar(70);
                                 driver.FindElement(By.XPath("//*[@id='shipping']/div/div[2]/div/button")).Click();
-                            Thread.Sleep(2000);
-                        }
+                                Thread.Sleep(2000);
+                            }
 
-                        Thread.Sleep(500);
-                        if (IsElementPresent(By.XPath("//*[@id='delivery']/div/div[2]/div[2]/button")))
-                        {
+                            Thread.Sleep(500);
+                            if (IsElementPresent(By.XPath("//*[@id='delivery']/div/div[2]/div[2]/button")))
+                            {
                                 Thunder._Form1.update_progresbar(80);
                                 driver.FindElement(By.XPath("//*[@id='delivery']/div/div[2]/div[2]/button")).Click();
-                            Thread.Sleep(2000);
+                                Thread.Sleep(2000);
+                            }
+                            else
+                            {
+                                restart();
+                            }
+
+                            if (tiempoElemento(By.XPath("/html/body/div[2]/div[1]/div/div[2]/section/div[2]/div[1]/div[3]/div/div[2]/div/div/div[3]/div/div[2]/div/div/div[3]/div[1]/div/iframe")))
+                            {
+                                pago();
+                            }
+                            else
+                            {
+                                restart();
+                            }
+
+
+
+
                         }
                         else
                         {
                             restart();
                         }
-
-                        if (tiempoElemento(By.XPath("/html/body/div[2]/div[1]/div/div[2]/section/div[2]/div[1]/div[3]/div/div[2]/div/div/div[3]/div/div[2]/div/div/div[3]/div[1]/div/iframe")))
-                        {
-                            pago();
-                        }
-                        else
-                        {
-                            restart();
-                        }
-
-
 
 
                     }
@@ -320,13 +326,6 @@ namespace gateDanny.gates
                     {
                         restart();
                     }
-
-
-                }
-                else
-                {
-                    restart();
-                }
 
                 }
                 catch (Exception ex)
@@ -339,7 +338,7 @@ namespace gateDanny.gates
                     {
                         stop2();
                     }
-                   
+
                 }
 
             }
@@ -349,7 +348,224 @@ namespace gateDanny.gates
             }
         }
 
+        public void load2()
+        {
 
+            check.login(Variables.key);
+            if (int.Parse(Variables.creditos) <= 0)
+            {
+                MessageBox.Show("Recargue sus creditos");
+                return;
+            }
+
+
+            if (Thunder._Form1.numcc() > 0 && Variables.run == true)
+            {
+               
+                try
+                {
+                    driver.Url = "https://www.roomstogo.com/furniture/kids-and-teens/decor/pillows/";
+                }
+                catch (Exception)
+                {
+
+                    restart();
+                }
+
+                try
+                {
+
+
+
+                    Thread.Sleep(1000);
+                    Thunder._Form1.update_progresbar(5);
+                    correo = "joseffernana" + getNum() + "@hotmail.com";
+
+                    if (IsElementPresent(By.XPath("/html/body/h1")))
+                    {
+                        if (driver.FindElement(By.XPath("/html/body/h1")).Text.Trim() == "403 ERROR")
+                        {
+                            restart();
+                        }
+                    }
+
+                    if (tiempoElemento(By.Id("aisSort")))
+                    {
+                        var precio = new SelectElement(driver.FindElement(By.Id("aisSort")));
+                        //precio.SelectByText("Lowest Price");
+                        Thread.Sleep(500);
+
+                    }
+                    else
+                    {
+                        restart();
+                    }
+                    var producto = RandomNumber(1, 20);
+                    var href = "";
+                    if (IsElementPresent(By.XPath("//*[@id='productResultsWrapper']/div/div/div[" + producto + "]/div/div/a")))
+                    {
+                        Thunder._Form1.update_progresbar(20);
+                        href = driver.FindElement(By.XPath("//*[@id='productResultsWrapper']/div/div/div[" + producto + "]/div/div/a")).GetAttribute("href");
+                        Thread.Sleep(300);
+                        driver.Navigate().GoToUrl(href);
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        restart();
+                    }
+
+                    if (tiempoElemento(By.XPath("//*[@id='content']/div[1]/div[2]/div/div/div[2]/div[3]/div/div[3]/div/div/div[2]/div/div[2]/div/button")))
+                    {
+                        Thunder._Form1.update_progresbar(40);
+                        driver.FindElement(By.XPath("//*[@id='content']/div[1]/div[2]/div/div/div[2]/div[3]/div/div[3]/div/div/div[2]/div/div[2]/div/button")).Click();
+                        Thread.Sleep(2000);
+                        if (IsElementPresent(By.XPath("/html/body/div[3]/div/div/div/div/div/h3[2]")))
+                        {
+                            if (driver.FindElement(By.XPath("/html/body/div[3]/div/div/div/div/div/h3[2]")).Displayed == true)
+                            {
+                                if (driver.FindElement(By.XPath("/html/body/div[3]/div/div/div/div/div/h3[2]")).Text == "Product is not available in your region.")
+                                {
+                                    load2();
+                                }
+                            }
+                        }
+
+                        driver.Navigate().GoToUrl("https://www.roomstogo.com/cart");
+                        //driver.FindElement(By.XPath("/html/body/div[3]/div/div/div/div/div/div[2]/div/div[2]/a")).Click();
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        restart();
+                    }
+
+                    if (IsElementPresent(By.XPath("//*[@id='content']/div/div/div[1]/div[2]/div[2]/div[2]/div/span/a")))
+                    {
+                        driver.FindElement(By.XPath("//*[@id='content']/div/div/div[1]/div[2]/div[2]/div[2]/div/span/a")).Click();
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+
+                        driver.Navigate().GoToUrl(href);
+                        Thread.Sleep(1000);
+
+                        if (tiempoElemento(By.XPath("//*[@id='content']/div[1]/div[2]/div/div/div[2]/div[3]/div/div[3]/div/div/div[2]/div/div[2]/div/button")))
+                        {
+                            Thunder._Form1.update_progresbar(40);
+                            driver.FindElement(By.XPath("//*[@id='content']/div[1]/div[2]/div/div/div[2]/div[3]/div/div[3]/div/div/div[2]/div/div[2]/div/button")).Click();
+                            Thread.Sleep(3000);
+                            //if (IsElementPresent(By.XPath("/html/body/div[3]/div/div/div/div/div/h3[2]")))
+                            //{
+                            //    if (driver.FindElement(By.XPath("/html/body/div[3]/div/div/div/div/div/h3[2]")).Displayed == true)
+                            //    {
+                            //        if (driver.FindElement(By.XPath("/html/body/div[3]/div/div/div/div/div/h3[2]")).Text == "Product is not available in your region.")
+                            //        {
+                            //            restart();
+                            //        }
+                            //    }
+                            //}
+
+                            driver.Navigate().GoToUrl("https://www.roomstogo.com/cart");
+                            //driver.FindElement(By.XPath("/html/body/div[3]/div/div/div/div/div/div[2]/div/div[2]/a")).Click();
+                            Thread.Sleep(1000);
+
+                            if (IsElementPresent(By.XPath("//*[@id='content']/div/div/div[1]/div[2]/div[2]/div[2]/div/span/a")))
+                            {
+                                driver.FindElement(By.XPath("//*[@id='content']/div/div/div[1]/div[2]/div[2]/div[2]/div/span/a")).Click();
+                                Thread.Sleep(1000);
+                            }
+                            else
+                            {
+                                restart();
+                            }
+                        }
+                        else
+                        {
+                            restart();
+                        }
+                    }
+
+                    if (tiempoElemento(By.Id("firstName")))
+                    {
+                        Thunder._Form1.update_progresbar(60);
+                        driver.FindElement(By.Id("firstName")).SendKeys("JOSE");
+                        driver.FindElement(By.Id("lastName")).SendKeys("REYES");
+                        driver.FindElement(By.Id("phone")).SendKeys("2136548541");
+                        driver.FindElement(By.Id("altPhone")).SendKeys("2136548541");
+                        driver.FindElement(By.Id("email")).SendKeys(correo);
+                        driver.FindElement(By.Id("address")).SendKeys("street " + RandomNumber(1, 9));
+                        Thread.Sleep(1000);
+                        if (tiempoElemento(By.XPath("//*[@id='addsug0']")))
+                        {
+                            driver.FindElement(By.XPath("//*[@id='addsug0']")).Click();
+                            Thread.Sleep(1000);
+
+                            if (IsElementPresent(By.XPath("//*[@id='shipping']/div/div[2]/div/button")))
+                            {
+                                Thunder._Form1.update_progresbar(70);
+                                driver.FindElement(By.XPath("//*[@id='shipping']/div/div[2]/div/button")).Click();
+                                Thread.Sleep(2000);
+                            }
+
+                            Thread.Sleep(500);
+                            if (IsElementPresent(By.XPath("//*[@id='delivery']/div/div[2]/div[2]/button")))
+                            {
+                                Thunder._Form1.update_progresbar(80);
+                                driver.FindElement(By.XPath("//*[@id='delivery']/div/div[2]/div[2]/button")).Click();
+                                Thread.Sleep(2000);
+                            }
+                            else
+                            {
+                                restart();
+                            }
+
+                            if (tiempoElemento(By.XPath("/html/body/div[2]/div[1]/div/div[2]/section/div[2]/div[1]/div[3]/div/div[2]/div/div/div[3]/div/div[2]/div/div/div[3]/div[1]/div/iframe")))
+                            {
+                                pago();
+                            }
+                            else
+                            {
+                                restart();
+                            }
+
+
+
+
+                        }
+                        else
+                        {
+                            restart();
+                        }
+
+
+                    }
+                    else
+                    {
+                        restart();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    if (Variables.run == true)
+                    {
+                        restart();
+                    }
+                    else
+                    {
+                        stop();
+                    }
+
+                }
+
+            }
+            else
+            {
+                stop2();
+            }
+        }
 
 
         private bool IsElementPresent(By by)
@@ -392,10 +608,10 @@ namespace gateDanny.gates
             try
             {
 
-                
 
 
-                if (Thunder._Form1.numcc() > 0 && Variables.run==true)
+
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true)
                 {
                     if (pagos < 5)
                     {
@@ -526,7 +742,7 @@ namespace gateDanny.gates
                 {
                     stop2();
                 }
-                
+
             }
 
         }
@@ -545,7 +761,7 @@ namespace gateDanny.gates
 
                 Console.WriteLine("ERROR");
             }
-       
+
         }
 
         public void stop2()

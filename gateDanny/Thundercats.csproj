@@ -244,7 +244,9 @@
     <Compile Include="gates\Expreso.cs" />
     <Compile Include="gates\Farmand.cs" />
     <Compile Include="gates\Fleetfarm.cs" />
+    <Compile Include="gates\Forever21.cs" />
     <Compile Include="gates\Frey.cs" />
+    <Compile Include="gates\Gate7.cs" />
     <Compile Include="gates\Generador.cs" />
     <Compile Include="gates\Gift.cs" />
     <Compile Include="gates\Giftfly.cs" />
@@ -260,6 +262,7 @@
     <Compile Include="gates\Primenutrition.cs" />
     <Compile Include="gates\Print.cs" />
     <Compile Include="gates\ResolveCaptcha.cs" />
+    <Compile Include="gates\Rooms2cs.cs" />
     <Compile Include="gates\Semana.cs" />
     <Compile Include="gates\Shopbob.cs" />
     <Compile Include="gates\Socks.cs" />
