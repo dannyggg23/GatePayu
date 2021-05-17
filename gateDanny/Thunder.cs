@@ -29,7 +29,7 @@ namespace gateBeta
         Weightwatchers Healthydirections = new Weightwatchers();
         Woot Jomashop = new Woot();
         Forever21 koleimports = new Forever21();
-        Rooms2 Qspray = new Rooms2();
+        Riteaid Qspray = new Riteaid();
 
 
         Shopbob Shopbob = new Shopbob();
@@ -206,7 +206,7 @@ namespace gateBeta
                 }
 
                 radioButton6.Enabled = true;
-                radioButton7.Enabled = false;
+                radioButton7.Enabled = true;
             }
             else
             {
@@ -721,7 +721,7 @@ namespace gateBeta
             radioButton4.Enabled = true;
             radioButton5.Enabled = true;
             radioButton6.Enabled = true;
-            radioButton7.Enabled = false;
+            radioButton7.Enabled = true;
             btn_iniciar.Enabled = true;
             btn_detener.Enabled = false;
 
@@ -945,7 +945,7 @@ namespace gateBeta
             radioButton4.Enabled = true;
             radioButton5.Enabled = true;
             radioButton6.Enabled = true;
-            radioButton7.Enabled = false;
+            radioButton7.Enabled = true;
             btn_iniciar.Enabled = true;
             btn_detener.Enabled = false;
 

@@ -262,6 +262,7 @@
     <Compile Include="gates\Primenutrition.cs" />
     <Compile Include="gates\Print.cs" />
     <Compile Include="gates\ResolveCaptcha.cs" />
+    <Compile Include="gates\Riteaid.cs" />
     <Compile Include="gates\Rooms2cs.cs" />
     <Compile Include="gates\Semana.cs" />
     <Compile Include="gates\Shopbob.cs" />
@@ -342,6 +343,9 @@
     <None Include="Resources\ThunderCats-logo-FE87D8397B-seeklogo.com.png" />
     <None Include="Resources\2291252-middle.png" />
     <None Include="Resources\f29fe9fd1365be35797f5380a05a0532.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="gates\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Selenium.Chrome.WebDriver.85.0.0\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.85.0.0\build\Selenium.Chrome.WebDriver.targets')" />
