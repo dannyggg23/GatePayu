@@ -17,7 +17,7 @@ using Keys = OpenQA.Selenium.Keys;
 
 namespace gateDanny.gates
 {
-    class Riteaid
+    class Weareplanned
     {
         ChromeDriver driver;
         check check = new check();
@@ -147,166 +147,13 @@ namespace gateDanny.gates
                     chromeDriverService.HideCommandPromptWindow = true;
 
                     driver = new ChromeDriver(chromeDriverService, chromeOptions);
-                    driver.Url = "https://www.riteaid.com/shop/household-pet/pets";
+                    driver.Url = "https://www.weareplannedparenthood.org/onlineactions/2U7UN1iNhESWUfDs4gDPNg2?sourceid=1000063&_ga=2.51912224.829475348.1565593412-698380132.1565593412";
                     Thread.Sleep(3000);
                     Thunder._Form1.update_progresbar(5);
 
 
-                    if (tiempoElemento(By.XPath("//*[@id='maincontent']/div[2]/div[2]/div[4]/div/div[4]/div[3]")))
-                    {
-                        //ExecuteRefreshProgressThread(10, "Ordenando productos...", "Success");
-                        Thread.Sleep(1000);
-                        //var precio = new SelectElement(driver.FindElement(By.XPath("/html/body/main/div[3]/form/fieldset")));
-                        //precio.SelectByValue("PRICE_ASC");
-
-
-                    }
-
-                    var producto = RandomNumber(1, 3);
-                    ///html/body/main/div[3]/ul/li[11]/div/div/a
-                    if (IsElementPresent(By.XPath("//*[@id='maincontent']/div[2]/div[2]/div[4]/div/div[4]/div[3]/div[4]/ul/li/li[" + producto + "]")))
-                    {
-                        Thunder._Form1.update_progresbar(20);
-                        Thread.Sleep(2000);
-                        driver.FindElement(By.XPath("//*[@id='maincontent']/div[2]/div[2]/div[4]/div/div[4]/div[3]/div[4]/ul/li/li[" + producto + "]")).Click();
-                        ////ExecuteRefreshProgressThread(15, "Seleccionando producto...", "Success");
-                        //var href = driver.FindElement(By.XPath("/html/body/div[2]/div[1]/div[2]/div/div[2]/div[2]/main/div[3]/div[3]/div/div[" + producto + "]")).GetAttribute("href");
-                        //Thread.Sleep(300);
-                        ////driver.Navigate().GoToUrl(href);
-                        //Thread.Sleep(1000);
-                    }
-                    else
-                    {
-                        //ExecuteRefreshProgressThread(1, "ERROR DEMETER #2, Reiniciando proceso", "Success");
-                        restart();
-                    }
-
-                    if (tiempoElemento(By.XPath("//*[@id='product-addtocart-button']")))
-                    {
-                        //ExecuteRefreshProgressThread(25, "Agregando al carrito...", "Success");
-                        Thunder._Form1.update_progresbar(40);
-                        Thread.Sleep(1000);
-                        driver.FindElement(By.XPath("//*[@id='product-addtocart-button']")).Click();
-                        //////driver.FindElement(By.XPath("/html/body/main/div[2]/section/form/div[2]/input")).Click();
-
-
-                        Thread.Sleep(6000);
-                        driver.Navigate().GoToUrl("https://www.riteaid.com/shop/interstitial/account/login");
-                        Thread.Sleep(2000);
-
-                        if (tiempoElemento(By.Id("guestCheckout")))
-                        {
-                            Thread.Sleep(2000);
-                            driver.FindElement(By.Id("guestCheckout")).Click();
-                        }
-                        else
-                        {
-                            restart();
-                        }
-                    }
-                    else
-                    {
-                        //ExecuteRefreshProgressThread(1, "ERROR DEMETER #3, Reiniciando proceso", "Success");
-                        restart();
-                    }
-
-                    ////*[@id="shipping-new-address-form"]/div[1] 
-
-                    if (tiempoElemento(By.XPath("//*[@id='shipping-new-address-form']/div[1]/div")))
-                    {
-                        //ExecuteRefreshProgressThread(50, "Datos fake...", "Success");
-                        Thunder._Form1.update_progresbar(50);
-
-
-                        driver.FindElement(By.Name("firstname")).SendKeys("Miguel");
-                        Thread.Sleep(1000);
-
-
-                        Thread.Sleep(2000);
-                        driver.FindElement(By.Name("lastname")).SendKeys("queso");
-                        Thread.Sleep(2000);
-                        driver.FindElement(By.Name("shipping-email")).SendKeys(correo);
-                        driver.FindElement(By.Name("street[0]")).SendKeys("street " + RandomNumber(1, 4));
-                        Thread.Sleep(2000);
-
-                        if (IsElementPresent(By.XPath("/html/body/div[7]/div[6]/div[2]/div[1]")))
-                        {
-                            driver.FindElementByXPath("/html/body/div[7]/div[6]/div[2]/div[1]").Click();
-                            Thread.Sleep(1000);
-                        }
-
-
-                        if (IsElementPresent(By.XPath("/html/body/div[7]/div[11]/div[2]/div[1]")))
-                        {
-                            driver.FindElementByXPath("/html/body/div[7]/div[11]/div[2]/div[1]").Click();
-                            Thread.Sleep(1000);
-                        }
-                        if (IsElementPresent(By.XPath("/html/body/div[7]/div[2]/div[2]/div[1]")))
-                        {
-                            driver.FindElementByXPath("/html/body/div[7]/div[2]/div[2]/div[1]").Click();
-                            Thread.Sleep(1000);
-                        }
-
-
-                        
-                        
-
-
-
-
-                        Thread.Sleep(1000);
-                        driver.FindElement(By.Name("telephone")).SendKeys("7845652325");
-
-
-                        Thread.Sleep(2000);
-                        if (tiempoElemento(By.XPath("//*[@id='shipping-method-buttons-container']/div/button")))
-                        {
-                            Thread.Sleep(1000);
-                            driver.FindElement(By.XPath("//*[@id='shipping-method-buttons-container']/div/button")).Click();
-
-                            Thread.Sleep(2000);
-
-
-                            if (tiempoElemento(By.XPath("//*[@id='checkout-payment-method-load']/div/div/div[3]/div[1]/label")))
-                            {
-
-                                Thread.Sleep(2000);
-
-                                if (tiempoElemento(By.XPath("//*[@id='acceptjs_payment']")))
-                                {
-                                    pago();
-                                }
-                                else
-                                {
-                                    restart();
-                                }
-                                //driver.ExecuteJavaScript("document.querySelector('#checkout-payment-method-load > div > div > div:nth-child(3) > div.payment-method-title.field.choice > label').click();");
-                                
-                            }
-                            else
-                            {
-                                //ExecuteRefreshProgressThread(1, "ERROR DEMETER #6, Reiniciando proceso", "Success");
-                                restart();
-                            }
-
-
-
-
-                        }
-                        else
-                        {
-                            //ExecuteRefreshProgressThread(1, "ERROR DEMETER #7, Reiniciando proceso", "Success");
-                            restart();
-                        }
-
-
-
-                    }
-                    else
-                    {
-                        restart();
-                    }
-
+                  
+                  
 
                 }
                 else
@@ -386,10 +233,10 @@ namespace gateDanny.gates
                         Thunder._Form1.update_progresbar(90);
 
                         Thread.Sleep(2000);
-                        if (tiempoElemento(By.XPath("//*[@id='acceptjs_payment']")))
+                        if (tiempoElemento(By.XPath("/html/body/div[3]/main/div[2]/div/div[4]/div[4]/ol/li[4]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/iframe")))
                         {
 
-                            driver.SwitchTo().Frame(driver.FindElement(By.XPath("//*[@id='acceptjs_payment']")));
+                            driver.SwitchTo().Frame(driver.FindElement(By.XPath("/html/body/div[3]/main/div[2]/div/div[4]/div[4]/ol/li[4]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/iframe")));
 
                             if (tiempoElemento(By.XPath("//*[@id='cardNum']")))
                             {
@@ -402,44 +249,40 @@ namespace gateDanny.gates
                                 }
                             }
 
-                            
-                          
-                                if (IsElementPresent(By.XPath("//*[@id='expiryDate']")))
+
+
+                            if (IsElementPresent(By.XPath("//*[@id='expiryDate']")))
+                            {
+                                driver.FindElement(By.XPath("//*[@id='expiryDate']")).SendKeys(month + year.Remove(0, 2));
+                                Thread.Sleep(1000);
+                            }
+
+
+
+
+                            if (IsElementPresent(By.XPath("//*[@id='cvv']")))
+                            {
+                                if (cvv.Trim().Length == 3)
                                 {
-                                    driver.FindElement(By.XPath("//*[@id='expiryDate']")).SendKeys(month + year.Remove(0, 2));
-                                    Thread.Sleep(1000);
+                                    driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("000" + OpenQA.Selenium.Keys.Enter);
                                 }
-                            
-
-
-                      
-                                if (IsElementPresent(By.XPath("//*[@id='cvv']")))
+                                else
                                 {
-                                    if (cvv.Trim().Length == 3)
-                                    {
-                                        driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("000" + OpenQA.Selenium.Keys.Enter);
-                                    }
-                                    else
-                                    {
-                                        driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("0000" + OpenQA.Selenium.Keys.Enter);
+                                    driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("0000" + OpenQA.Selenium.Keys.Enter);
 
-                                    }
-                                    Thread.Sleep(1000);
-                                 
-                             
-                                    if (IsElementPresent(By.XPath("//*[@id='saveButton']")))
-                                    {
-                                        Thread.Sleep(800);
-                                        driver.FindElement(By.XPath("//*[@id='saveButton']")).Click();
-                                        Thread.Sleep(800);
-                                    }
-                                
+                                }
+                                Thread.Sleep(1000);
+
+
+                                if (IsElementPresent(By.XPath("//*[@id='saveButton']")))
+                                {
+                                    Thread.Sleep(800);
+                                    driver.FindElement(By.XPath("//*[@id='saveButton']")).Click();
+                                    Thread.Sleep(800);
+                                }
+
 
                             }
-                        }
-                        else
-                        {
-                            restart();
                         }
 
 
@@ -557,7 +400,7 @@ namespace gateDanny.gates
                     }
 
 
-                   
+
 
                 }
                 else
@@ -578,15 +421,15 @@ namespace gateDanny.gates
                     Thread.Sleep(2000);
                     driver.FindElement(By.XPath("//*[@id='shipping-method-buttons-container']/div/button")).Click();
 
-                    if (tiempoElemento(By.XPath("//*[@id='acceptjs_payment']")))
+                    if (tiempoElemento(By.XPath("/html/body/div[3]/main/div[2]/div/div[4]/div[4]/ol/li[4]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/iframe")))
                     {
 
-                        driver.SwitchTo().Frame(driver.FindElement(By.XPath("//*[@id='acceptjs_payment']")));
+                        driver.SwitchTo().Frame(driver.FindElement(By.XPath("/html/body/div[3]/main/div[2]/div/div[4]/div[4]/ol/li[4]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/iframe")));
 
                         if (tiempoElemento(By.XPath("//*[@id='cardNum']")))
                         {
                             driver.SwitchTo().ParentFrame();
-                                return false;
+                            return false;
                         }
                     }
 

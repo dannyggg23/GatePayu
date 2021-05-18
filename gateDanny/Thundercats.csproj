@@ -275,6 +275,7 @@
     <Compile Include="gates\Theepochtimes.cs" />
     <Compile Include="gates\Timber.cs" />
     <Compile Include="gates\Variables.cs" />
+    <Compile Include="gates\Weareplanned.cs" />
     <Compile Include="gates\Weightwatchers.cs" />
     <Compile Include="gates\Eatsdane.cs" />
     <Compile Include="gates\Woot.cs" />

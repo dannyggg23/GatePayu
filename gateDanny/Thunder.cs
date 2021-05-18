@@ -28,7 +28,7 @@ namespace gateBeta
         Chicos Flletfarm = new Chicos();
         Weightwatchers Healthydirections = new Weightwatchers();
         Woot Jomashop = new Woot();
-        Forever21 koleimports = new Forever21();
+        Weareplanned koleimports = new Weareplanned();
         Riteaid Qspray = new Riteaid();
 
 
