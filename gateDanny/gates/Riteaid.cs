@@ -148,7 +148,7 @@ namespace gateDanny.gates
 
                     driver = new ChromeDriver(chromeDriverService, chromeOptions);
                     driver.Url = "https://www.riteaid.com/shop/household-pet/pets";
-                    Thread.Sleep(3000);
+                    Thread.Sleep(2000);
                     Thunder._Form1.update_progresbar(5);
 
 
@@ -190,9 +190,9 @@ namespace gateDanny.gates
                         //////driver.FindElement(By.XPath("/html/body/main/div[2]/section/form/div[2]/input")).Click();
 
 
-                        Thread.Sleep(6000);
+                        Thread.Sleep(4000);
                         driver.Navigate().GoToUrl("https://www.riteaid.com/shop/interstitial/account/login");
-                        Thread.Sleep(2000);
+                        Thread.Sleep(1000);
 
                         if (tiempoElemento(By.Id("guestCheckout")))
                         {
@@ -219,49 +219,34 @@ namespace gateDanny.gates
 
 
                         driver.FindElement(By.Name("firstname")).SendKeys("Miguel");
-                        Thread.Sleep(1000);
+                        Thread.Sleep(500);
 
 
-                        Thread.Sleep(2000);
+                        Thread.Sleep(500);
                         driver.FindElement(By.Name("lastname")).SendKeys("queso");
-                        Thread.Sleep(2000);
+                        Thread.Sleep(500);
                         driver.FindElement(By.Name("shipping-email")).SendKeys(correo);
-                        driver.FindElement(By.Name("street[0]")).SendKeys("street " + RandomNumber(1, 4));
-                        Thread.Sleep(2000);
 
-                        if (IsElementPresent(By.XPath("/html/body/div[7]/div[6]/div[2]/div[1]")))
-                        {
-                            driver.FindElementByXPath("/html/body/div[7]/div[6]/div[2]/div[1]").Click();
-                            Thread.Sleep(1000);
-                        }
-
-
-                        if (IsElementPresent(By.XPath("/html/body/div[7]/div[11]/div[2]/div[1]")))
-                        {
-                            driver.FindElementByXPath("/html/body/div[7]/div[11]/div[2]/div[1]").Click();
-                            Thread.Sleep(1000);
-                        }
-                        if (IsElementPresent(By.XPath("/html/body/div[7]/div[2]/div[2]/div[1]")))
-                        {
-                            driver.FindElementByXPath("/html/body/div[7]/div[2]/div[2]/div[1]").Click();
-                            Thread.Sleep(1000);
-                        }
-
-
-                        
-                        
-
-
-
-
+                        Thread.Sleep(300);
+                        driver.FindElementByXPath("//*[@id='shipping-new-address-form']/fieldset/div/div[1]/div[2]").Click();
                         Thread.Sleep(1000);
+
+                        driver.FindElement(By.Name("street[0]")).SendKeys("street " + RandomNumber(1, 20));
+                        Thread.Sleep(200);
+                        driver.FindElement(By.Name("city")).SendKeys("MIAMI");
+                        Thread.Sleep(200);
+                        var estado = new SelectElement(driver.FindElementByName("region_id"));
+                        Thread.Sleep(100);
+                        estado.SelectByValue("18");
+                        driver.FindElement(By.Name("postcode")).SendKeys("33206");
+                        Thread.Sleep(200);
                         driver.FindElement(By.Name("telephone")).SendKeys("7845652325");
 
 
                         Thread.Sleep(2000);
                         if (tiempoElemento(By.XPath("//*[@id='shipping-method-buttons-container']/div/button")))
                         {
-                            Thread.Sleep(1000);
+                           
                             driver.FindElement(By.XPath("//*[@id='shipping-method-buttons-container']/div/button")).Click();
 
                             Thread.Sleep(2000);
@@ -270,7 +255,7 @@ namespace gateDanny.gates
                             if (tiempoElemento(By.XPath("//*[@id='checkout-payment-method-load']/div/div/div[3]/div[1]/label")))
                             {
 
-                                Thread.Sleep(2000);
+                                Thread.Sleep(1000);
 
                                 if (tiempoElemento(By.XPath("//*[@id='acceptjs_payment']")))
                                 {
@@ -396,9 +381,10 @@ namespace gateDanny.gates
 
                                 if (IsElementPresent(By.XPath("//*[@id='cardNum']")))
                                 {
-
+                                    driver.FindElement(By.XPath("//*[@id='cardNum']")).Clear();
+                                    Thread.Sleep(500);
                                     driver.FindElement(By.XPath("//*[@id='cardNum']")).SendKeys(number);
-                                    Thread.Sleep(1000);
+                                    Thread.Sleep(500);
                                 }
                             }
 
@@ -406,8 +392,10 @@ namespace gateDanny.gates
                           
                                 if (IsElementPresent(By.XPath("//*[@id='expiryDate']")))
                                 {
-                                    driver.FindElement(By.XPath("//*[@id='expiryDate']")).SendKeys(month + year.Remove(0, 2));
-                                    Thread.Sleep(1000);
+                                driver.FindElement(By.XPath("//*[@id='expiryDate']")).Clear();
+                                Thread.Sleep(500);
+                                driver.FindElement(By.XPath("//*[@id='expiryDate']")).SendKeys(month + year.Remove(0, 2));
+                                    Thread.Sleep(500);
                                 }
                             
 
@@ -415,7 +403,11 @@ namespace gateDanny.gates
                       
                                 if (IsElementPresent(By.XPath("//*[@id='cvv']")))
                                 {
-                                    if (cvv.Trim().Length == 3)
+
+                                driver.FindElement(By.XPath("//*[@id='cvv']")).Clear();
+                                Thread.Sleep(500);
+
+                                if (cvv.Trim().Length == 3)
                                     {
                                         driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("000" + OpenQA.Selenium.Keys.Enter);
                                     }
@@ -424,7 +416,7 @@ namespace gateDanny.gates
                                         driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("0000" + OpenQA.Selenium.Keys.Enter);
 
                                     }
-                                    Thread.Sleep(1000);
+                                    Thread.Sleep(500);
                                  
                              
                                     if (IsElementPresent(By.XPath("//*[@id='saveButton']")))
@@ -575,21 +567,12 @@ namespace gateDanny.gates
 
                 if (tiempoElemento(By.XPath("//*[@id='shipping-method-buttons-container']/div/button")))
                 {
-                    Thread.Sleep(2000);
+                   
                     driver.FindElement(By.XPath("//*[@id='shipping-method-buttons-container']/div/button")).Click();
 
-                    if (tiempoElemento(By.XPath("//*[@id='acceptjs_payment']")))
-                    {
+                    Thread.Sleep(1000);
 
-                        driver.SwitchTo().Frame(driver.FindElement(By.XPath("//*[@id='acceptjs_payment']")));
-
-                        if (tiempoElemento(By.XPath("//*[@id='cardNum']")))
-                        {
-                            driver.SwitchTo().ParentFrame();
-                                return false;
-                        }
-                    }
-
+                    return false;
 
                 }
 
