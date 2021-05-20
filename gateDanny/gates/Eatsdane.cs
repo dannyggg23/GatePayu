@@ -345,7 +345,15 @@ namespace gateDanny.gates
                                                     {
                                                         driver.FindElement(By.Id("cvf-input-code")).SendKeys(opt);
                                                         Thread.Sleep(100);
-                                                        driver.FindElement(By.XPath("/html/body/div[1]/div[2]/div/div/div/div/div/div[1]/form/div[6]/span/span/input")).Click();
+                                                        if (IsElementPresent(By.XPath("//*[@id='cvf-submit-otp-button']/span/input")))
+                                                        {
+                                                            driver.FindElementByXPath("//*[@id='cvf-submit-otp-button']/span/input").Click();
+                                                        }
+
+                                                        if (IsElementPresent(By.XPath("/html/body/div[1]/div[2]/div/div/div/div/div/div[1]/form/div[6]/span/span/input")))
+                                                        {
+                                                            driver.FindElement(By.XPath("/html/body/div[1]/div[2]/div/div/div/div/div/div[1]/form/div[6]/span/span/input")).Click();
+                                                        }
                                                         Thread.Sleep(2500);
 
                                                         if (tiempoElemento(By.Id("select-birthday-month")))

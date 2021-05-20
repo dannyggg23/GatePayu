@@ -151,6 +151,57 @@ namespace gateDanny.gates
                     Thread.Sleep(3000);
                     Thunder._Form1.update_progresbar(5);
 
+                    if (tiempoElemento(By.XPath("/html/body/div[1]/div/main/div[1]/div/section/form/fieldset[1]/div/div[1]/div/div/label[1]")))
+                    {
+                        driver.FindElementByXPath("/html/body/div[1]/div/main/div[1]/div/section/form/fieldset[1]/div/div[1]/div/div/label[1]").Click();
+                        Thread.Sleep(1000);
+                        driver.FindElementByName("OtherAmount").SendKeys("5");
+                        Thread.Sleep(1000);
+                        driver.FindElementByXPath("/html/body/div[1]/div/main/div[1]/div/section/form/fieldset[4]/div/div/div/div/div[1]/label").Click();
+                        Thread.Sleep(1000);
+                        if (tiempoElemento(By.Name("FirstName")))
+                        {
+                            driver.FindElementByName("FirstName").SendKeys("jose");
+                            Thread.Sleep(500);
+
+                            driver.FindElementByName("LastName").SendKeys("REYES");
+                            Thread.Sleep(500);
+
+                            driver.FindElementByName("AddressLine1").SendKeys("1 WAY AEROPOST");
+                            Thread.Sleep(500);
+
+                            driver.FindElementByName("PostalCode").SendKeys("33206");
+                            Thread.Sleep(500);
+
+                            driver.FindElementByName("City").SendKeys("MIAMI");
+                            Thread.Sleep(500);
+
+                            var estado = new SelectElement(driver.FindElementByName("StateProvince"));
+                            estado.SelectByValue("FL");
+                            Thread.Sleep(500);
+                            driver.FindElementByName("EmailAddress").SendKeys(correo);
+                            Thread.Sleep(500);
+
+                            if (IsElementPresent(By.XPath("/html/body/div[1]/div/main/div[1]/div/section/form/fieldset[6]/div/div[1]/label[1]/div[2]/iframe")))
+                            {
+                                pago();
+                            }
+                            else
+                            {
+                                restart();
+                            }
+
+                        }
+                        else
+                        {
+                            restart();
+                        }
+                    }
+                    else
+                    {
+                        restart();
+                    }
+
 
                   
                   
@@ -232,57 +283,45 @@ namespace gateDanny.gates
 
                         Thunder._Form1.update_progresbar(90);
 
-                        Thread.Sleep(2000);
-                        if (tiempoElemento(By.XPath("/html/body/div[3]/main/div[2]/div/div[4]/div[4]/ol/li[4]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/iframe")))
+                        Thread.Sleep(100);
+                        if (tiempoElemento(By.XPath("/html/body/div[1]/div/main/div[1]/div/section/form/fieldset[6]/div/div[1]/label[1]/div[2]/iframe")))
                         {
 
-                            driver.SwitchTo().Frame(driver.FindElement(By.XPath("/html/body/div[3]/main/div[2]/div/div[4]/div[4]/ol/li[4]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/iframe")));
-
-                            if (tiempoElemento(By.XPath("//*[@id='cardNum']")))
+                            driver.SwitchTo().Frame(driver.FindElement(By.XPath("/html/body/div[1]/div/main/div[1]/div/section/form/fieldset[6]/div/div[1]/label[1]/div[2]/iframe")));
+                            Thread.Sleep(1000);
+                            for(var i = 0; i < number.Trim().Length; i++)
                             {
-
-                                if (IsElementPresent(By.XPath("//*[@id='cardNum']")))
-                                {
-
-                                    driver.FindElement(By.XPath("//*[@id='cardNum']")).SendKeys(number);
-                                    Thread.Sleep(1000);
-                                }
+                                driver.FindElement(By.XPath("//*[@id='react']/input[1]")).SendKeys(number[i].ToString());
+                                Thread.Sleep(200);
                             }
+                           
+                            Thread.Sleep(1000);
 
+                            driver.SwitchTo().ParentFrame();
+                            Thread.Sleep(500);
 
-
-                            if (IsElementPresent(By.XPath("//*[@id='expiryDate']")))
+                            if (tiempoElemento(By.XPath("/html/body/div[1]/div/main/div[1]/div/section/form/fieldset[6]/div/div[1]/label[2]/div[2]/iframe")))
                             {
-                                driver.FindElement(By.XPath("//*[@id='expiryDate']")).SendKeys(month + year.Remove(0, 2));
+                                driver.SwitchTo().Frame(driver.FindElement(By.XPath("/html/body/div[1]/div/main/div[1]/div/section/form/fieldset[6]/div/div[1]/label[2]/div[2]/iframe")));
                                 Thread.Sleep(1000);
-                            }
-
-
-
-
-                            if (IsElementPresent(By.XPath("//*[@id='cvv']")))
-                            {
-                                if (cvv.Trim().Length == 3)
-                                {
-                                    driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("000" + OpenQA.Selenium.Keys.Enter);
-                                }
-                                else
-                                {
-                                    driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("0000" + OpenQA.Selenium.Keys.Enter);
-
-                                }
+                                driver.FindElement(By.XPath("//*[@id='react']/input[1]")).SendKeys(month);
                                 Thread.Sleep(1000);
-
-
-                                if (IsElementPresent(By.XPath("//*[@id='saveButton']")))
-                                {
-                                    Thread.Sleep(800);
-                                    driver.FindElement(By.XPath("//*[@id='saveButton']")).Click();
-                                    Thread.Sleep(800);
-                                }
-
-
+                                driver.FindElement(By.XPath("//*[@id='react']/input[1]")).SendKeys(year.Remove(0,2));
+                                Thread.Sleep(1000);
+                                driver.SwitchTo().ParentFrame();
+                                Thread.Sleep(1000);
+                                driver.FindElementByXPath("/html/body/div[1]/div/main/div[1]/div/section/form/div[3]/input").Click();
+                                Thread.Sleep(5000);
                             }
+                            else
+                            {
+                                restart();
+                            }
+
+                        }
+                        else
+                        {
+                            restart();
                         }
 
 
@@ -377,14 +416,13 @@ namespace gateDanny.gates
                 if (tiempo < 15)
                 {
 
-                    if (IsElementPresent(By.XPath("//*[@id='saveButton']")))
+                    if (IsElementPresent(By.XPath("/html/body/div[1]/div/main/div[1]/div/section/form/fieldset[6]/div/div[1]/label[1]/div[2]/iframe")))
                     {
-                        if (driver.FindElement(By.XPath("//*[@id='saveButton']")).Displayed == true)
+                        if (driver.FindElement(By.XPath("/html/body/div[1]/div/main/div[1]/div/section/form/fieldset[6]/div/div[1]/label[1]/div[2]/iframe")).Displayed == true)
                         {
-                            if (driver.FindElement(By.XPath("//*[@id='saveButton']")).Text.Trim() != "")
-                            {
+                           
                                 estado = "dead";
-                            }
+                            
                         }
                     }
 
@@ -413,28 +451,35 @@ namespace gateDanny.gates
 
             if (estado == "dead")
             {
-                driver.Navigate().GoToUrl("https://www.riteaid.com/shop/checkout/#shipping");
+
+                driver.SwitchTo().Frame(driver.FindElement(By.XPath("/html/body/div[1]/div/main/div[1]/div/section/form/fieldset[6]/div/div[1]/label[1]/div[2]/iframe")));
+                Thread.Sleep(1000);
+                
+                    driver.FindElement(By.XPath("//*[@id='react']/input[1]")).Clear();
+               
+
                 Thread.Sleep(1000);
 
-                if (tiempoElemento(By.XPath("//*[@id='shipping-method-buttons-container']/div/button")))
+                driver.SwitchTo().ParentFrame();
+                Thread.Sleep(500);
+
+                if (tiempoElemento(By.XPath("/html/body/div[1]/div/main/div[1]/div/section/form/fieldset[6]/div/div[1]/label[2]/div[2]/iframe")))
                 {
-                    Thread.Sleep(2000);
-                    driver.FindElement(By.XPath("//*[@id='shipping-method-buttons-container']/div/button")).Click();
-
-                    if (tiempoElemento(By.XPath("/html/body/div[3]/main/div[2]/div/div[4]/div[4]/ol/li[4]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/iframe")))
-                    {
-
-                        driver.SwitchTo().Frame(driver.FindElement(By.XPath("/html/body/div[3]/main/div[2]/div/div[4]/div[4]/ol/li[4]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/iframe")));
-
-                        if (tiempoElemento(By.XPath("//*[@id='cardNum']")))
-                        {
-                            driver.SwitchTo().ParentFrame();
-                            return false;
-                        }
-                    }
-
-
+                    driver.SwitchTo().Frame(driver.FindElement(By.XPath("/html/body/div[1]/div/main/div[1]/div/section/form/fieldset[6]/div/div[1]/label[2]/div[2]/iframe")));
+                    Thread.Sleep(1000);
+                    driver.FindElement(By.XPath("//*[@id='react']/input[1]")).Clear();
+                    Thread.Sleep(1000);
+                    driver.SwitchTo().ParentFrame();
+                    return false;
+                    
                 }
+                else
+                {
+                    restart();
+                }
+
+
+
 
                 return false;
             }
