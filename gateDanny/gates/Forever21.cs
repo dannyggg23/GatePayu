@@ -279,10 +279,6 @@ namespace gateDanny.gates
 
 
             }
-            else
-            {
-                Thunder._Form1.abort();
-            }
 
             }
             catch (Exception ex)
@@ -291,10 +287,6 @@ namespace gateDanny.gates
                 if (Variables.run == true)
                 {
                     restart();
-                }
-                else
-                {
-                    Thunder._Form1.abort();
                 }
             }
         }
@@ -371,7 +363,12 @@ namespace gateDanny.gates
 
                         Thread.Sleep(1000);
 
+                        //*[@id='page']/div/div/div/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div[2]/button
 
+                        if (IsElementPresent(By.XPath("//*[@id='page']/div/div/div/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div[2]/button")))
+                        {
+                            driver.FindElement(By.XPath("//*[@id='page']/div/div/div/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div[2]/button")).Click();
+                        }
 
                         if (IsElementPresent(By.XPath("//*[@id='page']/div/div/div/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div[4]/button")))
                         {
@@ -495,7 +492,26 @@ namespace gateDanny.gates
                             }
                         }
                     }
+                    
 
+                    if (IsElementPresent(By.XPath("//*[@id='page']/div/div/div/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div[2]/div[1]")))
+                    {
+                        if (driver.FindElement(By.XPath("//*[@id='page']/div/div/div/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div[2]/div[1]")).Displayed == true)
+                        {
+                            if (driver.FindElement(By.XPath("//*[@id='page']/div/div/div/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div[2]/div[1]")).Text.Trim().Contains("CVV"))
+                            {
+                                estado = "live";
+                            }
+                            else if (driver.FindElement(By.XPath("//*[@id='page']/div/div/div/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div[2]/div[1]")).Text.Trim().Contains("date"))
+                            {
+                                estado = "dead";
+                            }
+                            else
+                            {
+                                estado = "dead";
+                            }
+                        }
+                    }
 
                     if (IsElementPresent(By.XPath("/html/body/div[1]/div/div/div/div/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div[3]/div[1]")))
                     {

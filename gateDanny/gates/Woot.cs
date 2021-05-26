@@ -435,16 +435,8 @@ namespace gateDanny.gates
                     {
                         restart();
                     }
-                    else
-                    {
-                        Thunder._Form1.abort();
-                    }
                 }
 
-            }
-            else
-            {
-                Thunder._Form1.abort();
             }
         }
 

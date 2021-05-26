@@ -305,21 +305,9 @@ namespace gateDanny.gates
                     {
                         restart();
                     }
-                    else
-                    {
-                       
-                        Thunder._Form1.abort();
-                        return;
-                    }
                    
                 }
 
-            }
-            else
-            {
-              
-                Thunder._Form1.abort();
-                return;
             }
         }
 
