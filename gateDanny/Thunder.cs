@@ -1,4 +1,5 @@
 ﻿using gateDanny.gates;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,10 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,7 +33,7 @@ namespace gateBeta
         Weightwatchers Healthydirections = new Weightwatchers();
         Woot Jomashop = new Woot();
         Riteaid koleimports = new Riteaid();
-        Forever21 Qspray = new Forever21();
+        Expreso Qspray = new Expreso();
 
 
         Shopbob Shopbob = new Shopbob();
@@ -84,14 +88,17 @@ namespace gateBeta
         public void ccsgen(string ccsgen)
         {
             txt_ccsgen.Text = ccsgen;
+            txt_ccsgen.Text = string.Join(Environment.NewLine, txt_ccsgen.Lines.Distinct());
             if (txt_check.Text == "")
             {
                 txt_check.AppendText(ccsgen.Trim());
+                txt_check.Text = string.Join(Environment.NewLine, txt_check.Lines.Distinct()).Trim();
             }
             else
             {
                 txt_check.AppendText(Environment.NewLine);
                 txt_check.AppendText(ccsgen.Trim());
+                txt_check.Text = string.Join(Environment.NewLine, txt_check.Lines.Distinct()).Trim();
             }
             btn_generar.Enabled = true;
 
@@ -165,6 +172,11 @@ namespace gateBeta
 
         }
 
+        public void agrgar_live_cvv(string cc)
+        {
+            txt_lives.AppendText(cc);
+        }
+
         public void remove_cc(int inicio,int fin)
         {
             txt_check.Text= txt_check.Text.Remove(inicio, fin).Trim();
@@ -175,6 +187,10 @@ namespace gateBeta
 
         private void Thunder_Load(object sender, EventArgs e)
         {
+            //Thunder._Form1.agrgar_live(" ** APROVADO ** - 4166830047762762|12|2025|000 - " + "Desconocido");
+
+          
+
             _Form1.update_progresbar(0);
             this.bunifuElipse1.ApplyElipse(pnl1, 8);
             this.bunifuElipse1.ApplyElipse(pnl2, 8);
@@ -206,7 +222,7 @@ namespace gateBeta
                 }
 
                 radioButton6.Enabled = true;
-                radioButton7.Enabled = false;
+                radioButton7.Enabled = true;
             }
             else
             {
@@ -721,7 +737,7 @@ namespace gateBeta
             radioButton4.Enabled = true;
             radioButton5.Enabled = true;
             radioButton6.Enabled = true;
-            radioButton7.Enabled = false;
+            radioButton7.Enabled = true;
             btn_iniciar.Enabled = true;
             btn_detener.Enabled = false;
 
@@ -891,7 +907,6 @@ namespace gateBeta
                 radioButton5.Checked = false;
                 radioButton6.Checked = false;
                 radioButton1.Checked = false;
-                MessageBox.Show("USAR VPN USA");
             }
         }
 
@@ -945,7 +960,7 @@ namespace gateBeta
             radioButton4.Enabled = true;
             radioButton5.Enabled = true;
             radioButton6.Enabled = true;
-            radioButton7.Enabled = false;
+            radioButton7.Enabled = true;
             btn_iniciar.Enabled = true;
             btn_detener.Enabled = false;
 

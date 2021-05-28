@@ -30,7 +30,7 @@ namespace gateDanny.gates
             try
             {
                 string jsonString = "";
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://lookup.binlist.net/" + bin);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://softoo.info/thunder/bin.php/?bin=" + bin);
                 request.Method = "GET";
                 request.Credentials = CredentialCache.DefaultCredentials;
                 ((HttpWebRequest)request).UserAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; Trident/5.0)";
@@ -43,9 +43,7 @@ namespace gateDanny.gates
                 StreamReader sr = new StreamReader(response.GetResponseStream());
                 jsonString = sr.ReadToEnd();
                 sr.Close();
-                //MessageBox.Show(jsonString);
-                dynamic cc = JsonConvert.DeserializeObject(jsonString);
-                return cc.country.name;
+                return jsonString.Trim();
             }
             catch (Exception ex)
             {
@@ -223,7 +221,7 @@ namespace gateDanny.gates
 
                     //chromeOptions.AddArguments(new List<string>() { "headless" });
                     //chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080");, 
-                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--ignore-certificate-errors", "--headless");
+                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--ignore-certificate-errors", "--headless"); //"--headless"
 
                     var chromeDriverService = ChromeDriverService.CreateDefaultService();
                     chromeDriverService.HideCommandPromptWindow = true;
@@ -516,6 +514,10 @@ namespace gateDanny.gates
                                                             }
 
                                                         }
+                                                        else
+                                                        {
+                                                            restart();
+                                                        }
 
                                                     }
                                                     else
@@ -575,7 +577,7 @@ namespace gateDanny.gates
                 catch (Exception ex)
                 {
 
-                    if (Variables.run == true)
+                    if (Variables.run == true && Variables.gate=="1")
                     {
                         restart();
                     }
@@ -629,12 +631,6 @@ namespace gateDanny.gates
                 {
                     restart();
                 }
-                else
-                {
-                   
-                    Thunder._Form1.abort();
-                    return;
-                }
             }
 
 
@@ -661,20 +657,29 @@ namespace gateDanny.gates
 
         private void restart()
         {
-            try
-            {
-                pagos = 0;
 
-                driver.Close();
-                driver.Quit();
-                load();
-            }
-            catch (Exception)
+            if(Variables.run==true && Variables.gate == "1")
             {
-                pagos = 0;
-                driver.Quit();
-                load();
+                try
+                {
+                    pagos = 0;
+                    driver.Close();
+                    driver.Quit();
+                    load();
+                }
+                catch (Exception)
+                {
+                    pagos = 0;
+                    driver.Quit();
+                    load();
+                }
             }
+            else
+            {
+                return;
+            }
+
+           
 
         }
 
@@ -799,24 +804,12 @@ namespace gateDanny.gates
                         restart();
                     }
                 }
-                else
-                {
-                   
-                    Thunder._Form1.abort();
-                    return;
-                }
             }
             catch (Exception ex)
             {
-                if (Variables.run == true)
+                if (Variables.run == true && Variables.gate=="1")
                 {
                     restart();
-                }
-                else
-                {
-                  
-                    Thunder._Form1.abort();
-                    return;
                 }
             }
 
@@ -904,27 +897,15 @@ namespace gateDanny.gates
                         restart();
                     }
                 }
-                else
-                {
-                 
-                    Thunder._Form1.abort();
-                    return;
-                }
 
             }
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.ToString());
                 
-                if (Variables.run == true)
+                if (Variables.run == true && Variables.gate=="1")
                 {
                     restart();
-                }
-                else
-                {
-                  
-                    Thunder._Form1.abort();
-                    return;
                 }
 
             }

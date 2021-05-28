@@ -258,6 +258,7 @@
     <Compile Include="gates\Onesignal.cs" />
     <Compile Include="gates\Overleaf.cs" />
     <Compile Include="gates\Papirogems.cs" />
+    <Compile Include="gates\Platzy.cs" />
     <Compile Include="gates\Poseidon.cs" />
     <Compile Include="gates\Primenutrition.cs" />
     <Compile Include="gates\Print.cs" />

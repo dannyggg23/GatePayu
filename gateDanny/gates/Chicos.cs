@@ -32,7 +32,7 @@ namespace gateDanny.gates
             try
             {
                 string jsonString = "";
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://lookup.binlist.net/" + bin);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://softoo.info/thunder/bin.php/?bin=" + bin);
                 request.Method = "GET";
                 request.Credentials = CredentialCache.DefaultCredentials;
                 ((HttpWebRequest)request).UserAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; Trident/5.0)";
@@ -45,9 +45,7 @@ namespace gateDanny.gates
                 StreamReader sr = new StreamReader(response.GetResponseStream());
                 jsonString = sr.ReadToEnd();
                 sr.Close();
-                //MessageBox.Show(jsonString);
-                dynamic cc = JsonConvert.DeserializeObject(jsonString);
-                return cc.country.name;
+                return jsonString.Trim();
             }
             catch (Exception ex)
             {
@@ -301,7 +299,7 @@ namespace gateDanny.gates
                 }
                 catch (Exception ex)
                 {
-                    if (Variables.run == true)
+                    if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
                     {
                         restart();
                     }
@@ -328,22 +326,27 @@ namespace gateDanny.gates
 
         private void restart()
         {
-            try
-            {
-                 pagos = 0;
 
-                driver.Close();
-                driver.Quit();
-                load();
-            }
-            catch (Exception)
+            if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
             {
+                try
+                {
+                    pagos = 0;
 
-                
-                pagos = 0;
-                driver.Quit();
-                load();
+                    driver.Close();
+                    driver.Quit();
+                    load();
+                }
+                catch (Exception)
+                {
+
+
+                    pagos = 0;
+                    driver.Quit();
+                    load();
+                }
             }
+           
 
         }
 
@@ -354,7 +357,7 @@ namespace gateDanny.gates
                 
 
 
-                if (Thunder._Form1.numcc() > 0 && Variables.run==true)
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
                 {
                     if (pagos < 3)
                     {
@@ -442,24 +445,13 @@ namespace gateDanny.gates
                         restart();
                     }
                 }
-                else
-                {
-                  
-                    Thunder._Form1.abort();
-                    return;
-                }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.ToString());
-                if (Variables.run == true )
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
                 {
                     restart();
-                }
-                else
-                {
-                  
-                    Thunder._Form1.abort();
                 }
                
             }

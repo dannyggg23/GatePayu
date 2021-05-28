@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace gateDanny.gates
 {
-    class Expreso
+    class Platzy
     {
         ChromeDriver driver;
         check check = new check();
@@ -29,7 +29,7 @@ namespace gateDanny.gates
             try
             {
                 string jsonString = "";
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://softoo.info/thunder/bin.php/?bin=" + bin);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://lookup.binlist.net/" + bin);
                 request.Method = "GET";
                 request.Credentials = CredentialCache.DefaultCredentials;
                 ((HttpWebRequest)request).UserAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; Trident/5.0)";
@@ -42,7 +42,9 @@ namespace gateDanny.gates
                 StreamReader sr = new StreamReader(response.GetResponseStream());
                 jsonString = sr.ReadToEnd();
                 sr.Close();
-                return jsonString.Trim();
+                //MessageBox.Show(jsonString);
+                dynamic cc = JsonConvert.DeserializeObject(jsonString);
+                return cc.country.name;
             }
             catch (Exception ex)
             {
@@ -204,7 +206,7 @@ namespace gateDanny.gates
             }
 
 
-            if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate=="7")
+            if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "7")
             {
 
                 try
@@ -216,158 +218,31 @@ namespace gateDanny.gates
 
                     //chromeOptions.AddArguments(new List<string>() { "headless" });
                     //chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080");, "--headless"
-                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "ignore-certificate-errors", "--headless");
+                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "ignore-certificate-errors");
 
                     var chromeDriverService = ChromeDriverService.CreateDefaultService();
                     chromeDriverService.HideCommandPromptWindow = true;
 
                     driver = new ChromeDriver(chromeDriverService, chromeOptions);
-                    driver.Url = "https://suscripcion.expreso.ec/id/register?continue=https://suscripcion.expreso.ec/suscripcion/PROSDPEXPRESO";
+                    driver.Url = "https://platzi.com/comprar/basic/?course=todos";
                     Thread.Sleep(1000);
                     correo = "joseffernana" + getNum() + "@hotmail.com";
 
-                    if (tiempoElemento(By.Id("first_name")))
+                    if (tiempoElemento(By.Name("name")))
                     {
                         Thunder._Form1.update_progresbar(10);
-                        enviarTexto(By.Id("first_name"), "JOSE");
-                        enviarTexto(By.Id("last_name"), "REYES");
-                        enviarTexto(By.Id("phone_number"), "099685" + RandomNumber(1000, 9999));
-                        GetEmail();
-                        enviarTexto(By.Id("email"), correo);
-                        enviarTexto(By.Id("password"), clave);
-                        enviarTexto(By.Id("password-confirm"), clave);
-                        driver.ExecuteScript("document.querySelector('#accept').checked=true");
-                        Thread.Sleep(2000);
-                        clickElemento(By.XPath("//*[@id='form']/div[7]/button"));
-                        Thread.Sleep(2000);
-
-                        if (tiempoElemento(By.Id("birth_date")))
-                        {
-                            Thunder._Form1.update_progresbar(30);
-                            //driver.ExecuteScript("document.querySelector('#birth_date').value='23/04/1993'");
-                            driver.ExecuteScript("document.querySelector('#birth_date').value='23/04/1993'");
-                            Thread.Sleep(500);
-                            var sexo = new SelectElement(driver.FindElement(By.Id("gender")));
-                            sexo.SelectByValue("H");
-                            Thread.Sleep(500);
-                            driver.FindElement(By.XPath("//*[@id='form']/button")).Click();
-                            Thread.Sleep(1000);
-
-                            if (tiempoElemento(By.XPath("/html/body/div[2]/div/div[3]/button[1]")))
-                            {
-
-                            }
-                            else
-                            {
-                                enviarTexto(By.Id("birth_date"), "23/04/199" + RandomNumber(1, 9));
-                                Thread.Sleep(1000);
-                                clickElemento(By.XPath("/html/body/div/div/div[2]/div"));
-                                Thread.Sleep(1000);
-                                clickElemento(By.XPath("//*[@id='form']/button"));
-                                Thread.Sleep(1000);
-                            }
-
-                            //GETCODIGO
-                            //Thread.Sleep(3000);
-                            driver.SwitchTo().Window(driver.WindowHandles[1]);
-                            Thread.Sleep(500);
-
-                            if (tiempoElemento(By.XPath("//*[@id='refresh']")))
-                            {
-                                Thunder._Form1.update_progresbar(40);
-                                driver.FindElement(By.XPath("//*[@id='refresh']")).Click();
-                                Thread.Sleep(3000);
-
-                                if (tiempoElementoeMAIL(By.XPath("//*[@id='inbox']/table/tbody/tr")))
-                                {
-                                    driver.FindElement(By.XPath("//*[@id='inbox']/table/tbody/tr")).Click();
-                                    Thread.Sleep(1000);
-                                    //opt
-                                    if (tiempoElemento(By.XPath("//*[@id='message-frame']")))
-                                    {
-                                        Thunder._Form1.update_progresbar(50);
-                                        driver.SwitchTo().Frame(driver.FindElement(By.XPath("//*[@id='message-frame']")));
-                                        Thread.Sleep(1000);
-                                        if (IsElementPresent(By.XPath("/html/body/div/div[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table[1]/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/a")))
-                                        {
-                                            driver.FindElement(By.XPath("/html/body/div/div[2]/table/tbody/tr[2]/td/table/tbody/tr/td/table[1]/tbody/tr/td/table/tbody/tr/td/table/tbody/tr/td/a")).Click();
-                                            Thunder._Form1.update_progresbar(60);
-                                            Thread.Sleep(2000);
-
-                                            Thread.Sleep(500);
-                                            driver.SwitchTo().Window(driver.WindowHandles[2]);
-                                            Thread.Sleep(500);
-                                            driver.SwitchTo().ParentFrame();
-                                            Thread.Sleep(100);
-                                            if (tiempoElemento(By.Id("email")))
-                                            {
-                                                Thunder._Form1.update_progresbar(70);
-                                                enviarTexto(By.Id("email"), correo);
-                                                enviarTexto(By.Id("password"), clave + OpenQA.Selenium.Keys.Enter);
+                        enviarTexto(By.Name("name"), correo);
+                        Thread.Sleep(500);
+                        enviarTexto(By.Name("email"), correo);
+                        Thread.Sleep(200);
+                        driver.ExecuteScript("document.querySelector('#tos').checked=true;");
+                        Thread.Sleep(1000);
+                        driver.FindElementByXPath("//*[@id='checkout']/div/div[3]/span/form/div/button").Click();
+                        Thread.Sleep(1000);
 
 
-                                                Thread.Sleep(1000);
 
-                                                driver.Navigate().GoToUrl("https://suscripcion.expreso.ec/suscripcion/PROSDPEXPRESO");
-                                                Thread.Sleep(1000);
-                                                if (tiempoElemento(By.XPath("//*[@id='form']/form/div[2]/div[4]/div/div/input")))
-                                                {
-                                                    Thunder._Form1.update_progresbar(80);
-                                                    enviarTexto(By.XPath("//*[@id='form']/form/div[2]/div[4]/div/div/input"), "050435" + RandomNumber(1000, 9999));
-                                                    Thread.Sleep(1000);
-                                                    var provincia = new SelectElement(driver.FindElement(By.Id("shipping.state")));
-                                                    provincia.SelectByIndex(RandomNumber(1, 20));
-                                                    Thread.Sleep(100);
-                                                    if (IsElementPresent(By.XPath("//*[@id='form']/form/div[5]/div[2]/div/div[2]/div/div/input")))
-                                                    {
-                                                        pago();
-                                                    }
-                                                    else
-                                                    {
-                                                        restart();
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    restart();
-                                                }
 
-                                            }
-                                            else
-                                            {
-                                                restart();
-                                            }
-                                        }
-                                        else
-                                        {
-
-                                            restart();
-                                        }
-                                    }
-                                    else
-                                    {
-
-                                        restart();
-                                    }
-                                }
-                                else
-                                {
-
-                                    restart();
-                                }
-
-                            }
-                            else
-                            {
-
-                                restart();
-                            }
-
-                        }
-                        else
-                        {
-                            restart();
-                        }
 
 
                     }
@@ -379,13 +254,13 @@ namespace gateDanny.gates
                 catch (Exception ex)
                 {
 
-                    if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "7")
+                    if (Variables.run == true && Variables.gate == "7")
                     {
                         restart();
                     }
                 }
 
-                
+
             }
         }
 
@@ -418,11 +293,6 @@ namespace gateDanny.gates
 
             Thunder._Form1.update_progresbar(0);
 
-            if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "7")
-            {
-
-            
-
             try
             {
                 pagos = 0;
@@ -437,7 +307,6 @@ namespace gateDanny.gates
                 driver.Quit();
                 load();
             }
-            }
 
         }
 
@@ -447,9 +316,9 @@ namespace gateDanny.gates
             {
 
 
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "7")
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true)
                 {
-                    if (pagos < 8)
+                    if (pagos < 5)
                     {
                         Thunder._Form1.update_progresbar(90);
                         string cc = Thunder._Form1.nextCc();
@@ -466,7 +335,7 @@ namespace gateDanny.gates
                             enviarTexto(By.XPath("//*[@id='form']/form/div[6]/div[5]/div/div/input"), mes);
                             Thread.Sleep(100);
                             enviarTexto(By.XPath("//*[@id='form']/form/div[6]/div[6]/div/div/input"), anio.Remove(0, 2));
-                            
+
                             Thread.Sleep(500);
                             var tipo = new SelectElement(driver.FindElement(By.Id("credit_card.type")));
 
@@ -533,7 +402,7 @@ namespace gateDanny.gates
                             Thread.Sleep(6000);
                         }
 
-                        
+
 
                         if (confirmar())
                         {
@@ -569,11 +438,15 @@ namespace gateDanny.gates
                         restart();
                     }
                 }
+                else
+                {
+                    stop();
+                }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.ToString());
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "7")
+                if (Variables.run == true)
                 {
                     restart();
                 }
@@ -597,25 +470,18 @@ namespace gateDanny.gates
 
             int tiempo = 0;
 
-           
-
             while (estado == "")
             {
 
                 if (tiempo < 10)
                 {
-                    
+
 
                     if (IsElementPresent(By.XPath("//*[@id='form']/form/div[5]")))
                     {
                         if (driver.FindElement(By.XPath("//*[@id='form']/form/div[5]")).Displayed == true)
                         {
-                            if (driver.FindElement(By.XPath("//*[@id='form']/form/div[5]")).Text.Trim().Contains("cvv"))
-                            {
-                                Thunder._Form1.agrgar_live_cvv("(cvv) - ");
-                                estado = "live";
-                            }
-                            else
+                            if (driver.FindElement(By.XPath("//*[@id='form']/form/div[5]")).Text.Trim() != "")
                             {
                                 estado = "dead";
                             }
@@ -630,15 +496,6 @@ namespace gateDanny.gates
                             {
                                 estado = "live";
                             }
-                        }
-                    }
-
-                    if (IsElementPresent(By.XPath("/html/body/section[2]/div/div/div[1]/div[1]/form/div[8]/div/div[2]/b")))
-                    {
-                        if (driver.FindElementByXPath("/html/body/section[2]/div/div/div[1]/div[1]/form/div[8]/div/div[2]/b").Displayed == true)
-                        {
-                            Thread.Sleep(1000);
-                            estado = "";
                         }
                     }
 

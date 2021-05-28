@@ -33,7 +33,7 @@ namespace gateDanny.gates
             try
             {
                 string jsonString = "";
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://lookup.binlist.net/" + bin);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://softoo.info/thunder/bin.php/?bin=" + bin);
                 request.Method = "GET";
                 request.Credentials = CredentialCache.DefaultCredentials;
                 ((HttpWebRequest)request).UserAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; Trident/5.0)";
@@ -46,9 +46,7 @@ namespace gateDanny.gates
                 StreamReader sr = new StreamReader(response.GetResponseStream());
                 jsonString = sr.ReadToEnd();
                 sr.Close();
-                //MessageBox.Show(jsonString);
-                dynamic cc = JsonConvert.DeserializeObject(jsonString);
-                return cc.country.name;
+                return jsonString.Trim();
             }
             catch (Exception ex)
             {
@@ -131,7 +129,7 @@ namespace gateDanny.gates
             }
 
 
-            if (Thunder._Form1.numcc() > 0 && Variables.run == true)
+            if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "7")
             {
 
 
@@ -284,7 +282,7 @@ namespace gateDanny.gates
             catch (Exception ex)
             {
 
-                if (Variables.run == true)
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "7")
                 {
                     restart();
                 }
@@ -308,6 +306,11 @@ namespace gateDanny.gates
 
         private void restart()
         {
+
+            if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "7")
+            {
+
+            
             try
             {
                 pagos = 0;
@@ -324,6 +327,7 @@ namespace gateDanny.gates
                 driver.Quit();
                 load();
             }
+            }
 
         }
 
@@ -334,7 +338,7 @@ namespace gateDanny.gates
 
                 var num = 1;
 
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true)
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "7")
                 {
                     if (pagos < 5)
                     {
@@ -418,23 +422,14 @@ namespace gateDanny.gates
                     }
 
                 }
-                else
-                {
-                    Thunder._Form1.abort();
-                }
             }
             catch (Exception ex)
             {
                 // MessageBox.Show(ex.ToString());
-                if (Variables.run == true)
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "7")
                 {
                     restart();
                 }
-                else
-                {
-                    Thunder._Form1.abort();
-                }
-
             }
 
         }
