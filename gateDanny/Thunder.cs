@@ -211,10 +211,20 @@ namespace gateBeta
                     proc.Kill();
                 }
 
-                foreach (Process proc in Process.GetProcessesByName("conhost"))
+                try
                 {
-                    proc.Kill();
+                    foreach (Process proc in Process.GetProcessesByName("conhost"))
+                    {
+                        proc.Kill();
+                    }
                 }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex);
+                }
+
+               
 
                 foreach (Process proc in Process.GetProcessesByName("chrome"))
                 {
@@ -827,6 +837,7 @@ namespace gateBeta
                 radioButton5.Checked = false;
                 radioButton6.Checked = false;
                 radioButton7.Checked = false;
+
             }
         }
 
@@ -907,6 +918,7 @@ namespace gateBeta
                 radioButton5.Checked = false;
                 radioButton6.Checked = false;
                 radioButton1.Checked = false;
+                MessageBox.Show("IP ECUADOR CCS VISA - MC -AMEX (LIVE CVV INCORRECTO Y LIVE CONSUMO DE CREDITO)");
             }
         }
 
