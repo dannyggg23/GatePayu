@@ -399,7 +399,7 @@ namespace gateDanny.gates
                             Thunder._Form1.remove_cc(0, cc.Length);
                             numeroTargeta++;
                             pagos++;
-                            restart();
+                            pago();
                         }
                         else
                         {
@@ -466,26 +466,24 @@ namespace gateDanny.gates
                 if (tiempo < 15)
                 {
 
-                    if (IsElementPresent(By.XPath("//*[@id='maincontent']/div/div/div/h1")))
+                    if (IsElementPresent(By.XPath("//*[@id='tt-comment-capture']/div[1]/div[2]/div/div[2]/form/div[2]/button[1]")))
                     {
-                        if (driver.FindElement(By.XPath("//*[@id='maincontent']/div/div/div/h1")).Displayed == true)
+                        if (driver.FindElement(By.XPath("//*[@id='tt-comment-capture']/div[1]/div[2]/div/div[2]/form/div[2]/button[1]")).Displayed == true)
                         {
-                            if (driver.FindElement(By.XPath("//*[@id='maincontent']/div/div/div/h1")).Text.Trim() != "")
-                            {
+                            
                                 estado = "live";
-                            }
+                            
                         }
                     }
                    
-                    if (IsElementPresent(By.XPath("//*[@id='sa_header_text']")))
+                    if (IsElementPresent(By.XPath("//*[@id='main']/div[1]/div[1]/h2")))
                     {
-                        if (driver.FindElement(By.XPath("//*[@id='sa_header_text']")).Displayed == true)
-                        {
-                            if (driver.FindElement(By.XPath("//*[@id='sa_header_text']")).Text.Trim() != "")
+                        
+                            if (driver.FindElement(By.XPath("//*[@id='main']/div[1]/div[1]/h2")).Text.Trim() == "Thank you for your order.")
                             {
                                 estado = "live";
                             }
-                        }
+                        
                     }
                     
 
