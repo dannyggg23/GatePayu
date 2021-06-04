@@ -21,5 +21,10 @@ namespace gateDanny.gates
         public static string bin = "";
         public static string cantidad = "";
         public static string ccsgen = "";
+
+        public static string[] socks;
+        public static int NumSocks=0;
+        public static int nextSok=0;
+
     }
 }

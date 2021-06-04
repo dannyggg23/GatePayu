@@ -27,6 +27,29 @@ namespace gateDanny.gates
                 Console.WriteLine(response.Content);
                 if (response.Content.Trim() == "1")
                 {
+                    try
+                    {
+                        var client2 = new RestClient("https://softoo.info/thunder/proxy.php");
+                        client2.Timeout = -1;
+                        var request2 = new RestRequest(Method.GET);
+                        IRestResponse response2 = client2.Execute(request2);
+                        Console.WriteLine(response2.Content);
+
+                        var datos = response2.Content.Trim();
+                        Console.WriteLine(datos);
+
+                        Variables.socks = datos.Split('_');
+                        Variables.NumSocks = Variables.socks.Length - 1;
+                        Thunder._Form1.updateSocks((Variables.NumSocks).ToString());
+                    }
+                    catch (Exception)
+                    {
+
+                        return true;
+                    }
+                    
+
+
                     return true;
                 }
                 else
@@ -48,6 +71,27 @@ namespace gateDanny.gates
             try
             {
                 var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=kaptcha");
+                client.Timeout = -1;
+                var request = new RestRequest(Method.GET);
+                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                IRestResponse response = client.Execute(request);
+                Console.WriteLine(response.Content);
+                Variables.key_captcha = response.Content.Trim();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+
+        }
+
+        public bool key_Proxy()
+        {
+            try
+            {
+                var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=proxy");
                 client.Timeout = -1;
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");

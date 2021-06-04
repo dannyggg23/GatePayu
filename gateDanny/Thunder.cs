@@ -27,13 +27,14 @@ namespace gateBeta
         check checkws = new check();
 
 
-        Shopbob poseidon = new Shopbob();
+        Gigikey poseidon = new Gigikey();
         Eatsdane Dropified = new Eatsdane();
         Chicos Flletfarm = new Chicos();
         Weightwatchers Healthydirections = new Weightwatchers();
         Woot Jomashop = new Woot();
         Riteaid koleimports = new Riteaid();
         Expreso Qspray = new Expreso();
+        Danny pumara = new Danny();
 
 
         Shopbob Shopbob = new Shopbob();
@@ -78,6 +79,11 @@ namespace gateBeta
         public void updateCreditos(string creditos)
         {
             LBL_CREDITOS.Text = creditos;
+        }
+
+        public void updateSocks(string socks)
+        {
+            lbl_soks.Text = socks;
         }
 
         public string nextCc()
@@ -233,6 +239,7 @@ namespace gateBeta
 
                 radioButton6.Enabled = true;
                 radioButton7.Enabled = true;
+                radioButton8.Enabled = true;
             }
             else
             {
@@ -247,6 +254,7 @@ namespace gateBeta
                 radioButton5.Enabled = false;
                 radioButton6.Enabled = false;
                 radioButton7.Enabled = false;
+                radioButton8.Enabled = false;
 
                 MessageBox.Show("CHECKER INACTIVO");
             }
@@ -440,7 +448,7 @@ namespace gateBeta
 
                             if (txt_key.Text != "CHK0333")
                             {
-                                if (txt_check.Lines.Count() > 8000)
+                                if (txt_check.Lines.Count() > 10000)
                                 {
                                     MessageBox.Show("No puede ingresar esa cantidad");
                                 }
@@ -457,6 +465,7 @@ namespace gateBeta
                                         radioButton5.Enabled = false;
                                         radioButton6.Enabled = false;
                                         radioButton7.Enabled = false;
+                                        radioButton8.Enabled = false;
                                     }
 
                                     if (radioButton2.Checked == true)
@@ -467,6 +476,7 @@ namespace gateBeta
                                         radioButton5.Enabled = false;
                                         radioButton6.Enabled = false;
                                         radioButton7.Enabled = false;
+                                        radioButton8.Enabled = false;
                                     }
 
                                     if (radioButton3.Checked == true)
@@ -477,6 +487,7 @@ namespace gateBeta
                                         radioButton5.Enabled = false;
                                         radioButton6.Enabled = false;
                                         radioButton7.Enabled = false;
+                                        radioButton8.Enabled = false;
                                     }
 
 
@@ -488,6 +499,7 @@ namespace gateBeta
                                         radioButton5.Enabled = false;
                                         radioButton6.Enabled = false;
                                         radioButton7.Enabled = false;
+                                        radioButton8.Enabled = false;
                                     }
 
                                     if (radioButton5.Checked == true)
@@ -498,6 +510,7 @@ namespace gateBeta
                                         radioButton4.Enabled = false;
                                         radioButton6.Enabled = false;
                                         radioButton7.Enabled = false;
+                                        radioButton8.Enabled = false;
                                     }
 
                                     if (radioButton6.Checked == true)
@@ -508,6 +521,7 @@ namespace gateBeta
                                         radioButton4.Enabled = false;
                                         radioButton5.Enabled = false;
                                         radioButton7.Enabled = false;
+                                        radioButton8.Enabled = false;
                                     }
 
                                     if (radioButton7.Checked == true)
@@ -518,10 +532,22 @@ namespace gateBeta
                                         radioButton4.Enabled = false;
                                         radioButton5.Enabled = false;
                                         radioButton6.Enabled = false;
+                                        radioButton8.Enabled = false;
                                       
                                     }
-                                  
-                                   
+                                    if (radioButton8.Checked == true)
+                                    {
+                                        radioButton2.Enabled = false;
+                                        radioButton1.Enabled = false;
+                                        radioButton3.Enabled = false;
+                                        radioButton4.Enabled = false;
+                                        radioButton5.Enabled = false;
+                                        radioButton6.Enabled = false;
+                                        radioButton7.Enabled = false;
+
+                                    }
+
+
 
 
                                     Variables.run = true;
@@ -542,6 +568,7 @@ namespace gateBeta
                                     radioButton5.Enabled = false;
                                     radioButton6.Enabled = false;
                                     radioButton7.Enabled = false;
+                                    radioButton8.Enabled = false;
 
                                 }
 
@@ -553,6 +580,7 @@ namespace gateBeta
                                     radioButton5.Enabled = false;
                                     radioButton6.Enabled = false;
                                     radioButton7.Enabled = false;
+                                    radioButton8.Enabled = false;
 
                                 }
 
@@ -564,6 +592,7 @@ namespace gateBeta
                                     radioButton5.Enabled = false;
                                     radioButton6.Enabled = false;
                                     radioButton7.Enabled = false;
+                                    radioButton8.Enabled = false;
 
                                 }
 
@@ -576,6 +605,7 @@ namespace gateBeta
                                     radioButton5.Enabled = false;
                                     radioButton6.Enabled = false;
                                     radioButton7.Enabled = false;
+                                    radioButton8.Enabled = false;
 
                                 }
 
@@ -587,6 +617,7 @@ namespace gateBeta
                                     radioButton4.Enabled = false;
                                     radioButton6.Enabled = false;
                                     radioButton7.Enabled = false;
+                                    radioButton8.Enabled = false;
 
                                 }
 
@@ -598,6 +629,7 @@ namespace gateBeta
                                     radioButton4.Enabled = false;
                                     radioButton5.Enabled = false;
                                     radioButton7.Enabled = false;
+                                    radioButton8.Enabled = false;
 
                                 }
 
@@ -609,9 +641,22 @@ namespace gateBeta
                                     radioButton4.Enabled = false;
                                     radioButton5.Enabled = false;
                                     radioButton6.Enabled = false;
+                                    radioButton8.Enabled = false;
 
                                 }
-                             
+
+                                if (radioButton8.Checked == true)
+                                {
+                                    radioButton2.Enabled = false;
+                                    radioButton1.Enabled = false;
+                                    radioButton3.Enabled = false;
+                                    radioButton4.Enabled = false;
+                                    radioButton5.Enabled = false;
+                                    radioButton6.Enabled = false;
+                                    radioButton7.Enabled = false;
+
+                                }
+
 
                                 Variables.run = true;
                                 t = new Thread(check);
@@ -688,6 +733,12 @@ namespace gateBeta
                 Variables.gate = "7";
                 Qspray.load();
             }
+            else if (radioButton8.Checked)
+            {
+                Variables.gate = "8";
+                pumara.load();
+            }
+
             else
             {
                 MessageBox.Show("Elija un gate");
@@ -748,6 +799,7 @@ namespace gateBeta
             radioButton5.Enabled = true;
             radioButton6.Enabled = true;
             radioButton7.Enabled = true;
+            radioButton8.Enabled = true;
             btn_iniciar.Enabled = true;
             btn_detener.Enabled = false;
 
@@ -837,6 +889,7 @@ namespace gateBeta
                 radioButton5.Checked = false;
                 radioButton6.Checked = false;
                 radioButton7.Checked = false;
+                radioButton8.Checked = false;
 
             }
         }
@@ -851,6 +904,7 @@ namespace gateBeta
                 radioButton5.Checked = false;
                 radioButton6.Checked = false;
                 radioButton7.Checked = false;
+                radioButton8.Checked = false;
             }
         }
 
@@ -864,6 +918,7 @@ namespace gateBeta
                 radioButton5.Checked = false;
                 radioButton6.Checked = false;
                 radioButton7.Checked = false;
+                radioButton8.Checked = false;
               
             }
         }
@@ -878,6 +933,7 @@ namespace gateBeta
                 radioButton5.Checked = false;
                 radioButton6.Checked = false;
                 radioButton7.Checked = false;
+                radioButton8.Checked = false;
             }
         }
 
@@ -891,6 +947,7 @@ namespace gateBeta
                 radioButton1.Checked = false;
                 radioButton6.Checked = false;
                 radioButton7.Checked = false;
+                radioButton8.Checked = false;
             }
         }
 
@@ -904,6 +961,7 @@ namespace gateBeta
                 radioButton5.Checked = false;
                 radioButton1.Checked = false;
                 radioButton7.Checked = false;
+                radioButton8.Checked = false;
                 MessageBox.Show("USAR VPN USA");
             }
         }
@@ -917,6 +975,7 @@ namespace gateBeta
                 radioButton4.Checked = false;
                 radioButton5.Checked = false;
                 radioButton6.Checked = false;
+                radioButton8.Checked = false;
                 radioButton1.Checked = false;
                 MessageBox.Show("IP ECUADOR CCS VISA - MC -AMEX (LIVE CVV INCORRECTO Y LIVE CONSUMO DE CREDITO)");
             }
@@ -973,6 +1032,7 @@ namespace gateBeta
             radioButton5.Enabled = true;
             radioButton6.Enabled = true;
             radioButton7.Enabled = true;
+            radioButton8.Enabled = true;
             btn_iniciar.Enabled = true;
             btn_detener.Enabled = false;
 
@@ -1021,6 +1081,51 @@ namespace gateBeta
             this.lbl_enproceso.Text = "0";
             this.lbl_deads.Text = "0";
             this.lbl_lives.Text = "0";
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                var client2 = new RestClient("https://softoo.info/thunder/proxy.php");
+                client2.Timeout = -1;
+                var request2 = new RestRequest(Method.GET);
+                IRestResponse response2 = client2.Execute(request2);
+                Console.WriteLine(response2.Content);
+
+                var datos = response2.Content.Trim();
+                Console.WriteLine(datos);
+
+                Variables.socks = datos.Split('_');
+                Variables.NumSocks = Variables.socks.Length - 1;
+                Thunder._Form1.updateSocks((Variables.NumSocks).ToString());
+            }
+            catch (Exception)
+            {
+
+                Thunder._Form1.updateSocks("0");
+            }
+
+        }
+
+        private void panel4_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void bunifuRadioButton1_CheckedChanged2(object sender, Bunifu.UI.WinForms.BunifuRadioButton.CheckedChangedEventArgs e)
+        {
+            if (radioButton8.Checked == true)
+            {
+                radioButton2.Checked = false;
+                radioButton3.Checked = false;
+                radioButton4.Checked = false;
+                radioButton5.Checked = false;
+                radioButton6.Checked = false;
+                radioButton7.Checked = false;
+                radioButton1.Checked = false;
+                MessageBox.Show("UTILIZA SOCKS OBLIGADOS");
+            }
         }
     }
 }

