@@ -307,6 +307,7 @@
     <Compile Include="gates\Forever21.cs" />
     <Compile Include="gates\Frey.cs" />
     <Compile Include="gates\Gate7.cs" />
+    <Compile Include="gates\Gate8.cs" />
     <Compile Include="gates\Generador.cs" />
     <Compile Include="gates\Gift.cs" />
     <Compile Include="gates\Giftfly.cs" />

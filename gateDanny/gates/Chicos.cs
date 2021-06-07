@@ -125,7 +125,7 @@ namespace gateDanny.gates
            
             if (Thunder._Form1.numcc() > 0 && Variables.run==true && Variables.gate == "3")
             {
-
+                pagos = 0;
                 Thunder._Form1.update_progresbar(5);
                 var chromeOptions = new ChromeOptions();
                 correo = "joseffernana" + getNum() + "@gmail.com";
@@ -367,49 +367,62 @@ namespace gateDanny.gates
                         string[] ccLine = cc.Split('|');
                         var ccnum = ccLine[0];
                         Thread.Sleep(1000);
+
+                        if (tiempoElemento(By.XPath("//*[@id='eProtect-iframe']")))
+                        {
+                            driver.SwitchTo().Frame(driver.FindElement(By.XPath("//*[@id='eProtect-iframe']")));
+                            Thread.Sleep(1500);
+
+                            driver.FindElement(By.XPath("//*[@id='accountNumber']")).SendKeys(ccLine[0]);
+                            Thread.Sleep(500);
+                            var mes = new SelectElement(driver.FindElement(By.XPath("//*[@id='expMonth']")));
+                            mes.SelectByValue(ccLine[1]);
+                            Thread.Sleep(1000);
+                            var anio = new SelectElement(driver.FindElement(By.XPath("//*[@id='expYear']")));
+                            anio.SelectByText(ccLine[2]);
+
+                            if (ccLine[3].Trim().Length == 3)
+                            {
+                                driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("000");
+
+                            }
+                            else if (ccLine[3].Trim().Length == 4)
+                            {
+                                driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("0000");
+
+                            }
+
+                            Thread.Sleep(300);
+
+                            driver.SwitchTo().ParentFrame();
+
+                            Thread.Sleep(1000);
+
+                            driver.FindElement(By.XPath("//*[@id='checkout-payment-options']/div/div[4]/div[3]/div/form/div[4]/div[2]/button[2]")).Click();
+
+                            Thread.Sleep(4000);
+
+                            if (tiempoElemento(By.XPath("//*[@id='checkout-commit-order']/div/div/form/div[2]/div[2]/button")))
+                            {
+                                driver.FindElement(By.XPath("//*[@id='checkout-commit-order']/div/div/form/div[2]/div[2]/button")).Submit();
+                                Thread.Sleep(300);
+                            }
+                            else
+                            {
+                                restart();
+                            }
+
+                            Thread.Sleep(5000);
+
+                            Thunder._Form1.update_progresbar(95);
+                        }
+                        else
+                        {
+                            restart();
+                        }
                         
 
-                        driver.SwitchTo().Frame(driver.FindElement(By.XPath("//*[@id='eProtect-iframe']")));
-                        Thread.Sleep(1500);
-
-                        driver.FindElement(By.XPath("//*[@id='accountNumber']")).SendKeys(ccLine[0]);
-                        Thread.Sleep(500);
-                        var mes = new SelectElement(driver.FindElement(By.XPath("//*[@id='expMonth']")));
-                        mes.SelectByValue(ccLine[1]);
-                        Thread.Sleep(1000);
-                        var anio = new SelectElement(driver.FindElement(By.XPath("//*[@id='expYear']")));
-                        anio.SelectByText(ccLine[2]);
-
-                        if (ccLine[3].Trim().Length == 3)
-                        {
-                            driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("000");
-
-                        }
-                        else if (ccLine[3].Trim().Length == 4)
-                        {
-                            driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("0000");
-
-                        }
-
-                        Thread.Sleep(300);
-
-                        driver.SwitchTo().ParentFrame();
-
-                        Thread.Sleep(1000);
-
-                        driver.FindElement(By.XPath("//*[@id='checkout-payment-options']/div/div[4]/div[3]/div/form/div[4]/div[2]/button[2]")).Click();
-
-                        Thread.Sleep(2000);
-
-                        if (tiempoElemento(By.XPath("//*[@id='checkout-commit-order']/div/div/form/div[2]/div[2]/button")))
-                        {
-                            driver.FindElement(By.XPath("//*[@id='checkout-commit-order']/div/div/form/div[2]/div[2]/button")).Submit();
-                            Thread.Sleep(300);
-                        }
-
-                        Thread.Sleep(5000);
-
-                        Thunder._Form1.update_progresbar(95);
+                      
 
                         if (confirmar())
                         {
@@ -557,7 +570,7 @@ namespace gateDanny.gates
 
             if (estado == "dead")
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(3000);
 
                 driver.ExecuteJavaScript("document.querySelector('#checkout-payment-options > div > div.section-review-header.row.row-tight > div.col-xs-5.section-review-change-wrapper > a').click();");
                 

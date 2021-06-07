@@ -10,6 +10,7 @@ namespace gateDanny.gates
     {
         public static string cc="";
         public static string key="";
+        public static string identificador = "";
         public static string creditos="";
         public static string lives="";
         public static string estado="";

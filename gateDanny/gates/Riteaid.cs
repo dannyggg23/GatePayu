@@ -122,6 +122,7 @@ namespace gateDanny.gates
 
 
                 check.login(Variables.key);
+                pagos = 0;
                 if (int.Parse(Variables.creditos) <= 0)
                 {
                     MessageBox.Show("Recargue sus creditos");
@@ -129,7 +130,7 @@ namespace gateDanny.gates
                 }
 
 
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate=="6")
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate=="4")
                 {
 
 
@@ -297,7 +298,7 @@ namespace gateDanny.gates
             catch (Exception ex)
             {
 
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "6")
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "4")
                 {
                     restart();
                 }
@@ -353,7 +354,7 @@ namespace gateDanny.gates
 
                 var num = 1;
 
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "6")
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "4")
                 {
                     if (pagos < 5)
                     {
@@ -473,7 +474,7 @@ namespace gateDanny.gates
             catch (Exception ex)
             {
                 // MessageBox.Show(ex.ToString());
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "6")
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "4")
                 {
                     restart();
                 }

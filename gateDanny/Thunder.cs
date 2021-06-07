@@ -26,14 +26,15 @@ namespace gateBeta
         Generador generador = new Generador();
         check checkws = new check();
 
+        private readonly Random _random = new Random();
 
-        Gigikey poseidon = new Gigikey();
+        Shopbob poseidon = new Shopbob();
         Eatsdane Dropified = new Eatsdane();
         Chicos Flletfarm = new Chicos();
-        Weightwatchers Healthydirections = new Weightwatchers();
+        Riteaid Healthydirections = new Riteaid();
         Woot Jomashop = new Woot();
         Riteaid koleimports = new Riteaid();
-        Expreso Qspray = new Expreso();
+        Gate7 Qspray = new Gate7();
         Danny pumara = new Danny();
 
 
@@ -71,6 +72,38 @@ namespace gateBeta
             return txt_check.Lines.Count();
         }
 
+        public bool checktxtcc(string cc)
+        {
+            if (txt_deads.Lines.Contains(cc))
+            {
+                return true;
+            }
+            else
+            {
+               return false;
+            }
+        }
+
+        public bool checktxtccliv(string cc)
+        {
+
+
+            var bandera = false;
+
+            for(var i=0;i< txt_lives.Lines.Count(); i++)
+            {
+                if (txt_lives.Lines[i].Contains(cc))
+                {
+                    bandera = true;
+                }
+                else
+                {
+
+                }
+            }
+
+            return bandera;
+        }
         public string ccs()
         {
             return txt_check.Text;
@@ -119,6 +152,29 @@ namespace gateBeta
         {
             try
             {
+
+                if (Variables.gate == "7" || Variables.gate == "8" || Variables.gate == "6")
+                {
+                    try
+                    {
+                        var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=update_test_stop");
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                        request.AddParameter("usuario", Variables.key);
+                        request.AddParameter("identificador", Variables.identificador);
+                        IRestResponse response = client.Execute(request);
+                        Console.WriteLine(response.Content);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Console.WriteLine(ex);
+                    }
+
+
+                }
+
                 t.Abort();
             }
             catch (Exception ex)
@@ -313,7 +369,7 @@ namespace gateBeta
         private void bunifuButton1_Click(object sender, EventArgs e)
         {
 
-           
+            txt_bin.Text= txt_bin.Text.Trim().Replace("X", "x");
            if(txt_bin.Text.Trim().Length>=22 && Int16.Parse(txt_cantidad.Text) > 1)
             {
                 Variables.bin = txt_bin.Text.Trim();
@@ -691,6 +747,11 @@ namespace gateBeta
             
         }
 
+        public int RandomNumber(int min, int max)
+        {
+            return _random.Next(min, max);
+        }
+
         public void check()
         {
 
@@ -726,17 +787,20 @@ namespace gateBeta
             else if (radioButton6.Checked)
             {
                 Variables.gate = "6";
-                koleimports.load();
+                Variables.identificador = RandomNumber(100000000, 999999999).ToString();
+                Qspray.load();
             }
             else if (radioButton7.Checked)
             {
                 Variables.gate = "7";
+                Variables.identificador = RandomNumber(100000000, 999999999).ToString();
                 Qspray.load();
             }
             else if (radioButton8.Checked)
             {
                 Variables.gate = "8";
-                pumara.load();
+                Variables.identificador = RandomNumber(100000000, 999999999).ToString();
+                Qspray.load();
             }
 
             else
@@ -757,33 +821,75 @@ namespace gateBeta
                 //{
                 //    poseidon.stop();
 
-                //}
-                //else if (radioButton2.Checked == true)
-                //{
-                //    Dropified.stop();
-                //}
-                //else if (radioButton3.Checked == true)
-                //{
-                //    Flletfarm.stop();
-                //}
-                //else if (radioButton4.Checked == true)
-                //{
-                //    Healthydirections.stop();
-                //}
-                //else if (radioButton5.Checked == true)
-                //{
-                //    Jomashop.stop();
-                //}
-                //else if (radioButton6.Checked == true)
-                //{
-                //    koleimports.stop();
-                //}
-                //else if (radioButton7.Checked == true)
-                //{
-                //    Qspray.stop();
+                    //}
+                    //else if (radioButton2.Checked == true)
+                    //{
+                    //    Dropified.stop();
+                    //}
+                    //else if (radioButton3.Checked == true)
+                    //{
+                    //    Flletfarm.stop();
+                    //}
+                    //else if (radioButton4.Checked == true)
+                    //{
+                    //    Healthydirections.stop();
+                    //}
+                    //else if (radioButton5.Checked == true)
+                    //{
+                    //    Jomashop.stop();
+                    //}
+                    //else if (radioButton6.Checked == true)
+                    //{
+                    //    koleimports.stop();
+                    //}
 
-                //}
-                
+                 if (Variables.gate=="7" || Variables.gate=="8" || Variables.gate == "6")
+                {
+                    try
+                    {
+                        var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=update_test_stop");
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.POST);
+                        request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                        request.AddParameter("usuario", Variables.key);
+                        request.AddParameter("identificador", Variables.identificador);
+                        IRestResponse response = client.Execute(request);
+                        Console.WriteLine(response.Content);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Console.WriteLine(ex);
+                    }
+                  
+
+                }
+                else
+                {
+
+                    radioButton1.Enabled = true;
+                    radioButton2.Enabled = true;
+                    radioButton3.Enabled = true;
+                    radioButton4.Enabled = true;
+                    radioButton5.Enabled = true;
+                    radioButton6.Enabled = true;
+                    radioButton7.Enabled = true;
+                    radioButton8.Enabled = true;
+                    btn_iniciar.Enabled = true;
+                    btn_detener.Enabled = false;
+
+                    try
+                    {
+                        t.Abort();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Console.WriteLine(ex);
+                    }
+
+                }
+
             }
             catch (Exception ex)
             {
@@ -792,27 +898,6 @@ namespace gateBeta
             }
 
 
-            radioButton1.Enabled = true;
-            radioButton2.Enabled = true;
-            radioButton3.Enabled = true;
-            radioButton4.Enabled = true;
-            radioButton5.Enabled = true;
-            radioButton6.Enabled = true;
-            radioButton7.Enabled = true;
-            radioButton8.Enabled = true;
-            btn_iniciar.Enabled = true;
-            btn_detener.Enabled = false;
-
-            try
-            {
-                t.Abort();
-            }
-            catch (Exception ex)
-            {
-
-                Console.WriteLine(ex);
-            }
-            
 
         }
 
@@ -962,7 +1047,7 @@ namespace gateBeta
                 radioButton1.Checked = false;
                 radioButton7.Checked = false;
                 radioButton8.Checked = false;
-                MessageBox.Show("USAR VPN USA");
+                MessageBox.Show("(ESTE GATE CORRE EN UN SERVIDOR EXTERNO)");
             }
         }
 
@@ -977,7 +1062,7 @@ namespace gateBeta
                 radioButton6.Checked = false;
                 radioButton8.Checked = false;
                 radioButton1.Checked = false;
-                MessageBox.Show("IP ECUADOR CCS VISA - MC -AMEX (LIVE CVV INCORRECTO Y LIVE CONSUMO DE CREDITO)");
+                MessageBox.Show("LIVES CNN NO CONSUME SALDO (ESTE GATE CORRE EN UN SERVIDOR EXTERNO)");
             }
         }
 
@@ -998,7 +1083,27 @@ namespace gateBeta
                 Console.WriteLine(ex);
             }
 
-            
+            if (Variables.gate == "7" || Variables.gate == "8" || Variables.gate == "6")
+            {
+                try
+                {
+                    var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=update_test_stop");
+                    client.Timeout = -1;
+                    var request = new RestRequest(Method.POST);
+                    request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                    request.AddParameter("usuario", Variables.key);
+                    request.AddParameter("identificador", Variables.identificador);
+                    IRestResponse response = client.Execute(request);
+                    Console.WriteLine(response.Content);
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex);
+                }
+
+
+            }
 
 
             foreach (Process proc in Process.GetProcessesByName("chromedriver"))
@@ -1046,15 +1151,47 @@ namespace gateBeta
 
         private void bunifuButton3_Click(object sender, EventArgs e)
         {
+
+            if (Variables.gate == "7" || Variables.gate == "8" || Variables.gate == "6")
+            {
+                try
+                {
+                    var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=update_test_stop");
+                    client.Timeout = -1;
+                    var request = new RestRequest(Method.POST);
+                    request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                    request.AddParameter("usuario", Variables.key);
+                    request.AddParameter("identificador", Variables.identificador);
+                    IRestResponse response = client.Execute(request);
+                    Console.WriteLine(response.Content);
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex);
+                }
+
+
+            }
+
             foreach (Process proc in Process.GetProcessesByName("chromedriver"))
             {
                 proc.Kill();
             }
 
-            foreach (Process proc in Process.GetProcessesByName("conhost"))
+            try
             {
-                proc.Kill();
+                foreach (Process proc in Process.GetProcessesByName("conhost"))
+                {
+                    proc.Kill();
+                }
             }
+            catch (Exception)
+            {
+
+                Console.WriteLine("Error");
+            }
+           
 
             foreach (Process proc in Process.GetProcessesByName("chrome"))
             {
@@ -1087,18 +1224,18 @@ namespace gateBeta
         {
             try
             {
-                var client2 = new RestClient("https://softoo.info/thunder/proxy.php");
-                client2.Timeout = -1;
-                var request2 = new RestRequest(Method.GET);
-                IRestResponse response2 = client2.Execute(request2);
-                Console.WriteLine(response2.Content);
+                //var client2 = new RestClient("https://softoo.info/thunder/proxy.php");
+                //client2.Timeout = -1;
+                //var request2 = new RestRequest(Method.GET);
+                //IRestResponse response2 = client2.Execute(request2);
+                //Console.WriteLine(response2.Content);
 
-                var datos = response2.Content.Trim();
-                Console.WriteLine(datos);
+                //var datos = response2.Content.Trim();
+                //Console.WriteLine(datos);
 
-                Variables.socks = datos.Split('_');
-                Variables.NumSocks = Variables.socks.Length - 1;
-                Thunder._Form1.updateSocks((Variables.NumSocks).ToString());
+                //Variables.socks = datos.Split('_');
+                //Variables.NumSocks = Variables.socks.Length - 1;
+                //Thunder._Form1.updateSocks((Variables.NumSocks).ToString());
             }
             catch (Exception)
             {
@@ -1124,8 +1261,18 @@ namespace gateBeta
                 radioButton6.Checked = false;
                 radioButton7.Checked = false;
                 radioButton1.Checked = false;
-                MessageBox.Show("UTILIZA SOCKS OBLIGADOS");
+                MessageBox.Show("LIVES CNN NO CONSUME SALDO  (ESTE GATE CORRE EN UN SERVIDOR EXTERNO - RECOMENDADO AMEX)");
             }
+        }
+
+        private void bunifuLabel27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuLabel28_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

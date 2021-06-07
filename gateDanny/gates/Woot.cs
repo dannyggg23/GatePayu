@@ -215,7 +215,7 @@ namespace gateDanny.gates
                 {
 
 
-
+                    pagos = 0;
                     Thunder._Form1.update_progresbar(5);
                     var chromeOptions = new ChromeOptions();
                     correo = "joseffernana" + getNum() + "@gmail.com";
@@ -223,7 +223,7 @@ namespace gateDanny.gates
 
                     //chromeOptions.AddArguments(new List<string>() { "headless" });
                     //chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080");, 
-                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--ignore-certificate-errors", "--headless"); //
+                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--ignore-certificate-errors", "--headless"); //"--headless"
 
                     var chromeDriverService = ChromeDriverService.CreateDefaultService();
                     chromeDriverService.HideCommandPromptWindow = true;
@@ -337,7 +337,7 @@ namespace gateDanny.gates
 
                                             ResolveCaptcha resolve = new ResolveCaptcha(Variables.key_captcha);
                                             var intentos = 1;
-                                            while (a == false && intentos < 4)
+                                            while (a == false && intentos < 2)
                                             {
                                                 captche = resolve.Image(imgCaptche);
                                                 if (captche is null)
@@ -369,6 +369,101 @@ namespace gateDanny.gates
                                             if (IsElementPresent(By.XPath("//*[@id='cvf-page-content']/div/div/div/form/div[2]/input")))
                                             {
                                                 restart();
+                                            }
+
+                                            if (IsElementPresent(By.XPath("//*[@id='signInExpandButton']")))
+                                            {
+                                                driver.FindElementByXPath("//*[@id='signInExpandButton']").Click();
+                                                Thread.Sleep(1000);
+                                                driver.FindElementByXPath("//*[@id='ap_password']").SendKeys(clave);
+                                                Thread.Sleep(1000);
+                                                driver.FindElementByXPath("//*[@id='signInSubmit']").Click();
+                                                Thread.Sleep(1000);
+
+
+                                                driver.Navigate().GoToUrl("https://www.woot.com/alldeals?ref=w_gw_zl_bs_all&selectedSort=plh");
+                                                Thread.Sleep(1000);
+
+                                                if (tiempoElemento(By.XPath(producto)))
+                                                {
+                                                    driver.FindElementByXPath(producto).Click();
+                                                    Thread.Sleep(1000);
+
+                                                    Thunder._Form1.update_progresbar(20);
+
+                                                    if (tiempoElemento(By.LinkText("Add to cart")))
+                                                    {
+                                                        if (IsElementPresent(By.Id("attr-cape:")))
+                                                        {
+                                                            try
+                                                            {
+                                                                var select = new SelectElement(driver.FindElementById("attr-cape:"));
+                                                                select.SelectByIndex(1);
+                                                            }
+                                                            catch (Exception ex)
+                                                            {
+
+                                                                Console.WriteLine(ex);
+                                                            }
+
+                                                            Thread.Sleep(1000);
+                                                        }
+
+                                                        if (IsElementPresent(By.Id("attr-color")))
+                                                        {
+
+                                                            try
+                                                            {
+                                                                var select = new SelectElement(driver.FindElementById("attr-color"));
+                                                                select.SelectByIndex(1);
+                                                            }
+                                                            catch (Exception ex)
+                                                            {
+
+                                                                Console.WriteLine(ex);
+                                                            }
+
+                                                            Thread.Sleep(1000);
+                                                        }
+                                                        if (IsElementPresent(By.Id("attr-size")))
+                                                        {
+                                                            try
+                                                            {
+                                                                var select = new SelectElement(driver.FindElementById("attr-size"));
+                                                                select.SelectByIndex(1);
+                                                            }
+                                                            catch (Exception ex)
+                                                            {
+
+                                                                Console.WriteLine(ex);
+                                                            }
+
+                                                            Thread.Sleep(1000);
+                                                        }
+
+                                                        driver.FindElementByLinkText("Add to cart").Click();
+                                                        Thread.Sleep(500);
+                                                        if (tiempoElemento(By.XPath("//*[@id='minicart']/div/footer/a[1]")))
+                                                        {
+                                                            Thunder._Form1.update_progresbar(30);
+                                                            driver.FindElementByXPath("//*[@id='minicart']/div/footer/a[1]").Click();
+                                                            Thread.Sleep(500);
+                                                        }
+                                                        else
+                                                        {
+                                                            restart();
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        restart();
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    restart();
+                                                }
+
                                             }
 
                                             Thread.Sleep(1000);
@@ -628,7 +723,7 @@ namespace gateDanny.gates
                         }
                         else
                         {
-                            var pais = checkbin(cc.Substring(0, 6));
+                            var pais = "";
                             Thunder._Form1.update_progresbar(100);
                             var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                             check.ccss(Variables.key, guardar, "deads");

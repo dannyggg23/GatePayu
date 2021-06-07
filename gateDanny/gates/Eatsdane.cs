@@ -215,7 +215,7 @@ namespace gateDanny.gates
                 {
 
 
-
+                    pagos = 0;
                     Thunder._Form1.update_progresbar(5);
                     var chromeOptions = new ChromeOptions();
                     correo = "joseffernana" + getNum() + "@gmail.com";
@@ -229,7 +229,7 @@ namespace gateDanny.gates
                     chromeDriverService.HideCommandPromptWindow = true;
                     //https://www.shopbop.com/jewelry-accessories/br/v=1/13539.htm
                     driver = new ChromeDriver(chromeDriverService, chromeOptions);
-                    driver.Url = "https://www.eastdane.com/account/address";
+                    driver.Url = "https://www.eastdane.com/actions/loginPageAction.action";
                     Thread.Sleep(800);
                     correo = "joseffernana" + getNum() + "@hotmail.com";
 
@@ -270,7 +270,7 @@ namespace gateDanny.gates
 
                                 ResolveCaptcha resolve = new ResolveCaptcha(Variables.key_captcha);
                                 var intentos = 1;
-                                while (a == false && intentos < 4)
+                                while (a == false && intentos < 2)
                                 {
                                     captche = resolve.Image(imgCaptche);
                                     if (captche is null)
@@ -282,16 +282,19 @@ namespace gateDanny.gates
                                         driver.FindElement(By.XPath("//*[@id='cvf-page-content']/div/div/div/form/div[2]/input")).SendKeys(captche);
                                         Thread.Sleep(500);
                                         driver.FindElement(By.Name("cvf_captcha_captcha_action")).Click();
-                                        Thread.Sleep(800);
-                                        if (IsElementPresent(By.XPath("//*[@id='cvf-page-content']/div/div/div/form/div[3]/div/div/div/div")))
+                                        Thread.Sleep(3000);
+                                        //*[@id="cvf-input-code"]
+                                        if (IsElementPresent(By.Id("cvf-input-code")))
                                         {
-                                            a = false;
-                                            captche = null;
+
+                                            Thunder._Form1.update_progresbar(30);
+                                            a = true;
+                                           
                                         }
                                         else
                                         {
-                                            Thunder._Form1.update_progresbar(30);
-                                            a = true;
+                                            a = false;
+                                            captche = null;
                                         }
 
                                     }
@@ -368,6 +371,12 @@ namespace gateDanny.gates
                                                             driver.FindElement(By.Id("post-reg-submit")).Click();
                                                             Thread.Sleep(800);
 
+                                                            Thread.Sleep(2000);
+
+                                                            driver.Navigate().GoToUrl("https://www.eastdane.com/account/address/v2");
+
+                                                            Thread.Sleep(1000);
+
                                                             if (tiempoElemento(By.XPath("//*[@id='addressBookPage']/a")))
                                                             {
                                                                 Thunder._Form1.update_progresbar(60);
@@ -378,7 +387,7 @@ namespace gateDanny.gates
                                                                     var country = new SelectElement(driver.FindElement(By.Id("addressCountryCode")));
                                                                     country.SelectByValue("US");
                                                                     Thread.Sleep(800);
-                                                                    driver.FindElement(By.Id("lastName")).SendKeys("REYES");
+                                                                    driver.FindElement(By.Id("fullName")).SendKeys(" JOSE REYES");
                                                                     Thread.Sleep(200);
                                                                     driver.FindElement(By.Id("addressLine1")).SendKeys("STREET " + RandomNumber(20, 180));
                                                                     Thread.Sleep(200);

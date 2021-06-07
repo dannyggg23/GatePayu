@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -132,7 +133,7 @@ namespace gateDanny.gates
             }
 
 
-            ////if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "8")
+            if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "8")
             {
 
 
@@ -148,7 +149,7 @@ namespace gateDanny.gates
 
                 //chromeOptions.AddArguments(new List<string>() { "headless" });
                 //chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080");, "--headless"
-                chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--ignore-certificate-errors", "--proxy-server=http://p.webshare.io:9999");
+                chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--ignore-certificate-errors", "--proxy-server=http://p.webshare.io:80");
 
                 Variables.nextSok++;
 
@@ -159,15 +160,18 @@ namespace gateDanny.gates
                 try
                 {
                     driver.Url = "https://contabo.com/en/vps/vps-s-ssd/";
+                    Thread.Sleep(2000);
+                    Process.Start("proxy.exe");
+                    Thread.Sleep(2000);
                 }
                 catch (Exception)
                 {
                     
                     restart();
                 }
-              
-                 
-         
+
+               
+
 
 
                 if (IsElementPresent(By.XPath("//*[@id='main-message']/h1/span")))
@@ -526,7 +530,7 @@ namespace gateDanny.gates
             while (estado == "")
             {
 
-                if (tiempo < 10)
+                if (tiempo < 20)
                 {
 
                     if (IsElementPresent(By.XPath("//*[@id='sapper']/main/div[2]/section/div/div[2]/aside/div/div[4]/button")))
@@ -539,7 +543,7 @@ namespace gateDanny.gates
                                 
                                 if (IsElementPresent(By.XPath("/html/body/div[1]/main/div[2]/div/div[2]/main/div/div/div/div/div/div[2]/div/div/form/div[2]/div[2]/a")))
                                 {
-                                    
+                                    Thread.Sleep(3000);
                                             driver.FindElement(By.XPath("/html/body/div[1]/main/div[2]/div/div[2]/main/div/div/div/div/div/div[2]/div/div/form/div[2]/div[2]/a")).Click();
                                             Thread.Sleep(500);
                                              cambiarSock++;
