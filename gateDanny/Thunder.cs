@@ -29,13 +29,13 @@ namespace gateBeta
         private readonly Random _random = new Random();
 
         Shopbob poseidon = new Shopbob();
-        Eatsdane Dropified = new Eatsdane();
-        Chicos Flletfarm = new Chicos();
+        Gate8 Dropified = new Gate8();
+        Expreso Flletfarm = new Expreso();
         Riteaid Healthydirections = new Riteaid();
         Woot Jomashop = new Woot();
-        Riteaid koleimports = new Riteaid();
+        Gate7 koleimports = new Gate7();
         Gate7 Qspray = new Gate7();
-        Danny pumara = new Danny();
+        Gate7 pumara = new Gate7();
 
 
         Shopbob Shopbob = new Shopbob();
@@ -157,7 +157,7 @@ namespace gateBeta
                 {
                     try
                     {
-                        var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=update_test_stop");
+                        var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=update_test_stop");
                         client.Timeout = -1;
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -847,7 +847,7 @@ namespace gateBeta
                 {
                     try
                     {
-                        var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=update_test_stop");
+                        var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=update_test_stop");
                         client.Timeout = -1;
                         var request = new RestRequest(Method.POST);
                         request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -934,7 +934,7 @@ namespace gateBeta
             try
             {
                 txtmisccs.Text = "";
-                var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=list_lives&key=" + txt_key.Text.Trim());
+                var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=list_lives&key=" + txt_key.Text.Trim());
                 client.Timeout = -1;
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -975,7 +975,7 @@ namespace gateBeta
                 radioButton6.Checked = false;
                 radioButton7.Checked = false;
                 radioButton8.Checked = false;
-
+               
             }
         }
 
@@ -990,6 +990,15 @@ namespace gateBeta
                 radioButton6.Checked = false;
                 radioButton7.Checked = false;
                 radioButton8.Checked = false;
+
+                if (Variables.key_captcha != "")
+                {
+                    MessageBox.Show("GATE ESPECIAL UNIVERSAL CONSUME $1 SALDO");
+                }
+
+               
+                
+                
             }
         }
 
@@ -1087,7 +1096,7 @@ namespace gateBeta
             {
                 try
                 {
-                    var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=update_test_stop");
+                    var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=update_test_stop");
                     client.Timeout = -1;
                     var request = new RestRequest(Method.POST);
                     request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -1156,7 +1165,7 @@ namespace gateBeta
             {
                 try
                 {
-                    var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=update_test_stop");
+                    var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=update_test_stop");
                     client.Timeout = -1;
                     var request = new RestRequest(Method.POST);
                     request.AddHeader("Content-Type", "application/x-www-form-urlencoded");

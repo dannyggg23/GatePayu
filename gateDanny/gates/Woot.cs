@@ -58,7 +58,7 @@ namespace gateDanny.gates
             string posibles = "0123456789";
             int longitud = posibles.Length;
             char letra;
-            int longitudnuevacadena = 9;
+            int longitudnuevacadena = 10;
             string nuevacadena = "";
             for (int i = 0; i < longitudnuevacadena; i++)
             {
@@ -314,7 +314,7 @@ namespace gateDanny.gates
                                         {
 
                                             Thunder._Form1.update_progresbar(70);
-                                            driver.FindElement(By.XPath("//*[@id='ap_customer_name']")).SendKeys("joseffernana" + getNum());
+                                            driver.FindElement(By.XPath("//*[@id='ap_customer_name']")).SendKeys("joseffcaro" + getNum());
                                             Thread.Sleep(500);
                                             driver.FindElement(By.XPath("//*[@id='ap_email']")).SendKeys(correo);
                                             Thread.Sleep(500);

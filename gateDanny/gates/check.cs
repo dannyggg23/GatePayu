@@ -19,7 +19,7 @@ namespace gateDanny.gates
         {
             try
             {
-                var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=estado");
+                var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=estado");
                 client.Timeout = -1;
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -70,7 +70,7 @@ namespace gateDanny.gates
         {
             try
             {
-                var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=kaptcha");
+                var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=kaptcha");
                 client.Timeout = -1;
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -91,7 +91,7 @@ namespace gateDanny.gates
         {
             try
             {
-                var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=proxy");
+                var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=proxy");
                 client.Timeout = -1;
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -112,7 +112,7 @@ namespace gateDanny.gates
         {
             try
             {
-                var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=cc");
+                var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=cc");
                 client.Timeout = -1;
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -135,7 +135,7 @@ namespace gateDanny.gates
 
             try
             {
-                var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=login");
+                var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=login");
                 client.Timeout = -1;
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -177,7 +177,7 @@ namespace gateDanny.gates
             {
                 WebProxy myproxy = new WebProxy(uri, true);
 
-                var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=login");
+                var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=login");
                 client.Timeout =10 ;
                 client.Proxy = myproxy;
                 var request = new RestRequest(Method.POST);

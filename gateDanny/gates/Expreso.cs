@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -204,7 +205,7 @@ namespace gateDanny.gates
             }
 
 
-            if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate=="7")
+            if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate=="3")
             {
 
                 try
@@ -216,7 +217,7 @@ namespace gateDanny.gates
 
                     //chromeOptions.AddArguments(new List<string>() { "headless" });
                     //chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080");, "--headless"
-                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--proxy-server=http://p.webshare.io:9999", "--ignore-certificate-errors");
+                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito",  "--ignore-certificate-errors"); //"--proxy-server=http://p.webshare.io:9999",
 
                     var chromeDriverService = ChromeDriverService.CreateDefaultService();
                     chromeDriverService.HideCommandPromptWindow = true;
@@ -225,8 +226,10 @@ namespace gateDanny.gates
                     driver.Url = "https://suscripcion.expreso.ec/id/register?continue=https://suscripcion.expreso.ec/suscripcion/PROSDPEXPRESO";
                     ////Thread.Sleep(1000);
                     correo = "joseffernana" + getNum() + "@hotmail.com";
+                    //Thread.Sleep(2000);
+                    //Process.Start("proxy.exe");
+                    //Thread.Sleep(2000);
 
-                   
 
                     if (tiempoElemento(By.Id("first_name")))
                     {
@@ -390,7 +393,7 @@ namespace gateDanny.gates
                 catch (Exception ex)
                 {
 
-                    if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "7")
+                    if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
                     {
                         restart();
                     }
@@ -429,7 +432,7 @@ namespace gateDanny.gates
 
             Thunder._Form1.update_progresbar(0);
 
-            if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "7")
+            if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
             {
 
             
@@ -458,7 +461,7 @@ namespace gateDanny.gates
             {
 
 
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "7")
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
                 {
                     if (pagos < 8)
                     {
@@ -584,7 +587,7 @@ namespace gateDanny.gates
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.ToString());
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "7")
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
                 {
                     restart();
                 }

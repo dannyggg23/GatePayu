@@ -775,7 +775,7 @@ namespace gateDanny
            
                 try
                 {
-                    var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=list_lives&key="+ textBox3.Text.Trim());
+                    var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=list_lives&key="+ textBox3.Text.Trim());
                     client.Timeout = -1;
                     var request = new RestRequest(Method.GET);
                     request.AddHeader("Content-Type", "application/x-www-form-urlencoded");

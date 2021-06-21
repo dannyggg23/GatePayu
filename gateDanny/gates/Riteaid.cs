@@ -451,7 +451,7 @@ namespace gateDanny.gates
                         }
                         else
                         {
-                            var pais = checkbin(cc.Substring(0, 6));
+                            var pais = "";
                             Thunder._Form1.update_progresbar(100);
                             var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                             check.ccss(Variables.key, guardar, "deads");

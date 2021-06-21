@@ -204,9 +204,9 @@ namespace gateDanny.gates
                     {
                         Thunder._Form1.update_progresbar(40);
                         driver.FindElement(By.XPath("//*[@id='add-to-bag']")).Click();
-                        Thread.Sleep(500);
+                        Thread.Sleep(1000);
                         driver.Navigate().GoToUrl("https://www.chicos.com/store/checkout/cart.jsp");
-                        Thread.Sleep(500);
+                        Thread.Sleep(2000);
 
                     }
                     else
@@ -440,7 +440,7 @@ namespace gateDanny.gates
                         }
                         else
                         {
-                            var pais = checkbin(cc.Substring(0, 6));
+                            var pais = "";
                             Thunder._Form1.update_progresbar(100);
                             var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                             check.ccss(Variables.key, guardar, "deads");

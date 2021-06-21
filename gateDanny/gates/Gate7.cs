@@ -216,7 +216,7 @@ namespace gateDanny.gates
                 {
                     var ccs = Thunder._Form1.ccs();
                     ccs = ccs.Replace("\r\n", "_");
-                    var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=insertTest");
+                    var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=insertTest");
                     client.Timeout = -1;
                     var request = new RestRequest(Method.POST);
                     request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -247,7 +247,7 @@ namespace gateDanny.gates
                         Thunder._Form1.update_progresbar(60);
                         try
                         {
-                            var client2 = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=selectccserv");
+                            var client2 = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=selectccserv");
                             client2.Timeout = -1;
                             var request2 = new RestRequest(Method.POST);
                             request2.AddHeader("Content-Type", "application/x-www-form-urlencoded");

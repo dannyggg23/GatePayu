@@ -420,8 +420,8 @@ namespace gateDanny.gates
                                                                             Thread.Sleep(1000);
                                                                             driver.FindElement(By.Id("sortBy.price")).Click();
                                                                             Thread.Sleep(500);
-
-                                                                            var producto = "/html/body/div[12]/div[1]/div[2]/div[3]/ul/li[" + RandomNumber(1, 10) + "]/div/div/a";
+                                                                                            
+                                                                            var producto = "/html/body/div[14]/div[1]/div[2]/div[3]/ul/li[" + RandomNumber(1, 10) + "]/div/div/a";
                                                                             if (tiempoElemento(By.XPath(producto)))
                                                                             {
                                                                                 driver.FindElement(By.XPath(producto)).Click();
@@ -794,7 +794,7 @@ namespace gateDanny.gates
                         }
                         else
                         {
-                            var pais = checkbin(cc.Substring(0, 6));
+                            var pais = "";
                             Thunder._Form1.update_progresbar(100);
                             var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                             check.ccss(Variables.key, guardar, "deads");

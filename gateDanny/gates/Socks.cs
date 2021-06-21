@@ -16,7 +16,7 @@ namespace gateBeta.gates
 
             try
             {
-                var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=proxy");
+                var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=proxy");
                 client.Timeout = -1;
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
@@ -34,7 +34,7 @@ namespace gateBeta.gates
 
             try
             {
-                var client = new RestClient("https://olympusgenerador.tech/guardar/ajax/generador.php?op=proxyUp&ip="+ip);
+                var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=proxyUp&ip="+ip);
                 client.Timeout = -1;
                 var request = new RestRequest(Method.GET);
                 IRestResponse response = client.Execute(request);
