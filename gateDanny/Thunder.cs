@@ -30,7 +30,7 @@ namespace gateBeta
 
         Shopbob poseidon = new Shopbob();
         Gate8 Dropified = new Gate8();
-        Expreso Flletfarm = new Expreso();
+        Intelephense Flletfarm = new Intelephense();
         Riteaid Healthydirections = new Riteaid();
         Woot Jomashop = new Woot();
         Gate7 koleimports = new Gate7();
@@ -192,10 +192,10 @@ namespace gateBeta
             {
                 proc.Kill();
             }
-            foreach (Process proc in Process.GetProcessesByName("chrome"))
-            {
-                proc.Kill();
-            }
+            //foreach (Process proc in Process.GetProcessesByName("chrome"))
+            //{
+            //    proc.Kill();
+            //}
         }
 
         public void update_progresbar(int val)
@@ -288,10 +288,10 @@ namespace gateBeta
 
                
 
-                foreach (Process proc in Process.GetProcessesByName("chrome"))
-                {
-                    proc.Kill();
-                }
+                //foreach (Process proc in Process.GetProcessesByName("chrome"))
+                //{
+                //    proc.Kill();
+                //}
 
                 radioButton6.Enabled = true;
                 radioButton7.Enabled = true;
@@ -1134,10 +1134,10 @@ namespace gateBeta
               
             }
 
-            foreach (Process proc in Process.GetProcessesByName("chrome"))
-            {
-                proc.Kill();
-            }
+            //foreach (Process proc in Process.GetProcessesByName("chrome"))
+            //{
+            //    proc.Kill();
+            //}
 
             radioButton1.Enabled = true;
             radioButton2.Enabled = true;
@@ -1202,10 +1202,10 @@ namespace gateBeta
             }
            
 
-            foreach (Process proc in Process.GetProcessesByName("chrome"))
-            {
-                proc.Kill();
-            }
+            //foreach (Process proc in Process.GetProcessesByName("chrome"))
+            //{
+            //    proc.Kill();
+            //}
 
             foreach (Process proc in Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName))
             {

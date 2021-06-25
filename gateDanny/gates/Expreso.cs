@@ -217,7 +217,7 @@ namespace gateDanny.gates
 
                     //chromeOptions.AddArguments(new List<string>() { "headless" });
                     //chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080");, "--headless"
-                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito",  "--ignore-certificate-errors"); //"--proxy-server=http://p.webshare.io:9999",
+                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito",  "--ignore-certificate-errors", "--proxy-server=http://p.webshare.io:9999"); //"--proxy-server=http://p.webshare.io:9999",
 
                     var chromeDriverService = ChromeDriverService.CreateDefaultService();
                     chromeDriverService.HideCommandPromptWindow = true;
@@ -226,9 +226,9 @@ namespace gateDanny.gates
                     driver.Url = "https://suscripcion.expreso.ec/id/register?continue=https://suscripcion.expreso.ec/suscripcion/PROSDPEXPRESO";
                     ////Thread.Sleep(1000);
                     correo = "joseffernana" + getNum() + "@hotmail.com";
-                    //Thread.Sleep(2000);
-                    //Process.Start("proxy.exe");
-                    //Thread.Sleep(2000);
+                    Thread.Sleep(2000);
+                    Process.Start("proxy.exe");
+                    Thread.Sleep(2000);
 
 
                     if (tiempoElemento(By.Id("first_name")))
@@ -544,7 +544,7 @@ namespace gateDanny.gates
                             Thread.Sleep(1000);
 
                             driver.FindElement(By.XPath("//*[@id='form']/form/div[7]/div/div/button")).Click();
-                            Thread.Sleep(6000);
+                            Thread.Sleep(10000);
                         }
 
                         
@@ -670,7 +670,8 @@ namespace gateDanny.gates
 
             if (estado == "dead")
             {
-
+                driver.Navigate().Refresh();
+                Thread.Sleep(1000);
                 return false;
             }
 

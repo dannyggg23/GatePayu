@@ -148,7 +148,7 @@ namespace gateDanny.gates
                     Thread.Sleep(500);
                     driver.FindElement(By.Name("communication")).Click();
                     Thread.Sleep(500);
-
+                   
                     if (IsElementPresent(By.XPath("//*[@id='card-number']/div/iframe")))
                     {
                         pago();
@@ -335,17 +335,17 @@ namespace gateDanny.gates
                 if (tiempo < 10)
                 {
 
-                    if (IsElementPresent(By.XPath("//*[@id='wrap']/div[1]/div/div[1]/p")))
+                    if (IsElementPresent(By.XPath("/html/body/div[6]/div[1]/div[1]/div/h4")))
                     {
-                        if (driver.FindElement(By.XPath("//*[@id='wrap']/div[1]/div/div[1]/p")).Displayed == true)
+                        if (driver.FindElement(By.XPath("/html/body/div[6]/div[1]/div[1]/div/h4")).Displayed == true)
                         {
-                            if (driver.FindElement(By.XPath("//*[@id='wrap']/div[1]/div/div[1]/p")).Text.Trim() == "Thanks for signing up for SQLizer")
+                            if (driver.FindElement(By.XPath("/html/body/div[6]/div[1]/div[1]/div/h4")).Text.Trim() == "Thank You!")
                             {
                                 estado = "live";
                             }
                         }
                     }
-
+                    
 
                     if (IsElementPresent(By.XPath("//*[@id='payment-form']/div[5]")))
                     {
