@@ -379,6 +379,71 @@ namespace gateDanny.gates
                                                 Thread.Sleep(1000);
                                                 driver.FindElementByXPath("//*[@id='signInSubmit']").Click();
                                                 Thread.Sleep(1000);
+                                                if (IsElementPresent(By.XPath("//*[@id='ap_password']")))
+                                                {
+                                                    driver.FindElementByXPath("//*[@id='ap_password']").SendKeys(clave);
+                                                    Thread.Sleep(1000);
+
+                                                    if (IsElementPresent(By.XPath("/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/form/div/div/div/div[4]/div[1]/div[1]/div/div[1]/img")))
+                                                    {
+                                                        a = false;
+                                                        imgCaptche = driver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/form/div/div/div/div[4]/div[1]/div[1]/div/div[1]/img")).GetAttribute("src");
+                                                        Thread.Sleep(100);
+                                                    }
+
+
+                                                    captche = resolve.Image(imgCaptche);
+                                                    driver.FindElementByXPath("//*[@id='auth-captcha-guess']").SendKeys(captche);
+                                                    Thread.Sleep(1000);
+
+                                                    driver.FindElementByXPath("//*[@id='signInSubmit']").Click();
+
+                                                    Thread.Sleep(2000);
+                                                }
+
+                                                if (IsElementPresent(By.XPath("//*[@id='ap_password']")))
+                                                {
+                                                    driver.FindElementByXPath("//*[@id='ap_password']").SendKeys(clave);
+                                                    Thread.Sleep(1000);
+
+                                                    if (IsElementPresent(By.XPath("/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/form/div/div/div/div[4]/div[1]/div[1]/div/div[1]/img")))
+                                                    {
+                                                        a = false;
+                                                        imgCaptche = driver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/form/div/div/div/div[4]/div[1]/div[1]/div/div[1]/img")).GetAttribute("src");
+                                                        Thread.Sleep(100);
+                                                    }
+
+
+                                                    captche = resolve.Image(imgCaptche);
+                                                    driver.FindElementByXPath("//*[@id='auth-captcha-guess']").SendKeys(captche);
+                                                    Thread.Sleep(1000);
+
+                                                    driver.FindElementByXPath("//*[@id='signInSubmit']").Click();
+
+                                                    Thread.Sleep(2000);
+                                                }
+
+                                                if (IsElementPresent(By.XPath("//*[@id='ap_password']")))
+                                                {
+                                                    driver.FindElementByXPath("//*[@id='ap_password']").SendKeys(clave);
+                                                    Thread.Sleep(1000);
+
+                                                    if (IsElementPresent(By.XPath("/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/form/div/div/div/div[4]/div[1]/div[1]/div/div[1]/img")))
+                                                    {
+                                                        a = false;
+                                                        imgCaptche = driver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/form/div/div/div/div[4]/div[1]/div[1]/div/div[1]/img")).GetAttribute("src");
+                                                        Thread.Sleep(100);
+                                                    }
+
+
+                                                    captche = resolve.Image(imgCaptche);
+                                                    driver.FindElementByXPath("//*[@id='auth-captcha-guess']").SendKeys(captche);
+                                                    Thread.Sleep(1000);
+
+                                                    driver.FindElementByXPath("//*[@id='signInSubmit']").Click();
+
+                                                    Thread.Sleep(2000);
+                                                }
 
 
                                                 driver.Navigate().GoToUrl("https://www.woot.com/alldeals?ref=w_gw_zl_bs_all&selectedSort=plh");
@@ -467,6 +532,61 @@ namespace gateDanny.gates
                                             }
 
                                             Thread.Sleep(1000);
+
+
+
+                                            if (IsElementPresent(By.XPath("//*[@id='signInExpandButton']")))
+                                            {
+                                                driver.FindElementByXPath("//*[@id='signInExpandButton']").Click();
+                                                Thread.Sleep(1000);
+                                                driver.FindElementByXPath("//*[@id='ap_password']").SendKeys(clave);
+                                                Thread.Sleep(1000);
+                                                driver.FindElementByXPath("//*[@id='signInSubmit']").Click();
+                                                Thread.Sleep(2000);
+                                                if (IsElementPresent(By.XPath("//*[@id='ap_password']")))
+                                                {
+                                                    driver.FindElementByXPath("//*[@id='ap_password']").SendKeys(clave);
+                                                    Thread.Sleep(1000);
+
+                                                    if (IsElementPresent(By.XPath("/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/form/div/div/div/div[4]/div[1]/div[1]/div/div[1]/img")))
+                                                    {
+                                                        a = false;
+                                                        imgCaptche = driver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/form/div/div/div/div[4]/div[1]/div[1]/div/div[1]/img")).GetAttribute("src");
+                                                        Thread.Sleep(100);
+                                                    }
+
+                                                   
+                                                        captche = resolve.Image(imgCaptche);
+                                                    driver.FindElementByXPath("//*[@id='auth-captcha-guess']").SendKeys(captche);
+                                                    Thread.Sleep(1000);
+
+                                                        driver.FindElementByXPath("//*[@id='signInSubmit']").Click();
+
+                                                    Thread.Sleep(2000);
+                                                }
+
+                                                if (IsElementPresent(By.XPath("//*[@id='ap_password']")))
+                                                {
+                                                    driver.FindElementByXPath("//*[@id='ap_password']").SendKeys(clave);
+                                                    Thread.Sleep(1000);
+
+                                                    if (IsElementPresent(By.XPath("/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/form/div/div/div/div[4]/div[1]/div[1]/div/div[1]/img")))
+                                                    {
+                                                        a = false;
+                                                        imgCaptche = driver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/form/div/div/div/div[4]/div[1]/div[1]/div/div[1]/img")).GetAttribute("src");
+                                                        Thread.Sleep(100);
+                                                    }
+
+
+                                                    captche = resolve.Image(imgCaptche);
+                                                    driver.FindElementByXPath("//*[@id='auth-captcha-guess']").SendKeys(captche);
+                                                    Thread.Sleep(1000);
+
+                                                    driver.FindElementByXPath("//*[@id='signInSubmit']").Click();
+
+                                                    Thread.Sleep(2000);
+                                                }
+                                            }
 
                                             if (tiempoElemento(By.Id("ShippingAddress_FullName")))
                                             {

@@ -124,7 +124,7 @@ namespace gateDanny.gates
             }
 
            
-            if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "4")
+            if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
             {
 
                 Thunder._Form1.update_progresbar(5);
@@ -200,7 +200,7 @@ namespace gateDanny.gates
                 }
                 catch (Exception ex)
                 {
-                    if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "4")
+                    if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
                     {
                         restart();
                     }
@@ -228,7 +228,7 @@ namespace gateDanny.gates
         private void restart()
         {
 
-            if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "4")
+            if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
             {
                 try
                 {
@@ -258,7 +258,7 @@ namespace gateDanny.gates
               
 
 
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "4")
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
                 {
                     if (pagos < 5)
                     {
@@ -353,7 +353,7 @@ namespace gateDanny.gates
                         }
                         else
                         {
-                            var pais = checkbin(cc.Substring(0, 6));
+                            var pais ="";
                             Thunder._Form1.update_progresbar(100);
                             var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                             check.ccss(Variables.key, guardar, "deads");
@@ -375,7 +375,7 @@ namespace gateDanny.gates
            catch (Exception ex)
             {
                 //MessageBox.Show(ex.ToString());
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "4")
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
                 {
                     restart();
                 }

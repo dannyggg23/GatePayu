@@ -30,8 +30,8 @@ namespace gateBeta
 
         Shopbob poseidon = new Shopbob();
         Gate8 Dropified = new Gate8();
-        Intelephense Flletfarm = new Intelephense();
-        Riteaid Healthydirections = new Riteaid();
+        Weightwatchers Flletfarm = new Weightwatchers();
+        Roomstogo Healthydirections = new Roomstogo();
         Woot Jomashop = new Woot();
         Gate7 koleimports = new Gate7();
         Gate7 Qspray = new Gate7();
@@ -192,10 +192,10 @@ namespace gateBeta
             {
                 proc.Kill();
             }
-            //foreach (Process proc in Process.GetProcessesByName("chrome"))
-            //{
-            //    proc.Kill();
-            //}
+            foreach (Process proc in Process.GetProcessesByName("chrome"))
+            {
+                proc.Kill();
+            }
         }
 
         public void update_progresbar(int val)
@@ -286,12 +286,12 @@ namespace gateBeta
                     Console.WriteLine(ex);
                 }
 
-               
 
-                //foreach (Process proc in Process.GetProcessesByName("chrome"))
-                //{
-                //    proc.Kill();
-                //}
+
+                foreach (Process proc in Process.GetProcessesByName("chrome"))
+                {
+                    proc.Kill();
+                }
 
                 radioButton6.Enabled = true;
                 radioButton7.Enabled = true;
@@ -782,7 +782,8 @@ namespace gateBeta
             else if (radioButton5.Checked)
             {
                 Variables.gate = "5";
-                Jomashop.load();
+                Variables.identificador = RandomNumber(100000000, 999999999).ToString();
+                Qspray.load();
             }
             else if (radioButton6.Checked)
             {
@@ -1042,6 +1043,12 @@ namespace gateBeta
                 radioButton6.Checked = false;
                 radioButton7.Checked = false;
                 radioButton8.Checked = false;
+                if (Variables.key_captcha != "")
+                {
+                    MessageBox.Show("(ESTE GATE CORRE EN UN SERVIDOR EXTERNO)");
+                }
+
+                
             }
         }
 
@@ -1092,7 +1099,7 @@ namespace gateBeta
                 Console.WriteLine(ex);
             }
 
-            if (Variables.gate == "7" || Variables.gate == "8" || Variables.gate == "6")
+            if (Variables.gate == "5" || Variables.gate == "7" || Variables.gate == "8" || Variables.gate == "6")
             {
                 try
                 {
@@ -1134,10 +1141,10 @@ namespace gateBeta
               
             }
 
-            //foreach (Process proc in Process.GetProcessesByName("chrome"))
-            //{
-            //    proc.Kill();
-            //}
+            foreach (Process proc in Process.GetProcessesByName("chrome"))
+            {
+                proc.Kill();
+            }
 
             radioButton1.Enabled = true;
             radioButton2.Enabled = true;
@@ -1161,7 +1168,7 @@ namespace gateBeta
         private void bunifuButton3_Click(object sender, EventArgs e)
         {
 
-            if (Variables.gate == "7" || Variables.gate == "8" || Variables.gate == "6")
+            if (Variables.gate == "5"  || Variables.gate == "7" || Variables.gate == "8" || Variables.gate == "6")
             {
                 try
                 {
@@ -1200,12 +1207,12 @@ namespace gateBeta
 
                 Console.WriteLine("Error");
             }
-           
 
-            //foreach (Process proc in Process.GetProcessesByName("chrome"))
-            //{
-            //    proc.Kill();
-            //}
+
+            foreach (Process proc in Process.GetProcessesByName("chrome"))
+            {
+                proc.Kill();
+            }
 
             foreach (Process proc in Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName))
             {

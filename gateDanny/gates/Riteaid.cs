@@ -140,7 +140,7 @@ namespace gateDanny.gates
 
                     //chromeOptions.AddArguments(new List<string>() { "headless" });
                     //chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080");, "--headless"
-                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--headless");
+                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito");
 
                     var chromeDriverService = ChromeDriverService.CreateDefaultService();
                     chromeDriverService.HideCommandPromptWindow = true;
@@ -323,7 +323,7 @@ namespace gateDanny.gates
         private void restart()
         {
 
-            if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "6")
+            if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "4")
             {
 
             

