@@ -29,9 +29,9 @@ namespace gateBeta
         private readonly Random _random = new Random();
 
         Shopbob poseidon = new Shopbob();
-        Intelephense Dropified = new Intelephense();
+        Drumeo Dropified = new Drumeo();
         Weightwatchers Flletfarm = new Weightwatchers();
-        Roomstogo Healthydirections = new Roomstogo();
+        Expreso Healthydirections = new Expreso();
         Woot Jomashop = new Woot();
         Gate7 koleimports = new Gate7();
         Gate7 Qspray = new Gate7();
@@ -257,10 +257,12 @@ namespace gateBeta
             this.bunifuElipse1.ApplyElipse(pnl1, 8);
             this.bunifuElipse1.ApplyElipse(pnl2, 8);
             this.bunifuElipse1.ApplyElipse(pnl3, 8);
+            this.bunifuElipse1.ApplyElipse(panel8, 8);
 
             panel1.Visible = true;
             pnl1.Visible = false;
             panel5.Visible = false;
+            panel8.Visible = false;
             btn_iniciar.Enabled = true;
             btn_detener.Enabled = false;
 
@@ -296,6 +298,33 @@ namespace gateBeta
                 radioButton6.Enabled = true;
                 radioButton7.Enabled = true;
                 radioButton8.Enabled = true;
+
+
+                //cargar info del cheker
+
+                try
+                {
+                    txtmisccs.Text = "";
+                    var client = new RestClient("http://3.12.239.104/th/ajax/generador.php?op=info&key=" + txt_key.Text.Trim());
+                    client.Timeout = -1;
+                    var request = new RestRequest(Method.GET);
+                    request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                    IRestResponse response = client.Execute(request);
+                    Console.WriteLine(response.Content);
+                    string[] ccs = response.Content.ToString().Trim().Split('_');
+                    for (var i = 0; i <= ccs.Length - 1; i++)
+                    {
+                       
+                        txtinfo.AppendText(ccs[i]);
+                        txtinfo.AppendText(Environment.NewLine);
+                    }
+                    //txtmisccs.Text = response.Content.Trim();
+                }
+                catch (Exception ex)
+                {
+                    //txtmisccs.Text = "";
+                    Console.WriteLine("ERROR: " + ex.ToString());
+                }
             }
             else
             {
@@ -432,6 +461,7 @@ namespace gateBeta
             panel5.Visible = true;
             panel1.Visible = false;
             pnl1.Visible = false;
+            panel8.Visible = false;
         }
 
         private void bunifuLabel10_Click(object sender, EventArgs e)
@@ -454,6 +484,7 @@ namespace gateBeta
             panel1.Visible = false;
             pnl1.Visible = true;
             panel5.Visible = false;
+            panel8.Visible = false;
         }
 
         private void bunifuLabel19_Click(object sender, EventArgs e)
@@ -844,7 +875,7 @@ namespace gateBeta
                     //    koleimports.stop();
                     //}
 
-                 if (Variables.gate=="7" || Variables.gate=="8" || Variables.gate == "6")
+                 if (Variables.gate=="7" || Variables.gate=="8" || Variables.gate == "6" || Variables.gate == "5")
                 {
                     try
                     {
@@ -908,6 +939,7 @@ namespace gateBeta
             panel1.Visible = true;
             pnl1.Visible = false;
             panel5.Visible = false;
+            panel8.Visible = false;
         }
 
         private void bunifuTextBox1_TextChanged_1(object sender, EventArgs e)
@@ -994,7 +1026,7 @@ namespace gateBeta
 
                 if (Variables.key_captcha != "")
                 {
-                    MessageBox.Show("GATE ESPECIAL UNIVERSAL CONSUME $1 SALDO");
+                   // MessageBox.Show("GATE ESPECIAL UNIVERSAL CONSUME $1 SALDO");
                 }
 
                
@@ -1289,6 +1321,27 @@ namespace gateBeta
         private void bunifuLabel28_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void panel8_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = false;
+            pnl1.Visible = false;
+            panel5.Visible = false;
+            panel8.Visible = true;
+        }
+
+        private void bunifuLabel31_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelInfo_Click(object sender, EventArgs e)
+        {
+            panel5.Visible = false;
+            panel1.Visible = false;
+            pnl1.Visible = false;
+            panel8.Visible = true;
         }
     }
 }
