@@ -265,6 +265,15 @@ namespace gateDanny.gates
                                     driver.SwitchTo().Frame(driver.FindElementByXPath("//*[@id='card-cvc']/div/iframe"));
                                     Thread.Sleep(500);
 
+                                    if (ccLine[3].Trim().Length == 3)
+                                    {
+                                        ccLine[3] = "000";
+                                    }
+                                    else
+                                    {
+                                        ccLine[3] = "0000";
+                                    }
+
                                     driver.FindElementByName("cvc").SendKeys(ccLine[3].Trim());
                                     Thread.Sleep(500);
                                     driver.SwitchTo().ParentFrame();
@@ -410,8 +419,8 @@ namespace gateDanny.gates
                         {
                             if (driver.FindElement(By.XPath("//*[@id='app']/div[3]/div[4]/div/div/h3")).Text.Trim() != "")
                             {
-                                Thunder._Form1.agrgar_live_cvv("(cvc) - ");
-                                estado = "live";
+                                
+                                estado = "dead2";
                             }
                         }
                     }
@@ -425,7 +434,13 @@ namespace gateDanny.gates
                 tiempo++;
             }
 
+            if(estado == "dead2")
+            {
+                pagos = 20;
 
+                return false;
+
+            }
 
             if (estado == "dead")
             {

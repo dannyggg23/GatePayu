@@ -51,7 +51,7 @@ namespace gateBeta
             string processName = Process.GetCurrentProcess().ProcessName;
             Process[] instances = Process.GetProcessesByName(processName);
 
-            if (instances.Length > 1)
+            if (instances.Length > 2)
             {
                 MessageBox.Show("YA SE ESTA EJECUTANDO THUNDER CHEKER");
 
@@ -194,7 +194,7 @@ namespace gateBeta
             }
             foreach (Process proc in Process.GetProcessesByName("chrome"))
             {
-                proc.Kill();
+               // proc.Kill();
             }
         }
 
@@ -292,7 +292,7 @@ namespace gateBeta
 
                 foreach (Process proc in Process.GetProcessesByName("chrome"))
                 {
-                    proc.Kill();
+                  //  proc.Kill();
                 }
 
                 radioButton6.Enabled = true;
@@ -1175,7 +1175,7 @@ namespace gateBeta
 
             foreach (Process proc in Process.GetProcessesByName("chrome"))
             {
-                proc.Kill();
+               // proc.Kill();
             }
 
             radioButton1.Enabled = true;
@@ -1243,7 +1243,7 @@ namespace gateBeta
 
             foreach (Process proc in Process.GetProcessesByName("chrome"))
             {
-                proc.Kill();
+                //proc.Kill();
             }
 
             foreach (Process proc in Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName))
