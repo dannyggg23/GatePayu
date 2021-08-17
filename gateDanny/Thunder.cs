@@ -29,7 +29,7 @@ namespace gateBeta
         private readonly Random _random = new Random();
 
         Shopbob poseidon = new Shopbob();
-        Drumeo Dropified = new Drumeo();
+        Totalwine Dropified = new Totalwine();
         Weightwatchers Flletfarm = new Weightwatchers();
         Expreso Healthydirections = new Expreso();
         Woot Jomashop = new Woot();

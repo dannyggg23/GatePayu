@@ -372,6 +372,7 @@
     <Compile Include="gates\Televisa.cs" />
     <Compile Include="gates\Theepochtimes.cs" />
     <Compile Include="gates\Timber.cs" />
+    <Compile Include="gates\Totalwine.cs" />
     <Compile Include="gates\Variables.cs" />
     <Compile Include="gates\Weareplanned.cs" />
     <Compile Include="gates\Weightwatchers.cs" />
