@@ -205,7 +205,7 @@ namespace gateDanny.gates
             }
 
 
-            if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate=="4")
+            if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate=="3")
             {
 
                 try
@@ -327,7 +327,8 @@ namespace gateDanny.gates
                                                 if (tiempoElemento(By.XPath("//*[@id='form']/form/div[2]/div[4]/div/div/input")))
                                                 {
                                                     Thunder._Form1.update_progresbar(80);
-                                                    enviarTexto(By.XPath("//*[@id='form']/form/div[2]/div[4]/div/div/input"), "050435" + RandomNumber(1000, 9999));
+                                                    //enviarTexto(By.XPath("//*[@id='form']/form/div[2]/div[4]/div/div/input"), "050435" + RandomNumber(1000, 9999));
+                                                    enviarTexto(By.XPath("//*[@id='form']/form/div[2]/div[4]/div/div/input"), "1791860829");
                                                     Thread.Sleep(1000);
                                                     var provincia = new SelectElement(driver.FindElement(By.Id("shipping.state")));
                                                     provincia.SelectByIndex(RandomNumber(1, 20));
@@ -393,7 +394,7 @@ namespace gateDanny.gates
                 catch (Exception ex)
                 {
 
-                    if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "4")
+                    if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
                     {
                         restart();
                     }
@@ -432,7 +433,7 @@ namespace gateDanny.gates
 
             Thunder._Form1.update_progresbar(0);
 
-            if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "4")
+            if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
             {
 
             
@@ -461,7 +462,7 @@ namespace gateDanny.gates
             {
 
 
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "4")
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
                 {
                     if (pagos < 8)
                     {
@@ -519,7 +520,7 @@ namespace gateDanny.gates
                             Thread.Sleep(100);
                             enviarTexto(By.XPath("//*[@id='form']/form/div[5]/div[6]/div/div/input"), anio.Remove(0, 2));
                             Thread.Sleep(100);
-                            enviarTexto(By.XPath("//*[@id='form']/form/div[5]/div[7]/div/div/input"), "000");
+                            enviarTexto(By.XPath("//*[@id='form']/form/div[5]/div[7]/div/div/input"), ccLine[3]);
                             Thread.Sleep(500);
                             var tipo = new SelectElement(driver.FindElement(By.Id("credit_card.type")));
 
@@ -537,14 +538,14 @@ namespace gateDanny.gates
                             {
                                 tipo.SelectByValue("MASTERCARD");
                                 Thread.Sleep(500);
-                                enviarTexto(By.XPath("//*[@id='form']/form/div[5]/div[7]/div/div/input"), "0");
+                               // enviarTexto(By.XPath("//*[@id='form']/form/div[5]/div[7]/div/div/input"), "0");
                                 Thread.Sleep(500);
                             }
 
                             Thread.Sleep(1000);
 
                             driver.FindElement(By.XPath("//*[@id='form']/form/div[7]/div/div/button")).Click();
-                            Thread.Sleep(10000);
+                            Thread.Sleep(15000);
                         }
 
                         
@@ -587,7 +588,7 @@ namespace gateDanny.gates
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.ToString());
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "4")
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "3")
                 {
                     restart();
                 }

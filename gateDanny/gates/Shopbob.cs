@@ -464,7 +464,7 @@ namespace gateDanny.gates
                                                                                                     restart();
                                                                                                 }
                                                                                             }
-                                                                                            else if (IsElementPresent(By.Id("ccnumber")))
+                                                                                            else  if (IsElementPresent(By.Id("ccnumber")))
                                                                                             {
                                                                                                 pago2();
                                                                                             }

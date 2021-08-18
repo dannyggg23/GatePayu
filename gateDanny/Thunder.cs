@@ -29,9 +29,9 @@ namespace gateBeta
         private readonly Random _random = new Random();
 
         Shopbob poseidon = new Shopbob();
-        Totalwine Dropified = new Totalwine();
-        Weightwatchers Flletfarm = new Weightwatchers();
-        Expreso Healthydirections = new Expreso();
+        _1Password Dropified = new _1Password();
+        Expreso Flletfarm = new Expreso();
+        Riteaid Healthydirections = new Riteaid();
         Woot Jomashop = new Woot();
         Gate7 koleimports = new Gate7();
         Gate7 Qspray = new Gate7();
@@ -1342,6 +1342,16 @@ namespace gateBeta
             panel1.Visible = false;
             pnl1.Visible = false;
             panel8.Visible = true;
+        }
+
+        private void txtinfo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel8_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

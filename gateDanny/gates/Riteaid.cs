@@ -140,7 +140,7 @@ namespace gateDanny.gates
 
                     //chromeOptions.AddArguments(new List<string>() { "headless" });
                     //chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080");, "--headless"
-                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito");
+                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--headless");
 
                     var chromeDriverService = ChromeDriverService.CreateDefaultService();
                     chromeDriverService.HideCommandPromptWindow = true;
@@ -160,8 +160,8 @@ namespace gateDanny.gates
 
 
                     }
-
-                    var producto = RandomNumber(1, 3);
+                                                   
+                    var producto = RandomNumber(1, 15);
                     ///html/body/main/div[3]/ul/li[11]/div/div/a
                     if (IsElementPresent(By.XPath("//*[@id='maincontent']/div[2]/div[2]/div[4]/div/div[4]/div[3]/div[4]/ul/li/li[" + producto + "]")))
                     {
@@ -173,6 +173,18 @@ namespace gateDanny.gates
                         //Thread.Sleep(300);
                         ////driver.Navigate().GoToUrl(href);
                         //Thread.Sleep(1000);
+                    }
+
+                    if (IsElementPresent(By.XPath("//*[@id='maincontent']/div[2]/div[2]/div[4]/div/div[4]/div[4]/div[3]/ul/li/li[" + producto + "]")))
+                    {                            
+                        Thunder._Form1.update_progresbar(20);
+                        Thread.Sleep(2000);
+                        driver.FindElement(By.XPath("//*[@id='maincontent']/div[2]/div[2]/div[4]/div/div[4]/div[4]/div[3]/ul/li/li[" + producto + "]")).Click();
+                        ////ExecuteRefreshProgressThread(15, "Seleccionando producto...", "Success");
+                        //var href = driver.FindElement(By.XPath("/html/body/div[2]/div[1]/div[2]/div/div[2]/div[2]/main/div[3]/div[3]/div/div[" + producto + "]")).GetAttribute("href");
+                        //Thread.Sleep(300);
+                        ////driver.Navigate().GoToUrl(href);
+                        Thread.Sleep(1000);
                     }
                     else
                     {
@@ -197,6 +209,8 @@ namespace gateDanny.gates
                         {
                             Thread.Sleep(2000);
                             driver.FindElement(By.Id("guestCheckout")).Click();
+                            Thread.Sleep(2000);
+
                         }
                         else
                         {
@@ -243,10 +257,10 @@ namespace gateDanny.gates
 
 
                         Thread.Sleep(2000);
-                        if (tiempoElemento(By.XPath("//*[@id='shipping-method-buttons-container']/div/button")))
+                        if (tiempoElemento(By.XPath("//*[@id='shipping-method-buttons-container']/div/div/button")))
                         {
                            
-                            driver.FindElement(By.XPath("//*[@id='shipping-method-buttons-container']/div/button")).Click();
+                            driver.FindElement(By.XPath("//*[@id='shipping-method-buttons-container']/div/div/button")).Click();
 
                             Thread.Sleep(2000);
 
@@ -404,15 +418,17 @@ namespace gateDanny.gates
                                 driver.FindElement(By.XPath("//*[@id='cvv']")).Clear();
                                 Thread.Sleep(500);
 
-                                if (cvv.Trim().Length == 3)
-                                    {
-                                        driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("000" + OpenQA.Selenium.Keys.Enter);
-                                    }
-                                    else
-                                    {
-                                        driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("0000" + OpenQA.Selenium.Keys.Enter);
+                                driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys(cvv + OpenQA.Selenium.Keys.Enter);
 
-                                    }
+                                //if (cvv.Trim().Length == 3)
+                                //    {
+                                //        driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("000" + OpenQA.Selenium.Keys.Enter);
+                                //    }
+                                //    else
+                                //    {
+                                //        driver.FindElement(By.XPath("//*[@id='cvv']")).SendKeys("0000" + OpenQA.Selenium.Keys.Enter);
+
+                                //    }
                                     Thread.Sleep(500);
                                  
                              
@@ -537,8 +553,19 @@ namespace gateDanny.gates
                         }
                     }
 
+                    if (IsElementPresent(By.XPath("/html/body/h1")))
+                    {
+                        if (driver.FindElement(By.XPath("/html/body/h1")).Displayed == true)
+                        {
+                            if (driver.FindElement(By.XPath("/html/body/h1")).Text.Trim().Contains("Access Denied"))
+                            {
+                                estado = "live";
+                            }
+                        }
+                    }
 
-                   
+
+
 
                 }
                 else
@@ -554,10 +581,10 @@ namespace gateDanny.gates
                 driver.Navigate().GoToUrl("https://www.riteaid.com/shop/checkout/#shipping");
                 Thread.Sleep(1000);
 
-                if (tiempoElemento(By.XPath("//*[@id='shipping-method-buttons-container']/div/button")))
+                if (tiempoElemento(By.XPath("//*[@id='shipping-method-buttons-container']/div/div/button")))
                 {
                    
-                    driver.FindElement(By.XPath("//*[@id='shipping-method-buttons-container']/div/button")).Click();
+                    driver.FindElement(By.XPath("//*[@id='shipping-method-buttons-container']/div/div/button")).Click();
 
                     Thread.Sleep(1000);
 

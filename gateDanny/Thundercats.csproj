@@ -323,6 +323,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="gates\1Password.cs" />
+    <Compile Include="gates\4life.cs" />
     <Compile Include="gates\Amazon.cs" />
     <Compile Include="gates\Augustaactive.cs" />
     <Compile Include="gates\Blindster.cs" />

@@ -209,7 +209,7 @@ namespace gateDanny.gates
             }
 
          
-            if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "5")
+            if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "2")
             {
                 try
                 {
@@ -223,7 +223,7 @@ namespace gateDanny.gates
 
                     //chromeOptions.AddArguments(new List<string>() { "headless" });
                     //chromeOptions.AddArguments("--blink-settings=imagesEnabled=false", "--window-size=1920,1080");, 
-                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--ignore-certificate-errors", "--headless"); //"--headless"
+                    chromeOptions.AddArguments("--window-size=1920,1080", "--blink-settings=imagesEnabled=false", "--incognito", "--ignore-certificate-errors"); //"--headless"
 
                     var chromeDriverService = ChromeDriverService.CreateDefaultService();
                     chromeDriverService.HideCommandPromptWindow = true;
@@ -644,7 +644,7 @@ namespace gateDanny.gates
                 catch (Exception ex)
                 {
 
-                    if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "5")
+                    if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "2")
                     {
                         restart();
                     }
@@ -694,7 +694,7 @@ namespace gateDanny.gates
             {
 
 
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "5")
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "2")
                 {
                     restart();
                 }
@@ -725,7 +725,7 @@ namespace gateDanny.gates
         private void restart()
         {
 
-            if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "5")
+            if(Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "2")
             {
                 try
                 {
@@ -753,7 +753,7 @@ namespace gateDanny.gates
             {
                
 
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "5")
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "2")
                 {
                     if (pagos < 10)
                     {
@@ -864,7 +864,7 @@ namespace gateDanny.gates
             }
             catch (Exception ex)
             {
-                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "5")
+                if (Thunder._Form1.numcc() > 0 && Variables.run == true && Variables.gate == "2")
                 {
                     restart();
                 }
