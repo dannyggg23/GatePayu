@@ -311,11 +311,11 @@ namespace gateDanny.gates
                                                     if (IsElementPresent(By.Id("card-number")))
                                                     {
                                                         Thunder._Form1.update_progresbar(60);
-                                                        driver.FindElementById("card-number").SendKeys("5326103308211455");
+                                                        driver.FindElementById("card-number").SendKeys("5471678315077075");
                                                         Thread.Sleep(1000);
-                                                        driver.FindElementById("exp-month").SendKeys("07");
+                                                        driver.FindElementById("exp-month").SendKeys("10");
                                                         Thread.Sleep(1000);
-                                                        driver.FindElementById("exp-year").SendKeys("25");
+                                                        driver.FindElementById("exp-year").SendKeys("23");
                                                         Thread.Sleep(1000);
                                                         driver.FindElementById("security-code").SendKeys("000");
                                                         Thread.Sleep(1000);
@@ -473,7 +473,7 @@ namespace gateDanny.gates
         {
             try
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
                 driver.FindElement(by);
                 return true;
             }
